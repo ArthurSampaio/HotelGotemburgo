@@ -24,4 +24,6 @@ public interface Quarto {
 	 * 		o valor da diaria
 	 */
 	double calculaDiaria(double desconto);
+	
+	String getID();
 }
