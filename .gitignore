@@ -1,2 +1,13 @@
-
+.recommenders 
+.settings
+doc/
+bin/
+tmp/
+*.tmp
+.loadpath
+.settings
+settings/
+*.launch
+.classpath
+RemoteSystemsTempFiles/
 
