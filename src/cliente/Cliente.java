@@ -64,12 +64,61 @@ public class Cliente {
 	public int qtdEstadias(){
 		return this.estadias.size();
 	}
-		
-	//FALTA, o getInfoHospede(String)
-	//atualizaCadastro
-	//
 	
-	private boolean stringInvalida(String string){
+	/**
+	 * Atualiza o cadastro do usuario
+	 * @param tipoInformacao
+	 * 		A informacao a ser atualizada
+	 * @param valor
+	 * 		O novo valor da informacao
+	 * @throws Exception
+	 * 		Quando a informacao requerida nao existe no usuario
+	 * @throws StringInvalidaException
+	 * 		Quando ha alguma string invalida (null ou vazia)
+	 */
+	public void atualizaCadastro(String tipoInformacao, String valor)throws Exception,StringInvalidaException{
+		if(stringInvalida(tipoInformacao) || stringInvalida(valor)){
+			throw new StringInvalidaException();
+		}
+		if(tipoInformacao.equalsIgnoreCase("Nome")){
+			 this.setNome(valor);
+		}else if (tipoInformacao.equalsIgnoreCase("Data de Nascimento")){
+			 this.setDataNasc(valor);
+		}else if (tipoInformacao.equalsIgnoreCase("Email")){
+			 this.setEmail(valor);
+		}else{
+			throw new Exception("O cliente nao possue a informacao especificada.");
+		}
+	}
+			
+	/**
+	 * Retorna uma determinada informacao do usuario
+	 * @param tipoInformacao
+	 * 		define qual informacao deve ser retornada
+	 * @return
+	 * 		um string contendo a informacao requerida
+	 * @throws Exception
+	 * 		quando um tipoInformacao nao existe no cliente
+	 * @throws StringInvalidaException
+	 * 		quando ha uma string invalida
+	 */
+	public String getInfoHospede(String tipoInformacao)throws Exception,StringInvalidaException{
+		if(stringInvalida(tipoInformacao)){
+			throw new StringInvalidaException();
+		}
+		if(tipoInformacao.equalsIgnoreCase("Nome")){
+			return this.getNome();
+		}else if (tipoInformacao.equalsIgnoreCase("Data de Nascimento")){
+			return this.getDataNasc();
+		}else if (tipoInformacao.equalsIgnoreCase("Email")){
+			return this.getEmail();
+		}else{
+			throw new Exception("O cliente nao possue a informacao especificada.");
+		}
+	}
+	
+	
+	public boolean stringInvalida(String string){
 		if(string == null || string.trim().isEmpty()){
 			return false;
 		}else{
@@ -121,6 +170,34 @@ public class Cliente {
 	public HashMap<String,Estadia> getEstadia(){
 		return this.estadias;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	/**
+	 * Dois clientes sao iguais se possuirem o mesmo nome e email
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Cliente){
+			Cliente cliente = (Cliente)obj;
+			if (this.getEmail().equals(cliente.getEmail()) || this.getNome().equals(cliente.getNome())){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return true;
+		}
+	}
+	
+	
 	
 
 }
