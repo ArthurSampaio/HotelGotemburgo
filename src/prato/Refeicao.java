@@ -12,7 +12,7 @@ import excecoes.StringInvalidaException;
  *
  */
 
-public class Refeicao {
+public class Refeicao extends ItensCardapio{
 	private String nome;
 	private String descricao;
 	private List<Prato> menu;
@@ -28,37 +28,11 @@ public class Refeicao {
 	 * 				Conjuto de pratos que compoem a refeicao			
 	 */
 	public Refeicao(String nome, String descricao, ArrayList<Prato> pratos)throws Exception{
-			if(nome.trim().isEmpty() || nome == null){
-				throw new StringInvalidaException("Nome nao pode ser vazio");
-			}
-			if (descricao.trim().isEmpty() || descricao == null){
-				throw new StringInvalidaException("Descricao nao pode ser vazia");
-			}
+			super(nome, descricao);
 			if (pratos == null){
 				throw new Exception ("Prato vazio");
 			}
-			
-			this.nome = nome;
-			this.descricao = descricao;
 			this.menu = pratos;
-	}
-	
-	/**
-	 * Obtem o nome da refeicao
-	 * @return
-	 * 		Uma string com o nome da refeicao
-	 */
-	public String getNome(){
-		return this.nome;
-	}
-	
-	/**
-	 * Obtem descricao da refeicao
-	 * @return
-	 * 		Uma string com a descricao da refeicao
-	 */
-	public String getDescricao(){
-		return this.descricao;
 	}
 	
 	/**
