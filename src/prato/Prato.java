@@ -1,6 +1,5 @@
 package prato;
 
-import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
 
 /**
@@ -8,81 +7,36 @@ import excecoes.ValorInvalidoException;
  * @author Mariana Mendes
  *
  */
-public class Prato {
 
-	/**
-	 * Atributos que cada Prato deve possuir.
-	 */
-	private String nome;
-	private String descricao;
+/**
+ * 
+ * A classe prato herda de ItensCardapio.
+ *
+ */
+public class Prato extends ItemCardapio {
+
 	private double preco;
 
 	/**
 	 * Construtor de um Prato.
 	 * 
-	 * @param nome
-	 *            Nome do prato.
-	 * @param descricao
-	 *            Descricao do prato.
+	 * Os atributos nome e descricao sao herdados de ItensCardapio.
+	 * 
 	 * @param preco
 	 *            Preco do base do prato.
-	 * @throws StringInvalidaException,
-	 *             ValorInvalidoException
+	 * @throws ValorInvalidoException
 	 */
 	public Prato(String nome, String descricao, double preco) throws Exception {
-		if (nome.trim().isEmpty() || nome == null) {
-			throw new StringInvalidaException();
-		}
-
-		if (descricao.trim().isEmpty() || descricao == null) {
-			throw new StringInvalidaException();
-		}
+		super(nome, descricao);
 
 		if (preco < 0) {
 			throw new ValorInvalidoException();
 		}
-		this.nome = nome;
-		this.descricao = descricao;
 		this.preco = preco;
 	}
 
 	/**
-	 * 
-	 * @return Nome de um prato.
-	 */
-	public String getNome() {
-		return nome;
-	}
-
-	/**
-	 * 
-	 * @param nome
-	 *            Altera nome de um prato.
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	/**
-	 * 
-	 * @return Descricao de um prato.
-	 */
-	public String getDescricao() {
-		return descricao;
-	}
-
-	/**
-	 * 
-	 * @param descricao
-	 *            Altera descricao de um prato.
-	 */
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	/**
-	 * 
-	 * @return Preco base de um prato.
+	 * @return preco de um prato.
 	 */
 	public double getPreco() {
 		return preco;
@@ -101,27 +55,22 @@ public class Prato {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((getDescricao() == null) ? 0 : getDescricao().hashCode());
+		result = prime * result + ((getNome() == null) ? 0 : getNome().hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(preco);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
-	
-	/**
-	 * Dois pratos serao iguais se possuirem o mesmo preco base e nome.
-	 */
 	@Override
 	public boolean equals(Object objeto) {
 		if (objeto instanceof Prato) {
 			Prato prato = (Prato) objeto;
 
-			return (this.preco == prato.getPreco() && this.nome.equalsIgnoreCase(prato.getNome()));
+			return (this.preco == prato.getPreco() && this.getNome().equalsIgnoreCase(prato.getNome()));
 		}
 		return false;
 	}
-	
-	
-}
 
+}

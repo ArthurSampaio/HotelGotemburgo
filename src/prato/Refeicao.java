@@ -3,8 +3,6 @@ package prato;
 import java.util.ArrayList;
 import java.util.List;
 
-import excecoes.StringInvalidaException;
-
 /**
  * Classe representando uma refeicao completa
  * 
@@ -12,58 +10,58 @@ import excecoes.StringInvalidaException;
  *
  */
 
-public class Refeicao extends ItensCardapio{
-	private String nome;
-	private String descricao;
+public class Refeicao extends ItemCardapio {
 	private List<Prato> menu;
-	
-	
+	private static final double DESCONTO = 0.9;
+
 	/**
 	 * Construtor da Classe
+	 * 
 	 * @param nome
-	 * 				Nome da refeicao
+	 *            Nome da refeicao
 	 * @param descricao
-	 * 				Descricao da refeicao
+	 *            Descricao da refeicao
 	 * @param pratos
-	 * 				Conjuto de pratos que compoem a refeicao			
+	 *            Conjuto de pratos que compoem a refeicao
 	 */
-	public Refeicao(String nome, String descricao, ArrayList<Prato> pratos)throws Exception{
-			super(nome, descricao);
-			if (pratos == null){
-				throw new Exception ("Prato vazio");
-			}
-			this.menu = pratos;
+	public Refeicao(String nome, String descricao, ArrayList<Prato> pratos) throws Exception {
+		super(nome, descricao);
+		if (pratos == null) {
+			throw new Exception("Prato vazio");
+		}
+		this.menu = pratos;
 	}
-	
+
 	/**
 	 * Obtem os pratos da refeicao
-	 * @return
-	 * 		Uma lista com todos os pratos que compoem a refeicao
+	 * 
+	 * @return Uma lista com todos os pratos que compoem a refeicao
 	 */
-	public List<Prato> getMenu(){
+	public List<Prato> getMenu() {
 		return this.menu;
 	}
-	
+
 	/**
 	 * Obtem o preco da refeicao
-	 * @return
-	 * 		Retorna a soma do preco de todos os pratos e aplica um desconto de 10%
+	 * 
+	 * @return Retorna a soma do preco de todos os pratos e aplica um desconto
+	 *         de 10%
 	 */
-	public double getPreco(){
+	public double getPreco() {
 		double preco = 0.0;
-		for (int i = 0; i < menu.size(); i++){
+		for (int i = 0; i < menu.size(); i++) {
 			preco += menu.get(i).getPreco();
 		}
-		return preco * 0.9;
+		return preco * DESCONTO;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((menu == null) ? 0 : menu.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((getDescricao() == null) ? 0 : getDescricao().hashCode());
+		result = prime * result + ((getMenu() == null) ? 0 : getMenu().hashCode());
+		result = prime * result + ((getNome() == null) ? 0 : getNome().hashCode());
 		return result;
 	}
 
@@ -72,11 +70,11 @@ public class Refeicao extends ItensCardapio{
 	 * Uma refeicao eh igual a outra se possui mesmo nome descricao e pratos.
 	 */
 	public boolean equals(Object obj) {
-		if (obj instanceof Refeicao){
-			Refeicao outra = (Refeicao)obj;
-			if (this.nome.equals(outra.getNome()) && this.descricao.equals(outra.getDescricao())){
-				for (int i = 0; i < this.menu.size(); i++){
-					if (! this.menu.get(i).equals(outra.getMenu().get(i))){
+		if (obj instanceof Refeicao) {
+			Refeicao outra = (Refeicao) obj;
+			if (super.getNome().equals(outra.getNome()) && super.getDescricao().equals(outra.getDescricao())) {
+				for (int i = 0; i < this.menu.size(); i++) {
+					if (!this.menu.get(i).equals(outra.getMenu().get(i))) {
 						return false;
 					}
 					return true;
@@ -84,6 +82,5 @@ public class Refeicao extends ItensCardapio{
 			}
 		}
 		return false;
-	}	
+	}
 }
-	
