@@ -1,7 +1,6 @@
 package quarto;
 
 import excecoes.StringInvalidaException;
-import excecoes.ValorInvalidoException;
 
 /**
  * Classe do tipo Luxo. Impementa a Interface Quarto
