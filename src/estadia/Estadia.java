@@ -61,7 +61,11 @@ public class Estadia {
 	public Quarto getQuarto() {
 		return quarto;
 	}
-
+	
+	public String getIDQuarto(){
+		return this.quarto.getID();
+	}
+		
 	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
 	}
