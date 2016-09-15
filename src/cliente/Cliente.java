@@ -7,133 +7,133 @@ import estadia.Estadia;
 
 /**
  * Classe que representa um cliente cadastrado no BD do Hotel Gutemburgo
+ * 
  * @author Arthur Sampaio
  *
  */
 public class Cliente {
-	
+
 	private boolean hospedado;
-	private String nome; 
+	private String nome;
 	private String dataNasc;
 	private String email;
-	private HashMap<String,Estadia> estadias;
-	
+	private HashMap<String, Estadia> estadias;
+
 	/**
 	 * Construtor da Classe Cliente
+	 * 
 	 * @param nome
-	 * 		O nome do cliente
+	 *            O nome do cliente
 	 * @param dataNasc
-	 * 		A data de nascimento do cliente
+	 *            A data de nascimento do cliente
 	 * @param email
-	 * 		O Email do cliente
+	 *            O Email do cliente
 	 * @param hosp
-	 * 		Representa se esta hospedado ou nao
+	 *            Representa se esta hospedado ou nao
 	 * @throws Exception
-	 * 		Quando alguma das strings é invalida. 
+	 *             Quando alguma das strings é invalida.
 	 */
-	public Cliente(String nome, String dataNasc, String email, boolean hosp)throws Exception{
-		if(stringInvalida(nome)){
+	public Cliente(String nome, String email, String dataNasc, boolean hosp) throws Exception {
+		if (stringInvalida(nome)) {
 			throw new StringInvalidaException("Nome nao pode ser nulo ou vazio");
-		}if(stringInvalida(dataNasc)){
+		}
+		if (stringInvalida(dataNasc)) {
 			throw new StringInvalidaException("Data nao pode ser nula ou vazia");
 		}
-		if(stringInvalida(email)){
+		if (stringInvalida(email)) {
 			throw new StringInvalidaException("O email nao pode ser nulo ou vazio");
 		}
-		
+
 		this.nome = nome;
 		this.dataNasc = dataNasc;
 		this.email = email;
 		this.hospedado = hosp;
-		this.estadias = new HashMap<String,Estadia>();
-		
+		this.estadias = new HashMap<String, Estadia>();
+
 	}
 
 	/**
 	 * Construtor para quando o cliente nao estiver hospedado
 	 */
-	public Cliente(String nome, String dataNasc, String email) throws Exception{
-		this(nome,dataNasc,email, false);
+	public Cliente(String nome, String email, String dataNasc) throws Exception {
+		this(nome, email, dataNasc, false);
 	}
-	
+
 	/**
 	 * Retorna a quantidade de estadias do cliente
-	 * @return
-	 * 		a quantidade de estadias
+	 * 
+	 * @return a quantidade de estadias
 	 */
-	public int qtdEstadias(){
+	public int qtdEstadias() {
 		return this.estadias.size();
 	}
-	
+
 	/**
 	 * Atualiza o cadastro do usuario
+	 * 
 	 * @param tipoInformacao
-	 * 		A informacao a ser atualizada
+	 *            A informacao a ser atualizada
 	 * @param valor
-	 * 		O novo valor da informacao
+	 *            O novo valor da informacao
 	 * @throws Exception
-	 * 		Quando a informacao requerida nao existe no usuario
+	 *             Quando a informacao requerida nao existe no usuario
 	 * @throws StringInvalidaException
-	 * 		Quando ha alguma string invalida (null ou vazia)
+	 *             Quando ha alguma string invalida (null ou vazia)
 	 */
-	public void atualizaCadastro(String tipoInformacao, String valor)throws Exception,StringInvalidaException{
-		if(stringInvalida(tipoInformacao) || stringInvalida(valor)){
+	public void atualizaCadastro(String tipoInformacao, String valor) throws Exception, StringInvalidaException {
+		if (stringInvalida(tipoInformacao) || stringInvalida(valor)) {
 			throw new StringInvalidaException();
 		}
-		if(tipoInformacao.equalsIgnoreCase("Nome")){
-			 this.setNome(valor);
-		}else if (tipoInformacao.equalsIgnoreCase("Data de Nascimento")){
-			 this.setDataNasc(valor);
-		}else if (tipoInformacao.equalsIgnoreCase("Email")){
-			 this.setEmail(valor);
-		}else{
+		if (tipoInformacao.equalsIgnoreCase("Nome")) {
+			this.setNome(valor);
+		} else if (tipoInformacao.equalsIgnoreCase("Data de Nascimento")) {
+			this.setDataNasc(valor);
+		} else if (tipoInformacao.equalsIgnoreCase("Email")) {
+			this.setEmail(valor);
+		} else {
 			throw new Exception("O cliente nao possue a informacao especificada.");
 		}
 	}
-			
+
 	/**
 	 * Retorna uma determinada informacao do usuario
+	 * 
 	 * @param tipoInformacao
-	 * 		define qual informacao deve ser retornada
-	 * @return
-	 * 		um string contendo a informacao requerida
+	 *            define qual informacao deve ser retornada
+	 * @return um string contendo a informacao requerida
 	 * @throws Exception
-	 * 		quando um tipoInformacao nao existe no cliente
+	 *             quando um tipoInformacao nao existe no cliente
 	 * @throws StringInvalidaException
-	 * 		quando ha uma string invalida
+	 *             quando ha uma string invalida
 	 */
-	public String getInfoHospede(String tipoInformacao)throws Exception,StringInvalidaException{
-		if(stringInvalida(tipoInformacao)){
+	public String getInfoHospede(String tipoInformacao) throws Exception, StringInvalidaException {
+		if (stringInvalida(tipoInformacao)) {
 			throw new StringInvalidaException();
 		}
-		if(tipoInformacao.equalsIgnoreCase("Nome")){
+		if (tipoInformacao.equalsIgnoreCase("Nome")) {
 			return this.getNome();
-		}else if (tipoInformacao.equalsIgnoreCase("Data de Nascimento")){
+		} else if (tipoInformacao.equalsIgnoreCase("Data de Nascimento")) {
 			return this.getDataNasc();
-		}else if (tipoInformacao.equalsIgnoreCase("Email")){
+		} else if (tipoInformacao.equalsIgnoreCase("Email")) {
 			return this.getEmail();
-		}else{
+		} else {
 			throw new Exception("O cliente nao possue a informacao especificada.");
 		}
 	}
-	
-	
+
 	public boolean stringInvalida(String string){
-		if(string == null || string.trim().isEmpty()){
-			return false;
-		}else{
-			return true;
-		}
+		return(string.trim().isEmpty() || string == null);
+		
 	}
-	
+
 	/**
 	 * Adiciona uma estadia no HashMap de Estadias do Cliente
+	 * 
 	 * @param novaEstadia
 	 */
-	public void adicionaEstadia(Estadia novaEstadia){
+	public void adicionaEstadia(Estadia novaEstadia) {
 		this.estadias.put(novaEstadia.getIDQuarto(), novaEstadia);
 	}
-	
 
 	public boolean isHospedado() {
 		return hospedado;
@@ -167,7 +167,7 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public HashMap<String,Estadia> getEstadia(){
+	public HashMap<String, Estadia> getEstadia() {
 		return this.estadias;
 	}
 
@@ -185,19 +185,16 @@ public class Cliente {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Cliente){
-			Cliente cliente = (Cliente)obj;
-			if (this.getEmail().equals(cliente.getEmail()) || this.getNome().equals(cliente.getNome())){
+		if (obj instanceof Cliente) {
+			Cliente cliente = (Cliente) obj;
+			if (this.getEmail().equals(cliente.getEmail()) || this.getNome().equals(cliente.getNome())) {
 				return true;
-			}else{
+			} else {
 				return false;
 			}
-		}else{
+		} else {
 			return true;
 		}
 	}
-	
-	
-	
 
 }

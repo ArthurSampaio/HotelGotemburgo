@@ -18,7 +18,7 @@ public class PratoTeste {
 			Prato prato4 = new Prato("nome4", "descricao4", 34.60);
 
 		} catch (Exception e) {
-			fail(); /* Nao deve ser lançada exececao */
+			fail(); /* Nao deve ser lancada exececao */
 
 		}
 
@@ -48,7 +48,7 @@ public class PratoTeste {
 			Prato prato4 = new Prato("nome4", "descricao4", -67.0);
 			fail();
 		} catch (Exception e) {
-			assertEquals("Valor inválido", e.getMessage());
+			assertEquals("Valor invï¿½lido", e.getMessage());
 		}
 
 	}
