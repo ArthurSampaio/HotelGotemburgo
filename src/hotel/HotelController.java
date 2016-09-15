@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cliente.Cliente;
+import excecoes.EmailInexistenteException;
 
 public class HotelController {
 	private Map<String, Cliente> clientes;
@@ -22,7 +23,8 @@ public class HotelController {
 
 	public String getInfoHospede(String email, String info) throws Exception {
 		if (!clientes.containsKey(email)) {
-			throw new Exception("Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
+			throw new EmailInexistenteException(
+					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
 		}
 
 		Cliente cliente = this.clientes.get(email);
@@ -62,7 +64,8 @@ public class HotelController {
 
 	public void removeHospede(String email) throws Exception {
 		if (!clientes.containsKey(email)) {
-			throw new Exception("Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
+			throw new EmailInexistenteException(
+					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
 		}
 		clientes.remove(email);
 
