@@ -10,11 +10,11 @@ import excecoes.StringInvalidaException;
  * @author Arthur Sampaio
  *
  */
-public class Presidencial implements Quarto {
+public class Presidencial extends QuartoAbstract {
 
 	
-	protected String ID;
-	protected ValorDeQuartos diaria;
+	private String ID;
+	private ValorDeQuartos diaria;
 	private static final double SEM_DESCONTO = 0;
 	
 	/**
@@ -23,11 +23,7 @@ public class Presidencial implements Quarto {
 	 * 		O ID do quarto, ou numero do Quarto
 	 */	
 	public Presidencial(String id)throws StringInvalidaException{
-		if(id == null || id.trim().isEmpty()){
-			throw new StringInvalidaException();
-		}
-		
-		this.ID = id;
+		super(id);
 		this.diaria = ValorDeQuartos.PRESIDENCIAL;
 		
 	}
@@ -51,28 +47,6 @@ public class Presidencial implements Quarto {
 	@Override
 	public double calculaDiaria(double desconto) {
 		return this.getDiaria() * (1-desconto);
-	}
-
-
-	/**
-	 * Obtem o Id do quarto
-	 * @return
-	 * 		Uma String com o ID do quarto
-	 */
-	public String getID() {
-		return ID;
-	}
-
-	/**
-	 * Altera o ID do quarto
-	 * @param iD
-	 * 		O novo ID do quarto
-	 */
-	public void setID(String id) throws StringInvalidaException{
-		if(id == null || id.trim().isEmpty()){
-			throw new StringInvalidaException();
-		}
-		this.ID = id;
 	}
 
 	/**
