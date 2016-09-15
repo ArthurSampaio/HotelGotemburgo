@@ -24,13 +24,8 @@ public class HotelFacade {
 
 	}
 
-	public String getInfoHospede(String email, String info) {
-		try {
-			return gerencia.getInfoHospede(email, info);
-		} catch (Exception e) {
-			return e.getMessage();
-
-		}
+	public String getInfoHospede(String email, String info) throws Exception{
+		return gerencia.getInfoHospede(email, info);
 	}
 
 	public String atualizaCadastro(String email, String tipoInfo, String novaInfo) {
