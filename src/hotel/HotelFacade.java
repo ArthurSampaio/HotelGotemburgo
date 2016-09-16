@@ -69,22 +69,21 @@ public class HotelFacade {
 	}
 
 	public String consultaRestaurante(String nome, String info){
-		 		try{
-		 			return restaurante.consultaRestaurante(nome, info);
-		 		}catch(Exception e){
-		 			return (e.getMessage());
-		 		}
-		 		
-		 	}
+		 try{
+		 	return restaurante.consultaRestaurante(nome, info);
+		 } catch(Exception e){
+		 	return (e.getMessage());
+		 }
+	}
 		 	
 		 	
-		 	public void cadastraRefeicao(String nome, String descricao, String componentes){
-		 		try{
-		 			restaurante.cadastraRefeicao(nome, descricao, componentes);
-		 		}catch(Exception e){
-		 			System.out.println(e.getMessage());
-		 		}
-		 	}
+	public void cadastraRefeicao(String nome, String descricao, String componentes){
+		try{
+		 	restaurante.cadastraRefeicao(nome, descricao, componentes);
+		 } catch(Exception e){
+		 	  System.out.println(e.getMessage());
+		 }
+	}
 	
 	
 	public void fechaSistema() {
