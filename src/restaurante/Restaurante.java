@@ -8,6 +8,7 @@ import prato.Prato;
 
 public class Restaurante {
 	private Map<String, ItemCardapio> cardapio;
+	
 	private FactoryPrato fabrica;
 	public Restaurante(){
 		this.cardapio = new HashMap<String, ItemCardapio>();
@@ -22,8 +23,10 @@ public class Restaurante {
 		cardapio.put(item.getNome(), item);
 	}
 	
-	public void criaPrato(String nome, String descricao, double preco, String tipo) throws Exception{
-		Prato prato = fabrica.criaPrato(nome, descricao, preco, tipo);
+	public void cadastraPrato(String nome, double preco, String descricao) throws Exception{
+		Prato prato = fabrica.criaPrato(nome, preco, descricao);
 		addItem(prato);
 	}
+	
+	
 }
