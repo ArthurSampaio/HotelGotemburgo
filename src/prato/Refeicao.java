@@ -64,6 +64,22 @@ public class Refeicao extends ItemCardapio {
 		result = prime * result + ((getNome() == null) ? 0 : getNome().hashCode());
 		return result;
 	}
+	
+	public String toString(){
+		String saida = "";
+		saida += this.getDescricao() +  " Serao servidos:";
+		
+		for(int i = 0; i < this.menu.size(); i++ ){
+			saida += " (" + (i+1) + ") " + menu.get(i).getNome();
+			if(i > menu.size()-2){
+				saida += ".";
+			}
+			else{
+				saida += ",";
+			}
+		
+		}return saida;
+	}
 
 	@Override
 	/**

@@ -62,6 +62,10 @@ public class Prato extends ItemCardapio {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	
+	public String toString(){
+		return this.getDescricao();
+	}
 
 	@Override
 	public boolean equals(Object objeto) {

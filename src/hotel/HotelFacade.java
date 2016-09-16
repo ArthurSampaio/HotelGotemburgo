@@ -1,15 +1,15 @@
 package hotel;
 
 import easyaccept.EasyAccept;
-import restaurante.Restaurante;
+import restaurante.RestauranteController;
 
 public class HotelFacade {
 	private HotelController gerencia;
-	private Restaurante restaurante;
+	private RestauranteController restaurante;
 
 	public HotelFacade() {
 		this.gerencia = new HotelController();
-		this.restaurante = new Restaurante();
+		this.restaurante = new RestauranteController();
 
 	}
 
@@ -38,12 +38,6 @@ public class HotelFacade {
 		}
 
 	}
-	
-	
-
-	public String getHospede(String email, String atributo) throws Exception {
-		return gerencia.getHospede(email, atributo);
-	}
 
 	public void removeHospede(String email) {
 		try {
@@ -61,6 +55,23 @@ public class HotelFacade {
 		}
 	}
 
+	public String consultaRestaurante(String nome, String info){
+		try{
+			return restaurante.consultaRestaurante(nome, info);
+		}catch(Exception e){
+			return (e.getMessage());
+		}
+		
+	}
+	
+	
+	public void cadastraRefeicao(String nome, String descricao, String componentes){
+		try{
+			restaurante.cadastraRefeicao(nome, descricao, componentes);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
 	public void fechaSistema() {
 
 	}

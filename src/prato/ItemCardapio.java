@@ -14,6 +14,8 @@ public abstract class ItemCardapio {
 		if(descricao.trim().isEmpty() || nome == null){
 			throw new StringInvalidaException();
 		}
+		this.nome = nome;
+		this.descricao = descricao;
 	}
 	
 	public String getNome() {
