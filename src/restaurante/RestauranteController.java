@@ -1,14 +1,15 @@
 package restaurante;
-
+ 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
+ 
 import excecoes.AtributoInvalidoException;
 import prato.ItemCardapio;
 import prato.Prato;
 import prato.Refeicao;
-
+ 
 /**Classe representando Controller do Restaurante.
  * 
  * @author marianams
@@ -16,18 +17,18 @@ import prato.Refeicao;
  */
 public class RestauranteController {
 	private Map<String, ItemCardapio> cardapio;
-
-	private FactoryPrato fabrica;
-
+ 
+	private FactoryItemCardapio fabrica;
+ 
 	/**
 	 * Construtor de Restaurante Controller.
 	 */
 	public RestauranteController() {
 		this.cardapio = new HashMap<String, ItemCardapio>();
-		this.fabrica = new FactoryPrato();
+		this.fabrica = new FactoryItemCardapio();
 	}
-	
-	
+ 
+ 
 	/**
 	 * 
 	 * @param nomeDoItem
@@ -43,16 +44,18 @@ public class RestauranteController {
 	public void addItem(ItemCardapio item) {
 		cardapio.put(item.getNome(), item);
 	}
-
+ 
 	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
 		Prato prato = fabrica.criaPrato(nome, preco, descricao);
 		addItem(prato);
 	}
-
-	public void cadastraRefeicao() {
-
+ 
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
+		ArrayList<Prato> pratos = criaArrayList(componentes);
+		Refeicao refeicao = fabrica.criaRefeicao(nome, descricao, pratos);
+		cardapio.put(nome, refeicao);
 	}
-
+ 
 	public String consultaRestaurante(String nome, String info) throws Exception {
 		if (info.equalsIgnoreCase("preco")) {
 			return getPrecoItem(nome);
@@ -62,38 +65,26 @@ public class RestauranteController {
 			throw new AtributoInvalidoException();
 		}
 	}
-
+ 
 	private String getPrecoItem(String nome) {
 		ItemCardapio item = this.cardapio.get(nome);
 		String preco = String.format("R$%.2f", item.getPreco());
 		return preco;
-
+ 
 	}
-
-	public void cadastraRefeicao(String nome, String descricao, String componente) throws Exception {
-
-		String[] pratos = componente.split(";");
-		if (pratos.length < 3 || pratos.length > 4) {
-			throw new Exception(
-					"Erro no cadastro de refeicao completa. Uma refeicao completa deve possuir no minimo 3 e no maximo 4 pratos.");
-		}
+ 
+	private ArrayList<Prato> criaArrayList(String componentes) throws Exception{
+		String[] pratos = componentes.split(";");
 		ArrayList<Prato> novosPratos = new ArrayList<Prato>();
-
-		Refeicao novaRefeicao = new Refeicao(nome, descricao, novosPratos);
-
+ 
 		for (int i = 0; i < pratos.length; i++) {
 			if (!cardapio.containsKey(pratos[i])) {
 				throw new Exception(pratos[i] + "nao existe no cardapio");
 			}
-			
 			Prato pratoNovo = (Prato) cardapio.get(pratos[i]);
-
 			novosPratos.add(pratoNovo);
-
 		}
-		
-		cardapio.put(nome, novaRefeicao);
-
+		return novosPratos;
 	}
-
+ 
 }
