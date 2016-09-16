@@ -5,8 +5,11 @@ import java.util.Map;
 
 import cliente.Cliente;
 import cliente.ClienteFactory;
+import estadia.Estadia;
 import excecoes.EmailInexistenteException;
 import excecoes.StringInvalidaException;
+import quarto.Quarto;
+import quarto.QuartoFactory;
 
 /**
  * Classe que representa o Controller do Hotel 
@@ -14,11 +17,13 @@ import excecoes.StringInvalidaException;
  * @author João Maurício
  * @author Mariana Mendes
  * @author Arthur Sampaio
+ * @author Tiago Pereira
  *
  */
 public class HotelController {
 	private Map<String, Cliente> clientes;
 	private ClienteFactory factoryCliente;
+	private QuartoFactory factoryQuarto;
 
 	/**
 	 * Construtor do HotelController
@@ -26,6 +31,7 @@ public class HotelController {
 	public HotelController() {
 		this.clientes = new HashMap<String, Cliente>();
 		this.factoryCliente = new ClienteFactory();
+		this.factoryQuarto = new QuartoFactory();
 	}
 
 	/**
@@ -49,6 +55,14 @@ public class HotelController {
 		return email;
 
 	}
+	
+	public void realizaChekin(String email, int dias, String id, String tipoQuarto) throws Exception{
+		Cliente cliente = this.getCliente(email);
+		Quarto quarto = factoryQuarto.criaQuarto(id, tipoQuarto);
+		Estadia estadia = new Estadia(quarto, dias);
+		cliente.adicionaEstadia(estadia);
+		
+	}
 
 
 	/**
@@ -65,14 +79,17 @@ public class HotelController {
 	 * 				Quando nao há o email passado como parametro cadastrado no sistema            
 	 */
 	public String getInfoHospede(String email, String info) throws Exception {
-		if (!clientes.containsKey(email)) {
-			throw new EmailInexistenteException(
-					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
-		}
-
-		Cliente cliente = this.clientes.get(email);
+		Cliente cliente = getCliente(email);
 		return cliente.getInfoHospede(info);
 
+	}
+	
+	public String getInfoHospedagem(String email, String info)throws Exception{
+		Cliente cliente = getCliente(email);
+		if(!cliente.isHospedado()){
+			throw new Exception("Erro na consulta de hospedagem. Hospede " + cliente.getNome() + " nao esta hospedado(a).");
+		}
+		return cliente.getInfoHospedagem(info);
 	}
 
 	/**
@@ -112,6 +129,14 @@ public class HotelController {
 		}
 
 		return null;
+	}
+	
+	public Cliente getCliente(String email) throws Exception {
+		if (!clientes.containsKey(email)) {
+			throw new EmailInexistenteException(
+					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
+		}
+		return clientes.get(email);
 	}
 
 	/**
