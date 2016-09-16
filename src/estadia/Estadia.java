@@ -44,7 +44,7 @@ public class Estadia {
 	 * @return
 	 * 		O valor total da estadia dada a quantidade de dias definida na criação do objeto
 	 */
-	public double calculaValorEstadia(double desconto){
+	public double calculaValorEstadia(double desconto)throws Exception{
 		return this.quarto.calculaDiaria(desconto) * this.getDias();
 	}
 	
@@ -54,7 +54,7 @@ public class Estadia {
 	 * @return
 	 * 		O valor da estadia. 
 	 */
-	public double calculaValorEstadia(){
+	public double calculaValorEstadia()throws Exception{
 		return this.calculaValorEstadia(SEM_DESCONTO);
 	}
 
