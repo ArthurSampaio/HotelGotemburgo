@@ -1,6 +1,7 @@
 package quarto;
 
 import excecoes.StringInvalidaException;
+import excecoes.ValorInvalidoException;
 
 /**
  * Classe do tipo Simples. Implementa a interface Quarto.
@@ -31,7 +32,7 @@ public class Simples extends QuartoAbstract {
 	 * Calcula o valor da diaria sem descontoimplements
 	 */
 	@Override
-	public double calculaDiaria() {
+	public double calculaDiaria() throws Exception{
 		return this.calculaDiaria(SEM_DESCONTO);
 	}
 
@@ -43,7 +44,10 @@ public class Simples extends QuartoAbstract {
 	 * 		o valor da diaria
 	 */
 	@Override
-	public double calculaDiaria(double desconto) {
+	public double calculaDiaria(double desconto)throws Exception {
+		if(desconto < 0){
+			throw new ValorInvalidoException("O valor da diaria nao pode ser inferior a zero.");
+		}
 		return this.getDiaria() * (1-desconto);
 	}
 

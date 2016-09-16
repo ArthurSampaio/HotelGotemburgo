@@ -1,6 +1,7 @@
 package quarto;
 
 import excecoes.StringInvalidaException;
+import excecoes.ValorInvalidoException;
 
 /**
  * Classe do tipo Presidencial. Implementa a classe Quarto.
@@ -33,7 +34,7 @@ public class Presidencial extends QuartoAbstract {
 	 * Calcula o valor da diaria sem desconto
 	 */
 	@Override
-	public double calculaDiaria() {
+	public double calculaDiaria()throws Exception {
 		return this.calculaDiaria(SEM_DESCONTO);
 	}
 
@@ -45,7 +46,10 @@ public class Presidencial extends QuartoAbstract {
 	 * 		o valor da diaria
 	 */
 	@Override
-	public double calculaDiaria(double desconto) {
+	public double calculaDiaria(double desconto) throws ValorInvalidoException {
+		if(desconto < 0){
+			throw new ValorInvalidoException("O valor da diaria nao pode ser inferior a zero.");
+		}
 		return this.getDiaria() * (1-desconto);
 	}
 

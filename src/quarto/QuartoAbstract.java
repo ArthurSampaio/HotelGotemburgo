@@ -7,7 +7,7 @@ public abstract class QuartoAbstract implements Quarto {
 	
 	public QuartoAbstract(String id)throws StringInvalidaException{
 		if(id == null || id.trim().isEmpty()){
-			throw new StringInvalidaException();
+			throw new StringInvalidaException("O ID nao pode ser vazio ou nulo");
 		}
 		
 		this.ID = id;
