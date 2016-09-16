@@ -48,7 +48,7 @@ public class PratoTeste {
 			Prato prato4 = new Prato("nome4", "descricao4", -67.0);
 			fail();
 		} catch (Exception e) {
-			assertEquals("Valor inv�lido", e.getMessage());
+			assertEquals("Valor invalido", e.getMessage());
 		}
 
 	}
