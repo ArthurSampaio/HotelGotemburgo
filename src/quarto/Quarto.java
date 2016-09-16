@@ -14,7 +14,7 @@ public interface Quarto {
 	 * @return
 	 * 		o valor da diaria
 	 */
-	double calculaDiaria();
+	double calculaDiaria()throws Exception;
 	
 	/**
 	 * Calcula a diaria apartir de um desconto
@@ -23,7 +23,7 @@ public interface Quarto {
 	 * @return
 	 * 		o valor da diaria
 	 */
-	double calculaDiaria(double desconto);
+	double calculaDiaria(double desconto)throws Exception;
 	
 	String getID();
 }
