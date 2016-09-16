@@ -38,6 +38,12 @@ public class HotelFacade {
 		}
 
 	}
+	
+	
+
+	public String getHospede(String email, String atributo) throws Exception {
+		return gerencia.getHospede(email, atributo);
+	}
 
 	public void removeHospede(String email) {
 		try {
