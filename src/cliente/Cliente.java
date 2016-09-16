@@ -1,6 +1,7 @@
 package cliente;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import excecoes.StringInvalidaException;
 import estadia.Estadia;
@@ -120,10 +121,49 @@ public class Cliente {
 			throw new Exception("O cliente nao possue a informacao especificada.");
 		}
 	}
-
+	
+	public String getInfoHospedagem(String info) throws Exception, StringInvalidaException {
+		if (stringInvalida(info)) {
+			throw new StringInvalidaException();
+		}
+		else if(info.equalsIgnoreCase("Hospedagens ativas")){
+			return "" + this.estadias.size();
+		}
+		else if(info.equalsIgnoreCase("Quarto")){
+			return IDquartos();
+		} else if(info.equalsIgnoreCase("Total")){
+			return String.format("R$%.2f", totalEstadias());
+			
+		} else {
+		throw new Exception("O cliente nao possue a informacao especificada.");
+		}
+	}
+	
 	public boolean stringInvalida(String string){
 		return(string.trim().isEmpty() || string == null);
 		
+	}
+	
+	public String IDquartos(){
+		int i = estadias.size();
+		String saida  = "";
+		for(Entry<String, Estadia> entry : this.estadias.entrySet()) {
+			if(i > 1){
+			    saida += entry.getValue().getIDQuarto() + ",";
+			}else{
+				saida += entry.getValue().getIDQuarto();
+			}
+			i -= 1;
+		}
+		return saida;
+	}
+	
+	public double totalEstadias() throws Exception{
+		double total = 0.0;
+		for(Entry<String, Estadia> entry : this.estadias.entrySet()) {
+		    total += entry.getValue().calculaValorEstadia();
+		}
+		return total;
 	}
 
 	/**
@@ -133,6 +173,7 @@ public class Cliente {
 	 */
 	public void adicionaEstadia(Estadia novaEstadia) {
 		this.estadias.put(novaEstadia.getIDQuarto(), novaEstadia);
+		setHospedado(true);
 	}
 
 	public boolean isHospedado() {
