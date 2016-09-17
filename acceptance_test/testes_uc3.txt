@@ -22,19 +22,19 @@ expect "1" getInfoHospedagem email="sven@sverige.se" atributo="Hospedagens ativa
 expect "1" getInfoHospedagem email="ines@brasil.com.br" atributo="Hospedagens ativas"
 
 expectError "Erro na consulta de hospedagem. Agnetha Faltskog nao esta hospedado(a)." getInfoHospedagem email="agnetha@abba.se" atributo="Hospedagens ativas"
-expectError "Erro na consulta de hospedagem. Hospede Alfred Nobel nao esta hospedado(a)." getInfoHospede email="nobel@got.se" atributo="Hospedagens ativas"
+expectError "Erro na consulta de hospedagem. Alfred Nobel nao esta hospedado(a)." getInfoHospedagem email="nobel@got.se" atributo="Hospedagens ativas"
 
 expect "2A" getInfoHospedagem email="sven@sverige.se" atributo="Quarto"
-expect "1B" getInfoHospedagem email="ines@brasil.com.br" atributo="Quarto"
+expect "2B" getInfoHospedagem email="ines@brasil.com.br" atributo="Quarto"
 
 expectError "Erro na consulta de hospedagem. Agnetha Faltskog nao esta hospedado(a)." getInfoHospedagem email="agnetha@abba.se" atributo="Quarto"
-expectError "Erro na consulta de hospedagem. Hospede Alfred Nobel nao esta hospedado(a)." getInfoHospedagem email="nobel@got.se" atributo="Quarto"
+expectError "Erro na consulta de hospedagem. Alfred Nobel nao esta hospedado(a)." getInfoHospedagem email="nobel@got.se" atributo="Quarto"
 
 expect "R$1350,00" getInfoHospedagem email="sven@sverige.se" atributo="Total"
 expect "R$750,00" getInfoHospedagem email="ines@brasil.com.br" atributo="Total"
 
-expectError "Erro na consulta de hospedagem. Agnetha Faltskog nao esta hospedado(a)." email="agnetha@abba.se" atributo="Total"
-expectError "Erro na consulta de hospedagem. Hospede Alfred Nobel nao esta hospedado(a)." getInfoHospedagem email="nobel@got.se" atributo="Total"
+expectError "Erro na consulta de hospedagem. Agnetha Faltskog nao esta hospedado(a)." getInfoHospedagem email="agnetha@abba.se" atributo="Total"
+expectError "Erro na consulta de hospedagem. Alfred Nobel nao esta hospedado(a)." getInfoHospedagem email="nobel@got.se" atributo="Total"
 
 expect "3" consultaTransacoes atributo="Quantidade"
 expect "R$2950,00" consultaTransacoes atributo="Total"
