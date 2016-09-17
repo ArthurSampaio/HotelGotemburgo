@@ -1,7 +1,6 @@
 package hotel;
 
 import easyaccept.EasyAccept;
-import restaurante.Restaurante;
 import restaurante.RestauranteController;
 
 public class HotelFacade {
