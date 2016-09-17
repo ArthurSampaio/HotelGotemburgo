@@ -38,6 +38,22 @@ public class HotelFacade {
 			return e.getMessage();
 		}
 	}
+	
+	public String consultaTransacoes(String atributo){
+		try{
+			return gerencia.consultaTransacoes(atributo);
+		}catch(Exception e){
+			return e.getMessage();
+		}
+	}
+	
+	public String consultaTransacoes(String atributo, int indice){
+		try{
+			return gerencia.consultaTransacoes(atributo, indice);
+		}catch(Exception e){
+			return e.getMessage();
+		}
+	}
 
 	public String getInfoHospede(String email, String info) throws Exception {
 		return gerencia.getInfoHospede(email, info);
