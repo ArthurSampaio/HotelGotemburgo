@@ -181,6 +181,14 @@ public class Cliente {
 		this.estadias.put(novaEstadia.getIDQuarto(), novaEstadia);
 		setHospedado(true);
 	}
+	
+	public void removeEstadia(Estadia estadia) {
+		String id = estadia.getIDQuarto();
+		this.estadias.remove(id);
+		if(this.estadias.size() == 0){
+			setHospedado(false);
+		}
+	}
 
 	public boolean isHospedado() {
 		return hospedado;
