@@ -182,13 +182,17 @@ public class Cliente {
 		setHospedado(true);
 	}
 	
-	public void removeEstadia(Estadia estadia) {
+	public void removeEstadia(Estadia estadia) throws Exception {
 		String id = estadia.getIDQuarto();
+		if(!this.estadias.containsKey(id)){
+			throw new Exception("Cliente nao possui estadia no quarto especificado.");
+		}
 		this.estadias.remove(id);
 		if(this.estadias.size() == 0){
 			setHospedado(false);
 		}
 	}
+	
 
 	public boolean isHospedado() {
 		return hospedado;
