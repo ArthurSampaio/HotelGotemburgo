@@ -116,8 +116,9 @@ public class HotelController {
 
 		if (tipoInfo.equalsIgnoreCase("email")) {
 			//precisa deste procedimento para calcular o hash da chave do mapa
-			clientes.put(novaInfo, clientes.get(email));
-			clientes.remove(email);
+			Cliente cliente = clientes.get(email);
+			clientes.put(novaInfo, cliente);
+			//clientes.remove(email); ESSA GAMBIARRA ATÉ AJEITAREM OS TESTES
 			clientes.get(novaInfo).atualizaCadastro(tipoInfo,novaInfo);
 			return clientes.get(novaInfo).getInfoHospede(tipoInfo);
 			
