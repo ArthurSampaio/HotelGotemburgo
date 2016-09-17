@@ -30,6 +30,14 @@ public class HotelFacade {
 		gerencia.realizaChekin(email, dias, idQuarto, tipoQuarto);
 		
 	}
+	
+	public String realizaCheckout(String email, String idQuarto) {
+		try{
+			return gerencia.realizaCheckout(email, idQuarto);
+		}catch(Exception e){
+			return e.getMessage();
+		}
+	}
 
 	public String getInfoHospede(String email, String info) throws Exception {
 		return gerencia.getInfoHospede(email, info);
@@ -87,7 +95,7 @@ public class HotelFacade {
 	}
 
 	public static void main(String[] args) {
-		args = new String[] { "hotel.HotelFacade", "acceptance_test/testes_uc1.txt", "acceptance_test/testes_uc2.txt", "acceptance_test/testes_uc4.txt" };
+		args = new String[] { "hotel.HotelFacade", "acceptance_test/testes_uc1.txt", "acceptance_test/testes_uc2.txt","acceptance_test/testes_uc3.txt", "acceptance_test/testes_uc4.txt" };
 		EasyAccept.main(args);
 
 	}

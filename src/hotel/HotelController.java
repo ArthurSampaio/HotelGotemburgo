@@ -1,6 +1,8 @@
 package hotel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -23,6 +25,7 @@ import quarto.QuartoFactory;
  */
 public class HotelController {
 	private Map<String, Cliente> clientes;
+	private List<Cliente> transacoes;
 	private ClienteFactory factoryCliente;
 	private QuartoFactory factoryQuarto;
 
@@ -31,6 +34,7 @@ public class HotelController {
 	 */
 	public HotelController() {
 		this.clientes = new HashMap<String, Cliente>();
+		this.transacoes = new ArrayList<Cliente>();
 		this.factoryCliente = new ClienteFactory();
 		this.factoryQuarto = new QuartoFactory();
 	}
@@ -67,6 +71,14 @@ public class HotelController {
 		cliente.adicionaEstadia(estadia);
 		
 	}
+	
+	public String realizaCheckout(String email, String idQuarto) throws Exception{
+		Cliente cliente = getCliente(email);
+		Estadia estadia = cliente.getEstadia().get(idQuarto);
+		cliente.removeEstadia(estadia);
+		return String.format("R$%.2f", estadia.calculaValorEstadia());
+		
+	}
 
 
 	/**
@@ -91,7 +103,7 @@ public class HotelController {
 	public String getInfoHospedagem(String email, String info)throws Exception{
 		Cliente cliente = getCliente(email);
 		if(!cliente.isHospedado()){
-			throw new Exception("Erro na consulta de hospedagem. Hospede " + cliente.getNome() + " nao esta hospedado(a).");
+			throw new Exception("Erro na consulta de hospedagem. " + cliente.getNome() + " nao esta hospedado(a).");
 		}
 		return cliente.getInfoHospedagem(info);
 	}
