@@ -2,6 +2,7 @@ package hotel;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import cliente.Cliente;
 import cliente.ClienteFactory;
@@ -57,6 +58,9 @@ public class HotelController {
 	}
 	
 	public void realizaChekin(String email, int dias, String id, String tipoQuarto) throws Exception{
+		if(!verificaQuartoDisponivel(id)){
+			throw new Exception("Erro ao realizar checkin. Quarto " + id + " ja esta ocupado.");
+		}
 		Cliente cliente = this.getCliente(email);
 		Quarto quarto = factoryQuarto.criaQuarto(id, tipoQuarto);
 		Estadia estadia = new Estadia(quarto, dias);
@@ -154,5 +158,15 @@ public class HotelController {
 		}
 		clientes.remove(email);
 
+	}
+	
+	public boolean verificaQuartoDisponivel(String id){
+		for(Entry<String, Cliente> entry : this.clientes.entrySet()) {
+			if(entry.getValue().isHospedado() && entry.getValue().getEstadia().containsKey(id)){
+				
+				return false;
+			}
+		}
+		return true;
 	}
 }

@@ -1,5 +1,8 @@
 package cliente;
 
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -145,15 +148,18 @@ public class Cliente {
 	}
 	
 	public String IDquartos(){
-		int i = estadias.size();
 		String saida  = "";
+		ArrayList<String> idQuartos = new ArrayList<String>();
 		for(Entry<String, Estadia> entry : this.estadias.entrySet()) {
-			if(i > 1){
-			    saida += entry.getValue().getIDQuarto() + ",";
+			   idQuartos.add(entry.getValue().getIDQuarto());
+		}
+		Collections.sort(idQuartos);
+		for(int i = 0; i < idQuartos.size(); i++){
+			if(i < idQuartos.size() - 1){
+				saida += idQuartos.get(i) + ",";
 			}else{
-				saida += entry.getValue().getIDQuarto();
+				saida += idQuartos.get(i);
 			}
-			i -= 1;
 		}
 		return saida;
 	}

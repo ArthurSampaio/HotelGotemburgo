@@ -26,12 +26,9 @@ public class HotelFacade {
 
 	}
 	
-	public void realizaCheckin(String email, int dias, String idQuarto, String tipoQuarto){
-		try{
-			gerencia.realizaChekin(email, dias, idQuarto, tipoQuarto);
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-		}
+	public void realizaCheckin(String email, int dias, String idQuarto, String tipoQuarto) throws Exception{
+		gerencia.realizaChekin(email, dias, idQuarto, tipoQuarto);
+		
 	}
 
 	public String getInfoHospede(String email, String info) throws Exception {
