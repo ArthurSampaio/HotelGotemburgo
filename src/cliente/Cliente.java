@@ -147,7 +147,7 @@ public class Cliente {
 		
 	}
 	
-	public String IDquartos(){
+	private String IDquartos(){
 		String saida  = "";
 		ArrayList<String> idQuartos = new ArrayList<String>();
 		for(Entry<String, Estadia> entry : this.estadias.entrySet()) {
