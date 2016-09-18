@@ -2,10 +2,24 @@ package prato;
 
 import excecoes.StringInvalidaException;
 
+/**
+ * Classe que representa um item do cardapio.
+ * @author Joao Mauricio Carvalho
+ * @author Mariana Mendes
+ *
+ */
+
 public abstract class ItemCardapio {
 	private String nome;
 	private String descricao;
 	
+	/**
+	 * Construtor da classe.
+	 * @param nome
+	 * 			Nome do item.
+	 * @param descricao
+	 * 			Descricao do item.
+	 */
 	public ItemCardapio(String nome, String descricao) throws StringInvalidaException{
 		if(nome.trim().isEmpty() || nome == null){
 			throw new StringInvalidaException();
@@ -34,8 +48,16 @@ public abstract class ItemCardapio {
 		this.descricao = descricao;
 	}
 
+	/**
+	 * Classe que herdam tem seu propio calculo de preco.
+	 * @return
+	 * 		Preco do item.
+	 */
 	public abstract double getPreco();
 	
+	/**
+	 * Itens sao iguais se tem mesmo nome e descricao.
+	 */
 	public boolean equals(Object outro){
 		if (outro instanceof  ItemCardapio){
 			ItemCardapio outroItem = (ItemCardapio)outro;
