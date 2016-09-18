@@ -26,8 +26,13 @@ public class Refeicao extends ItemCardapio {
 	 */
 	public Refeicao(String nome, String descricao, ArrayList<Prato> pratos) throws Exception {
 		super(nome, descricao);
-		if (pratos == null) {
-			throw new Exception("Prato vazio");
+		for(int i = 0; i < pratos.size(); i++){
+			if (pratos.get(i) == null){
+				throw new Exception ("Prato vazio");
+			}
+		}
+		if (pratos.size() != 3 && pratos.size() != 4){
+			throw new Exception ("Refeicao deve ser composta por 3 ou 4 pratos");
 		}
 		this.menu = pratos;
 	}
