@@ -59,12 +59,12 @@ public class QuartoTeste {
 	
 	@Test 
 	public void testCalculaDiaria()throws Exception{
-		Assert.assertEquals(100, q1.calculaDiaria(0), 0.05);
-		Assert.assertEquals(250.0, q2.calculaDiaria(), 0.05);
-		Assert.assertEquals(450.0, q3.calculaDiaria(), 0.05);
+		Assert.assertEquals(100, q1.getDiaria(0), 0.05);
+		Assert.assertEquals(250.0, q2.getDiaria(), 0.05);
+		Assert.assertEquals(450.0, q3.getDiaria(), 0.05);
 
 		try{
-			Assert.assertEquals(250.0, q2.calculaDiaria(-0.5), 0.05);
+			Assert.assertEquals(250.0, q2.getDiaria(-0.5), 0.05);
 		}catch(Exception e){
 			Assert.assertEquals("O valor da diaria nao pode ser inferior a zero.", e.getMessage());
 		}

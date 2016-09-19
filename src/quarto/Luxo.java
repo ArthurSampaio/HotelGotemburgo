@@ -11,12 +11,11 @@ import excecoes.ValorInvalidoException;
  * @author Arthur Sampaio
  *
  */
-public class Luxo extends QuartoAbstract{
+public class Luxo extends Quarto{
 	
 	
 	private String ID;
-	private ValorDeQuartos diaria;
-	private static final double SEM_DESCONTO = 0;
+	private final double DIARIA = 250;
 	
 	/**
 	 * Construtor da Classe
@@ -25,18 +24,11 @@ public class Luxo extends QuartoAbstract{
 	 */	
 	public Luxo(String id)throws StringInvalidaException{
 		super(id);
-		this.diaria = ValorDeQuartos.LUXO;
 		
 	}
 	
 
-	/**
-	 * Calcula o valor da diaria sem desconto
-	 */
-	@Override
-	public double calculaDiaria()throws Exception {
-		return this.calculaDiaria(SEM_DESCONTO);
-	}
+
 
 	/**
 	 * Calcula a diaria apartir de um desconto
@@ -45,8 +37,8 @@ public class Luxo extends QuartoAbstract{
 	 * @return
 	 * 		o valor da diaria
 	 */
-	@Override
-	public double calculaDiaria(double desconto) throws Exception {
+	
+	public double getDiaria(double desconto) throws ValorInvalidoException {
 		if(desconto < 0){
 			throw new ValorInvalidoException("O valor da diaria nao pode ser inferior a zero.");
 		}
@@ -60,7 +52,7 @@ public class Luxo extends QuartoAbstract{
 	 * 		Um double com o valor da diaria
 	 */
 	public double getDiaria() {
-		return diaria.getValor();
+		return this.DIARIA;
 	}
 	
 	@Override

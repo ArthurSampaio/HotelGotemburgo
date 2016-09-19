@@ -12,7 +12,6 @@ import quarto.Quarto;
 public class Estadia {
 	private Quarto quarto;
 	private int dias;
-	private static int SEM_DESCONTO = 0;
 	
 	/**
 	 * Construtor de Estadia
@@ -45,17 +44,17 @@ public class Estadia {
 	 * 		O valor total da estadia dada a quantidade de dias definida na criação do objeto
 	 */
 	public double calculaValorEstadia(double desconto)throws Exception{
-		return this.quarto.calculaDiaria(desconto) * this.getDias();
+		return this.quarto.getDiaria(desconto) * this.dias;
 	}
 	
 	/**
 	 * Calcula o valor da estadia sem desconto.
-	 * Sobrecarga do metodo calculaValorEstadia(double), com o valor passado por parâmetro sendo igual a 0.
+	 * Sobrecarga do metodo calculaValorEstadia(double).
 	 * @return
 	 * 		O valor da estadia. 
 	 */
 	public double calculaValorEstadia()throws Exception{
-		return this.calculaValorEstadia(SEM_DESCONTO);
+		return this.quarto.getDiaria() * this.dias;
 	}
 
 	public Quarto getQuarto() {
