@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import excecoes.AtributoInvalidoException;
+import excecoes.StringInvalidaException;
 import prato.ItemCardapio;
 import prato.Prato;
 import prato.Refeicao;
@@ -89,7 +90,10 @@ public class RestauranteController {
 	 * @return Informacao requerida do item.
 	 * @throws AtributoInvalidoException
 	 */
-	public String consultaRestaurante(String nome, String info) throws AtributoInvalidoException {
+	public String consultaRestaurante(String nome, String info) throws Exception {
+		if (nome.trim().isEmpty() || nome == null){
+			throw new StringInvalidaException("Erro na consulta do restaurante. Nome do prato esto vazio.");
+		}
 		if (info.equalsIgnoreCase("preco")) {
 			return getPrecoItem(nome);
 		} else if (info.equalsIgnoreCase("descricao")) {
@@ -122,12 +126,15 @@ public class RestauranteController {
 	 * @throws Exception
 	 */
 	private ArrayList<Prato> criaArrayList(String componentes) throws Exception {
+		if (componentes.trim().isEmpty()){
+			throw new Exception ("Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
+		}
 		String[] pratos = componentes.split(";");
 		ArrayList<Prato> novosPratos = new ArrayList<Prato>();
 
 		for (int i = 0; i < pratos.length; i++) {
 			if (!cardapio.containsKey(pratos[i])) {
-				throw new Exception(pratos[i] + "nao existe no cardapio");
+				throw new StringInvalidaException("Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
 			}
 			Prato pratoNovo = (Prato) cardapio.get(pratos[i]);
 			novosPratos.add(pratoNovo);

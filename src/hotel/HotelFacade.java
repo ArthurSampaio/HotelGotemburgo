@@ -80,29 +80,17 @@ public class HotelFacade {
 		}
 	}
 
-	public void cadastraPrato(String nome, double preco, String descricao) {
-		try {
+	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
 			restaurante.cadastraPrato(nome, preco, descricao);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
 	}
 
-	public String consultaRestaurante(String nome, String info){
-		 try{
-		 	return restaurante.consultaRestaurante(nome, info);
-		 } catch(Exception e){
-		 	return (e.getMessage());
-		 }
+	public String consultaRestaurante(String nome, String info) throws Exception{
+		return restaurante.consultaRestaurante(nome, info);
 	}
 		 	
 		 	
-	public void cadastraRefeicao(String nome, String descricao, String componentes){
-		try{
-		 	restaurante.cadastraRefeicao(nome, descricao, componentes);
-		 } catch(Exception e){
-		 	  System.out.println(e.getMessage());
-		 }
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception{
+		restaurante.cadastraRefeicao(nome, descricao, componentes);
 	}
 	
 	
@@ -111,7 +99,7 @@ public class HotelFacade {
 	}
 
 	public static void main(String[] args) {
-		args = new String[] { "hotel.HotelFacade", "acceptance_test/testes_uc1.txt", "acceptance_test/testes_uc2.txt","acceptance_test/testes_uc3.txt", "acceptance_test/testes_uc4.txt" };
+		args = new String[] { "hotel.HotelFacade", "acceptance_test/testes_uc1.txt", "acceptance_test/testes_uc2.txt","acceptance_test/testes_uc3.txt", "acceptance_test/testes_uc4.txt","acceptance_test/testes_uc4_exception.txt" };
 		EasyAccept.main(args);
 
 	}
