@@ -4,18 +4,19 @@ import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
 
 /**
- * Classe do tipo Luxo. Impementa a Interface Quarto
+ * Classe do tipo Luxo. Herda da SuperClasse Quarto
  * 
  * Representa um tipo de quarto dentro do Hotel Gotemburgo
  * 
  * @author Arthur Sampaio
- *
+ * @author Tiago Pereira
  */
 public class Luxo extends Quarto{
 	
 	
 	private String ID;
-	private final double DIARIA = 250;
+	private double valorDiaria;
+	private final double DIARIA_LUXO = 250;
 	
 	/**
 	 * Construtor da Classe
@@ -24,20 +25,16 @@ public class Luxo extends Quarto{
 	 */	
 	public Luxo(String id)throws StringInvalidaException{
 		super(id);
-		
+		this.valorDiaria = DIARIA_LUXO;
 	}
 	
-
-
-
 	/**
-	 * Calcula a diaria apartir de um desconto
+	 * Calcula a diaria a partir de um desconto
 	 * @param desconto
 	 * 		O desconto da diaria na forma decimal
 	 * @return
 	 * 		o valor da diaria
 	 */
-	
 	public double getDiaria(double desconto) throws ValorInvalidoException {
 		if(desconto < 0){
 			throw new ValorInvalidoException("O valor da diaria nao pode ser inferior a zero.");
@@ -52,7 +49,7 @@ public class Luxo extends Quarto{
 	 * 		Um double com o valor da diaria
 	 */
 	public double getDiaria() {
-		return this.DIARIA;
+		return this.valorDiaria;
 	}
 	
 	@Override
@@ -78,8 +75,5 @@ public class Luxo extends Quarto{
 		}else{
 			return false;
 		}
-	}
-
-	
-	
+	}	
 }

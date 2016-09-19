@@ -4,16 +4,19 @@ import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
 
 /**
- * Classe do tipo Simples. Implementa a interface Quarto.
+ * Classe do tipo Simples. Herda da SuperClasse Quarto.
+ * 
  * Representa um tipo de quarto dentro do Hotel Gotemburgo.
  * 
  * @author Arthur Sampaio
- *
+ * @author Tiago Pereira
  */
 public class Simples extends Quarto {
 
 	private String ID;
-	private final double DIARIA = 100;
+	private double valorDiaria;
+	private final double DIARIA_SIMPLES = 100;
+	
 	/**
 	 * Construtor da Classe
 	 * @param id
@@ -21,13 +24,11 @@ public class Simples extends Quarto {
 	 */	
 	public Simples(String id)throws StringInvalidaException{
 		super(id);
-		
-		
+		this.valorDiaria = DIARIA_SIMPLES;
 	}
 	
-
 	/**
-	 * Calcula a diaria apartir de um desconto
+	 * Calcula a diaria a partir de um desconto
 	 * @param desconto
 	 * 		O desconto da diaria na forma decimal
 	 * @return
@@ -41,15 +42,13 @@ public class Simples extends Quarto {
 		return this.getDiaria() * (1-desconto);
 	}
 
-
-	
 	/**
 	 * Retorna o valor da diaria
 	 * @return
 	 * 		Um double com o valor da diaria
 	 */
 	public double getDiaria() {
-		return this.DIARIA;
+		return this.valorDiaria;
 	}
 	
 	@Override

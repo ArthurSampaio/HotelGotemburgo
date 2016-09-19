@@ -4,20 +4,19 @@ import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
 
 /**
- * Classe do tipo Presidencial. Implementa a classe Quarto.
+ * Classe do tipo Presidencial. Herda da SuperClasse Quarto.
  * 
  * Representa um tipo de quarto dentro do Hotel Gotemburgo.
  * 
  * @author Arthur Sampaio
- *
+ *@author Tiago Pereira
  */
 public class Presidencial extends Quarto {
 
-	
 	private String ID;
-	private final double DIARIA = 450;
+	private double valorDiaria;
+	private final double DIARIA_PRESIDENCIAL = 450;
 
-	
 	/**
 	 * Construtor da Classe
 	 * @param id
@@ -25,12 +24,12 @@ public class Presidencial extends Quarto {
 	 */	
 	public Presidencial(String id)throws StringInvalidaException{
 		super(id);
-		
+		this.valorDiaria = DIARIA_PRESIDENCIAL;
 	}
 	
 
 	/**
-	 * Calcula a diaria apartir de um desconto
+	 * Calcula a diaria a partir de um desconto
 	 * @param desconto
 	 * 		O desconto da diaria na forma decimal
 	 * @return
@@ -50,7 +49,7 @@ public class Presidencial extends Quarto {
 	 * 		Um double com o valor da diaria
 	 */
 	public double getDiaria() {
-		return this.DIARIA;
+		return this.valorDiaria;
 	}
 	
 	@Override

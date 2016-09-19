@@ -3,18 +3,28 @@ package quarto;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
 
+/**
+ * SuperClasse quarto
+ * 
+ * @author Arthur Sampaio
+ * @author Tiago Pereira
+ */
 public abstract class Quarto{
 	private String ID;
 	
+	/**
+	 * Construtor da Classe
+	 * @param id
+	 * 		ID do quarto (numero do quarto)
+	 * @throws StringInvalidaException
+	 * 		Quando uma ID eh invalida, nula ou vazia
+	 */
 	public Quarto(String id)throws StringInvalidaException{
 		if(id == null || id.trim().isEmpty()){
 			throw new StringInvalidaException("O ID nao pode ser vazio ou nulo");
 		}
-		
 		this.ID = id;
-		
 	}
-	
 	
 	@Override
 	public int hashCode() {
@@ -38,9 +48,22 @@ public abstract class Quarto{
 		}
 	}
 
+	/**
+	 * Retorna o valor da diaria de um quarto dado um desconto
+	 * @param desconto
+	 * 		Desconto para o calculo da diaria
+	 * @return
+	 * 		Um double informando o valor da diaria com desconto
+	 * @throws ValorInvalidoException
+	 * 		Quando o desconto for menor que zero
+	 */
 	public abstract double getDiaria(double desconto) throws ValorInvalidoException;
 
-	
+	/**
+	 * Retorna o valor da diaria sem desconto
+	 * @return
+	 * 		Valor da diaria sem desconto
+	 */
 	public abstract double getDiaria();
 	
 	/**
