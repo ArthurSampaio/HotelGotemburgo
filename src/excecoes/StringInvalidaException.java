@@ -1,12 +1,12 @@
 package excecoes;
 
 /**
- * Classe para exceção de Strings. Herda de Exception
+ * Classe para excecao de Strings.
  * 
  * @author Arthur Sampaio
  *
  */
-public class StringInvalidaException extends Exception {
+public class StringInvalidaException extends SistemaException {
 	
 
 	private static final long serialVersionUID = 1L;

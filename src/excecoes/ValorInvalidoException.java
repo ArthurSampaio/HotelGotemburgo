@@ -2,12 +2,12 @@ package excecoes;
 
 
 /**
- * Classe para exce��o de Strings. Herda de Exception
+ * Classe para excecaoo de Strings. Herda de Exception
  * 
  * @author Arthur Sampaio
  *
  */
-public class ValorInvalidoException extends Exception{
+public class ValorInvalidoException extends SistemaException{
 	
 	private static final long serialVersionUID = 1L;
 

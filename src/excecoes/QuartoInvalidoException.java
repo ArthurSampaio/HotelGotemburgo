@@ -1,6 +1,6 @@
 package excecoes;
 
-public class QuartoInvalidoException extends Exception {
+public class QuartoInvalidoException extends SistemaException {
 
 	/**
 	 * 

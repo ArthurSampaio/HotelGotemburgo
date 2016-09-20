@@ -1,6 +1,6 @@
 package excecoes;
 
-public class ItemCardapioInvalidoException extends Exception{
+public class ItemCardapioInvalidoException extends SistemaException{
 	private static final long serialVersionUID = 1L;
 	private static final String MENSAGEM = "Item Cardapio Invalido.";
 	

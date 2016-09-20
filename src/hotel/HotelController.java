@@ -10,6 +10,7 @@ import cliente.Cliente;
 import cliente.ClienteFactory;
 import estadia.Estadia;
 import excecoes.EmailInexistenteException;
+import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
 import quarto.Quarto;
 import quarto.QuartoFactory;
@@ -53,7 +54,7 @@ public class HotelController {
 	 * @throws Exception
 	 * 		Quando há alguma string invalida
 	 */
-	public String cadastraHospede(String nome, String email, String data) throws Exception {
+	public String cadastraHospede(String nome, String email, String data) throws SistemaException {
 		Cliente novoCliente = this.factoryCliente.criaCliente(nome, email, data);
 		clientes.put(email, novoCliente);
 
@@ -340,13 +341,13 @@ public class HotelController {
 	 * @throws Exception
 	 * 		Quando nao ha um cliente cadastrado com o email passado
 	 */
-	public void removeHospede(String email) throws Exception {
+	public void removeHospede(String email) throws SistemaException {
+		checaEmail(email, "Erro na remocao do Hospede. Formato de email invalido.");
 		if (!clientes.containsKey(email)) {
 			throw new EmailInexistenteException(
 					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
 		}
 		clientes.remove(email);
-
 	}
 	
 	/**
@@ -363,5 +364,12 @@ public class HotelController {
 			}
 		}
 		return true;
+	}
+	
+	public void checaEmail(String email, String msg) throws StringInvalidaException {
+		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
+				&& !email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
+			throw new StringInvalidaException(msg);
+		}
 	}
 }
