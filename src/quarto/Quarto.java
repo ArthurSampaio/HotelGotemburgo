@@ -9,8 +9,9 @@ import excecoes.ValorInvalidoException;
  * @author Arthur Sampaio
  * @author Tiago Pereira
  */
-public abstract class Quarto{
+public class Quarto{
 	private String ID;
+	private TipoDeQuarto diaria;
 	
 	/**
 	 * Construtor da Classe
@@ -19,9 +20,56 @@ public abstract class Quarto{
 	 * @throws StringInvalidaException
 	 * 		Quando uma ID eh invalida, nula ou vazia
 	 */
-	public Quarto(String id)throws StringInvalidaException{
+	public Quarto(String id, TipoDeQuarto tipo)throws StringInvalidaException{
 		if(id == null || id.trim().isEmpty()){
 			throw new StringInvalidaException("O ID nao pode ser vazio ou nulo");
+		}
+		this.ID = id;
+		this.diaria = tipo;
+			
+	}
+	
+
+
+	/**
+	 * Retorna o valor da diaria de um quarto dado um desconto
+	 * @param desconto
+	 * 		Desconto para o calculo da diaria
+	 * @return
+	 * 		Um double informando o valor da diaria com desconto
+	 * @throws ValorInvalidoException
+	 * 		Quando o desconto for menor que zero
+	 */
+	public double getDiaria(double desconto) throws ValorInvalidoException{
+		return this.diaria.getDiaria()*(1-desconto);
+	}
+
+	/**
+	 * Retorna o valor da diaria sem desconto
+	 * @return
+	 * 		Valor da diaria sem desconto
+	 */
+	public double getDiaria()throws ValorInvalidoException{
+		return this.getDiaria(0);
+	}
+	
+	/**
+	 * Obtem o Id do quarto
+	 * @return
+	 * 		Uma String com o ID do quarto
+	 */
+	public String getID() {
+		return ID;
+	}
+
+	/**
+	 * Altera o ID do quarto
+	 * @param iD
+	 * 		O novo ID do quarto
+	 */
+	public void setID(String id) throws StringInvalidaException{
+		if(id == null || id.trim().isEmpty()){
+			throw new StringInvalidaException();
 		}
 		this.ID = id;
 	}
@@ -46,45 +94,6 @@ public abstract class Quarto{
 		}else{
 			return false;
 		}
-	}
-
-	/**
-	 * Retorna o valor da diaria de um quarto dado um desconto
-	 * @param desconto
-	 * 		Desconto para o calculo da diaria
-	 * @return
-	 * 		Um double informando o valor da diaria com desconto
-	 * @throws ValorInvalidoException
-	 * 		Quando o desconto for menor que zero
-	 */
-	public abstract double getDiaria(double desconto) throws ValorInvalidoException;
-
-	/**
-	 * Retorna o valor da diaria sem desconto
-	 * @return
-	 * 		Valor da diaria sem desconto
-	 */
-	public abstract double getDiaria();
-	
-	/**
-	 * Obtem o Id do quarto
-	 * @return
-	 * 		Uma String com o ID do quarto
-	 */
-	public String getID() {
-		return ID;
-	}
-
-	/**
-	 * Altera o ID do quarto
-	 * @param iD
-	 * 		O novo ID do quarto
-	 */
-	public void setID(String id) throws StringInvalidaException{
-		if(id == null || id.trim().isEmpty()){
-			throw new StringInvalidaException();
-		}
-		this.ID = id;
 	}
 
 }
