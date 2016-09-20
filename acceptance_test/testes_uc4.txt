@@ -10,7 +10,7 @@ iniciaSistema
 
 cadastraPrato nome="Artsoppa com panquecas" preco=18.50 descricao="Deliciosa sopa de ervilhas com carne. Essa comida tradicional da Suecia eh saboreada principalmente nas quintas-feiras."
 cadastraPrato nome="Kotbullar com lingon" preco=38.50 descricao="Almondegas de carne feito no tradicional estilo sueco."
-cadastraPrato nome="Kanelbullar" preco=15.00 descricao="Um pequeno pao de massa fofinha e sabor de canela"
+cadastraPrato nome="Kanelbullar" preco=15.00 descricao="Um pequeno pao de massa fofinha e sabor de canela."
 cadastraPrato nome="Algkot com vegetais" preco=75.00 descricao="Carne de alce grelhada e servida com vegetais cozidos no vapor."
 
 cadastraPrato nome="Espresso" preco=2.50 descricao="Tradicional cafe italiano."

@@ -1,3 +1,4 @@
+
 ##########################
 #     Caso de Uso 1      #
 # Trabalhando Exceptions #
@@ -10,7 +11,7 @@ iniciaSistema
 ###############################
 #    Cadastro de Hospedes     #
 ###############################
-
+id1=cadastraHospede nome="Sven Svensson" email="sven@sverige.se" dataNascimento="10/02/1978"
 expectError "Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio." cadastraHospede nome="" email="sven@sverige.se" dataNascimento="10/02/1978"
 expectError "Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio." cadastraHospede nome="    " email="sven@sverige.se" dataNascimento="10/02/1978"
 expectError "Erro no cadastro de Hospede. Nome do(a) hospede esta invalido." cadastraHospede nome="Sven Gudm@r Svenson" email="sven@sverige.se" dataNascimento="10/02/1978"
@@ -37,6 +38,8 @@ expectError "Erro no cadastro de Hospede. A idade do(a) hospede deve ser maior q
 ###############################
 #      Atualiza Cadastro      #
 ###############################
+
+id1=cadastraHospede nome="Sven Svensson" email="sven@sverige.se" dataNascimento="10/02/1978"
 
 expectError "Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede nao pode ser vazio." atualizaCadastro id=${id1} atributo="Nome" valor=""
 expectError "Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede nao pode ser vazio." atualizaCadastro id=${id1} atributo="Nome" valor="    "

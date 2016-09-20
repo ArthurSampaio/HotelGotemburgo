@@ -271,7 +271,7 @@ public class HotelController {
 	public String getInfoHospedagem(String email, String info)throws Exception{
 		Cliente cliente = getCliente(email);
 		if(!cliente.isHospedado()){
-			throw new Exception("Erro na consulta de hospedagem. " + cliente.getNome() + " nao esta hospedado(a).");
+			throw new Exception("Erro na consulta de hospedagem. Hospede " + cliente.getNome() + " nao esta hospedado(a).");
 		}
 		return cliente.getInfoHospedagem(info);
 	}

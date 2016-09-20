@@ -45,4 +45,3 @@ expectError "Erro ao realizar checkin. Quarto 15A ja esta ocupado." realizaCheck
 expectError "Erro ao realizar checkin. Quarto 2A ja esta ocupado." realizaCheckin email="agnetha@abba.se" dias=3 quarto="2A" tipoQuarto="Presidencial"
 
 fechaSistema
-

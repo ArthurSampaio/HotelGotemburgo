@@ -42,4 +42,3 @@ expectError "Erro no cadastro de refeicao. Descricao da refeicao esta vazia." ca
 expectError "Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s)." cadastraRefeicao nome="Svensk mat" descricao="Uma variedade de comidas populares na Suecia." componentes=""
 
 fechaSistema
-
