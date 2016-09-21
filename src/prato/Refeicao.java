@@ -94,7 +94,7 @@ public class Refeicao extends ItemCardapio {
 		if (obj instanceof Refeicao) {
 			Refeicao outra = (Refeicao) obj;
 			if (super.getNome().equals(outra.getNome()) && super.getDescricao().equals(outra.getDescricao())) {
-				for (int i = 0; i < this.menu.size(); i++) {
+				for (int i = 0; i < this.menu.size();) {
 					if (!this.menu.get(i).equals(outra.getMenu().get(i))) {
 						return false;
 					}

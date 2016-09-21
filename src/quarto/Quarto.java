@@ -12,6 +12,7 @@ import excecoes.ValorInvalidoException;
 public class Quarto{
 	private String ID;
 	private TipoDeQuarto diaria;
+	private static final String ID_VAZIO_NULO = "O ID nao pode ser vazio ou nulo";
 	
 	/**
 	 * Construtor da Classe
@@ -22,7 +23,7 @@ public class Quarto{
 	 */
 	public Quarto(String id, TipoDeQuarto tipo)throws StringInvalidaException{
 		if(id == null || id.trim().isEmpty()){
-			throw new StringInvalidaException("O ID nao pode ser vazio ou nulo");
+			throw new StringInvalidaException(ID_VAZIO_NULO);
 		}
 		this.ID = id;
 		this.diaria = tipo;
@@ -41,6 +42,9 @@ public class Quarto{
 	 * 		Quando o desconto for menor que zero
 	 */
 	public double getDiaria(double desconto) throws ValorInvalidoException{
+		if(desconto < 0){
+			throw new ValorInvalidoException();
+		}
 		return this.diaria.getDiaria()*(1-desconto);
 	}
 
@@ -82,6 +86,9 @@ public class Quarto{
 		return result;
 	}
 
+	/**
+	 * Dois quartos são iguais se possuirem o mesmo IDs
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Quarto){

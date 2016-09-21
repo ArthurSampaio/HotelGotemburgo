@@ -7,19 +7,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 import estadia.Estadia;
-import quarto.Quarto;
+import quarto.*;
+import cliente.ClienteFactory;
 
-import quarto.Simples;
 
 public class ClienteTeste {
 
 	private Cliente cliente;
 	private Cliente cliente2;
+	private QuartoFactory quartoFactory; 
 
 	@Before
 	public void setUp() throws Exception {
 		cliente = new Cliente("Tiago Pereira", "tiago@lima.cc", "04/09/1995");
 		cliente2 = new Cliente("Mariana Mendes", "mariana@menes.cc", "21/11/1997");
+		this.quartoFactory = new QuartoFactory();
 	}
 
 	@Test
@@ -96,7 +98,7 @@ public class ClienteTeste {
 	@Test
 	public void getInfoHospedagem() {
 		try {
-			Quarto quarto = new Simples("1A");
+			Quarto quarto = this.quartoFactory.criaQuarto("1A", "simples");
 			Estadia estadia = new Estadia(quarto, 3);
 			cliente.adicionaEstadia(estadia);
 			Assert.assertEquals("1", cliente.getInfoHospedagem("Hospedagens ativas"));
@@ -111,7 +113,7 @@ public class ClienteTeste {
 	public void adicionaEstadia() {
 		try {
 			Assert.assertEquals("0", cliente.getInfoHospedagem("Hospedagens ativas"));
-			Quarto quarto = new Simples("1A");
+			Quarto quarto = this.quartoFactory.criaQuarto("1A", "simples");
 			Estadia estadia = new Estadia(quarto, 3);
 			cliente.adicionaEstadia(estadia);
 			Assert.assertEquals("1", cliente.getInfoHospedagem("Hospedagens ativas"));

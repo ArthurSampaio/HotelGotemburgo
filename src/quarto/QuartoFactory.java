@@ -36,11 +36,8 @@ public class QuartoFactory {
 			throw new StringInvalidaException("Tipo nao pode ser nulo ou invalido.");
 		}
 		
-		if(tipo.equalsIgnoreCase("simples")){
-			return new Quarto(ID, this.setTipoDeQuarto(tipo));
-		}else if(tipo.equalsIgnoreCase("luxo")){
-			return new Quarto(ID, this.setTipoDeQuarto(tipo));
-		}else if(tipo.equalsIgnoreCase("presidencial")){
+		if(tipo.equalsIgnoreCase("simples") || tipo.equalsIgnoreCase("luxo") ||
+				tipo.equalsIgnoreCase("presidencial")){
 			return new Quarto(ID, this.setTipoDeQuarto(tipo));
 		}else{
 			throw new Exception("Tipo invalido para o hotel.");
