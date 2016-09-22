@@ -2,9 +2,13 @@ package quarto;
 
 
 
-import org.junit.Assert;
+import quarto.QuartoFactory;
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import junit.framework.Assert;
 
 
 public class QuartoTeste {
@@ -12,61 +16,57 @@ public class QuartoTeste {
 	private Quarto q1;
 	private Quarto q2;
 	private Quarto q3;
+	private QuartoFactory quarto = new QuartoFactory();
 	
 	@Before
 	public void setUp() throws Exception{
 		
-		q1 = new Simples("A401");
-		q2 = new Luxo("B401");
-		q3 = new Presidencial("C401");
+		q1 = this.quarto.criaQuarto("A401", "simples");
+		q2 = this.quarto.criaQuarto("B401", "luxo");
+		q3 = this.quarto.criaQuarto("C401", "presidencial");
 		
 	}
 	
 	@Test
 	public void constructor(){
 		try{
-			Quarto love = new Luxo("Luxo01");
-			Quarto normal = new Simples("xoxo");
-			Quarto bixao = new Presidencial("Lula");
+			Quarto love = this.quarto.criaQuarto("Luxo01", "luxo");
+			Quarto normal = this.quarto.criaQuarto("xoxo", "simples");
+			Quarto bixao = this.quarto.criaQuarto("Lula", "presidencial");
 		}catch(Exception e){
-			Assert.fail(); //nao devia lancar excecao
+			fail(); //nao devia lancar excecao
 		}
 	}
 	
 	@Test
 	public void constructorException(){
 		try{
-			Quarto luxo = new Luxo(" ");
-			Quarto luxo1 = new Luxo(null);
+			Quarto luxo =  this.quarto.criaQuarto(" ", "luxo");
+			Quarto luxo1 =  this.quarto.criaQuarto(null, "luxo");
+			fail();
 		}catch(Exception e){
-			Assert.assertEquals("O ID nao pode ser vazio ou nulo", e.getMessage());
+			assertEquals("O ID nao pode ser invalida ou nula.", e.getMessage());
 		}		
 		try{
-			Quarto simples = new Simples(" ");
-			Quarto simples1 = new Simples(null);
+			Quarto luxo =  this.quarto.criaQuarto("luxo ", " ");
+			Quarto luxo1 =  this.quarto.criaQuarto("arriba", null);
 		}catch(Exception e){
-			Assert.assertEquals("O ID nao pode ser vazio ou nulo", e.getMessage());
+			assertEquals("Tipo nao pode ser nulo ou invalido.", e.getMessage());
 		}
-		try{
-			Quarto presidencial = new Luxo(" ");
-			Quarto presidencial1 = new Luxo(null);
-		}catch(Exception e){
-			Assert.assertEquals("O ID nao pode ser vazio ou nulo", e.getMessage());
-		}
-		
+				
 	}
 	
 	
 	@Test 
 	public void testCalculaDiaria()throws Exception{
-		Assert.assertEquals(100, q1.getDiaria(0), 0.05);
-		Assert.assertEquals(250.0, q2.getDiaria(), 0.05);
-		Assert.assertEquals(450.0, q3.getDiaria(), 0.05);
+		assertEquals(100, q1.getDiaria(0), 0.05);
+		assertEquals(250.0, q2.getDiaria(), 0.05);
+		assertEquals(450.0, q3.getDiaria(), 0.05);
 
 		try{
-			Assert.assertEquals(250.0, q2.getDiaria(-0.5), 0.05);
+			assertEquals(250.0, q2.getDiaria(-0.5), 0.05);
 		}catch(Exception e){
-			Assert.assertEquals("O valor da diaria nao pode ser inferior a zero.", e.getMessage());
+			assertEquals("Valor invalido", e.getMessage());
 		}
 		
 	}
