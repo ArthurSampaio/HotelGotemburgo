@@ -1,8 +1,7 @@
 package restaurante;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import excecoes.AtributoInvalidoException;
 import excecoes.ItemCardapioInvalidoException;
@@ -18,7 +17,7 @@ import prato.Refeicao;
  *
  */
 public class RestauranteController {
-	private Map<String, ItemCardapio> cardapio;
+	private List<ItemCardapio> cardapio;
 
 	private FactoryItemCardapio fabrica;
 
@@ -26,7 +25,7 @@ public class RestauranteController {
 	 * Construtor de Restaurante Controller.
 	 */
 	public RestauranteController() {
-		this.cardapio = new HashMap<String, ItemCardapio>();
+		this.cardapio = new ArrayList<ItemCardapio>();
 		this.fabrica = new FactoryItemCardapio();
 	}
 
@@ -34,9 +33,15 @@ public class RestauranteController {
 	 * 
 	 * @param nomeDoItem
 	 * @return Objeto que eh um item do cardapio
+	 * @throws ItemCardapioInvalidoException 
 	 */
-	public ItemCardapio getItem(String nomeDoItem) {
-		return cardapio.get(nomeDoItem);
+	public ItemCardapio getItem(String nomeDoItem) throws ItemCardapioInvalidoException {
+		for (int i = 0; i < cardapio.size(); ++i){
+			if (cardapio.get(i).getNome().equals(nomeDoItem)){
+				return cardapio.get(i);
+			}
+		}
+		throw new ItemCardapioInvalidoException("Item nao existe no cardapio.");
 	}
 
 	/**
@@ -45,7 +50,7 @@ public class RestauranteController {
 	 *            Adiciona um novo item ao cardapio.
 	 */
 	public void addItem(ItemCardapio item) {
-		cardapio.put(item.getNome(), item);
+		cardapio.add(item);
 	}
 
 	/**
@@ -80,7 +85,7 @@ public class RestauranteController {
 			String componentes) throws Exception {
 		ArrayList<Prato> pratos = criaArrayList(componentes);
 		Refeicao refeicao = fabrica.criaRefeicao(nome, descricao, pratos);
-		cardapio.put(nome, refeicao);
+		cardapio.add(refeicao);
 	}
 
 	/**
@@ -113,9 +118,10 @@ public class RestauranteController {
 	 * @param nome
 	 *            Nome do item do cardapio.
 	 * @return O preco de um item do cardapio em formato String.
+	 * @throws ItemCardapioInvalidoException 
 	 */
-	private String getPrecoItem(String nome) {
-		ItemCardapio item = this.cardapio.get(nome);
+	private String getPrecoItem(String nome) throws ItemCardapioInvalidoException {
+		ItemCardapio item = this.getItem(nome);
 		String preco = String.format("R$%.2f", item.getPreco());
 		return preco;
 
@@ -138,11 +144,11 @@ public class RestauranteController {
 		ArrayList<Prato> novosPratos = new ArrayList<Prato>();
 
 		for (int i = 0; i < pratos.length; i++) {
-			if (!cardapio.containsKey(pratos[i])) {
+			if (!buscaItem(pratos[i])) {
 				throw new StringInvalidaException(
 						"Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
 			}
-			Prato pratoNovo = (Prato) cardapio.get(pratos[i]);
+			Prato pratoNovo = (Prato) getItem(pratos[i]);
 			novosPratos.add(pratoNovo);
 		}
 		return novosPratos;
@@ -157,11 +163,19 @@ public class RestauranteController {
 	 */
 	public void removeItemCardapio(String nome)
 			throws ItemCardapioInvalidoException {
-		if (!this.cardapio.containsKey(nome)) {
+		if (!buscaItem(nome)) {
 			throw new ItemCardapioInvalidoException(
 					"Esse item nao existe no cardapio");
 		}
 		cardapio.remove(nome);
 	}
-
+	
+	private boolean buscaItem(String nome){
+		for (int i = 0; i < cardapio.size(); ++i){
+			if (cardapio.get(i).getNome().equalsIgnoreCase(nome)){
+				return true;
+			}
+		}
+		return false;
+	}
 }
