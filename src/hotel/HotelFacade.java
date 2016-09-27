@@ -81,6 +81,17 @@ public class HotelFacade {
 		restaurante.cadastraRefeicao(nome, descricao, componentes);
 	}
 
+	
+	public void removeItemCardapio(String nome){
+		try{
+			restaurante.removeItemCardapio(nome);
+		}catch(Exception e){
+		System.out.println(e.getMessage());
+			
+		}
+	}
+	
+
 	public void fechaSistema() {
 
 	}

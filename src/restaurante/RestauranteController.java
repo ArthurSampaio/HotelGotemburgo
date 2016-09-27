@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import excecoes.AtributoInvalidoException;
+import excecoes.ItemCardapioInvalidoException;
 import excecoes.StringInvalidaException;
 import prato.ItemCardapio;
 import prato.Prato;
@@ -58,7 +59,8 @@ public class RestauranteController {
 	 * @throws Exception
 	 *             Lanca excecao do metodo cria prato.
 	 */
-	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
+	public void cadastraPrato(String nome, double preco, String descricao)
+			throws Exception {
 		Prato prato = fabrica.criaPrato(nome, preco, descricao);
 		addItem(prato);
 	}
@@ -74,7 +76,8 @@ public class RestauranteController {
 	 * @throws Exception
 	 *             Lanca execao do metodo cria refeicao.
 	 */
-	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
+	public void cadastraRefeicao(String nome, String descricao,
+			String componentes) throws Exception {
 		ArrayList<Prato> pratos = criaArrayList(componentes);
 		Refeicao refeicao = fabrica.criaRefeicao(nome, descricao, pratos);
 		cardapio.put(nome, refeicao);
@@ -90,9 +93,11 @@ public class RestauranteController {
 	 * @return Informacao requerida do item.
 	 * @throws AtributoInvalidoException
 	 */
-	public String consultaRestaurante(String nome, String info) throws Exception {
-		if (nome.trim().isEmpty() || nome == null){
-			throw new StringInvalidaException("Erro na consulta do restaurante. Nome do prato esto vazio.");
+	public String consultaRestaurante(String nome, String info)
+			throws Exception {
+		if (nome.trim().isEmpty() || nome == null) {
+			throw new StringInvalidaException(
+					"Erro na consulta do restaurante. Nome do prato esto vazio.");
 		}
 		if (info.equalsIgnoreCase("preco")) {
 			return getPrecoItem(nome);
@@ -121,25 +126,42 @@ public class RestauranteController {
 	 * 
 	 * @param componentes
 	 *            Pratos que irao compor uma refeicao completa.
-	 * @return 
-	 * 			  Array contendo os Pratos que irao compor a refeicao completa.
+	 * @return Array contendo os Pratos que irao compor a refeicao completa.
 	 * @throws Exception
 	 */
 	private ArrayList<Prato> criaArrayList(String componentes) throws Exception {
-		if (componentes.trim().isEmpty()){
-			throw new Exception ("Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
+		if (componentes.trim().isEmpty()) {
+			throw new Exception(
+					"Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
 		}
 		String[] pratos = componentes.split(";");
 		ArrayList<Prato> novosPratos = new ArrayList<Prato>();
 
 		for (int i = 0; i < pratos.length; i++) {
 			if (!cardapio.containsKey(pratos[i])) {
-				throw new StringInvalidaException("Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
+				throw new StringInvalidaException(
+						"Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
 			}
 			Prato pratoNovo = (Prato) cardapio.get(pratos[i]);
 			novosPratos.add(pratoNovo);
 		}
 		return novosPratos;
+	}
+
+	/**
+	 * 
+	 * @param nome
+	 *            Nome do item do cardapio a ser removido
+	 * @throws ItemCardapioInvalidoException
+	 *             ,se o item for inexistente no cardapio.
+	 */
+	public void removeItemCardapio(String nome)
+			throws ItemCardapioInvalidoException {
+		if (!this.cardapio.containsKey(nome)) {
+			throw new ItemCardapioInvalidoException(
+					"Esse item nao existe no cardapio");
+		}
+		cardapio.remove(nome);
 	}
 
 }
