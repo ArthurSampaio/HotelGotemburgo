@@ -9,7 +9,8 @@ import excecoes.StringInvalidaException;
  *
  */
 
-public abstract class ItemCardapio {
+public abstract class ItemCardapio implements Comparable<ItemCardapio>{
+	
 	private String nome;
 	private String descricao;
 	
@@ -63,5 +64,15 @@ public abstract class ItemCardapio {
 			ItemCardapio outroItem = (ItemCardapio)outro;
 			return (this.nome.equalsIgnoreCase(outroItem.getNome()) && this.descricao.equalsIgnoreCase(outroItem.getDescricao()));
 		}return false;
+	}
+	
+	public int compareTo(ItemCardapio outro){
+		if(this.getPreco() > outro.getPreco()){
+			return 1;
+		}
+		if(this.getPreco() < outro.getPreco()){
+			return -1;
+		}
+		return 0;
 	}
 }

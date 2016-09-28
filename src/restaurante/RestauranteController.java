@@ -1,6 +1,7 @@
 package restaurante;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import excecoes.AtributoInvalidoException;
@@ -62,7 +63,7 @@ public class RestauranteController {
 	 *            Preco do prato
 	 * @param descricao
 	 *            Texto de descricao do prato.
-	 * @throws Exception
+	 * @throws SistemaException
 	 *             Lanca excecao do metodo cria prato.
 	 */
 	public void cadastraPrato(String nome, double preco, String descricao)
@@ -79,7 +80,7 @@ public class RestauranteController {
 	 *            Descricao da refeicao.
 	 * @param componentes
 	 *            Pratos que vao compor a refeicao.
-	 * @throws Exception
+	 * @throws SistemaException
 	 *             Lanca execao do metodo cria refeicao.
 	 */
 	public void cadastraRefeicao(String nome, String descricao,
@@ -134,7 +135,7 @@ public class RestauranteController {
 	 * @param componentes
 	 *            Pratos que irao compor uma refeicao completa.
 	 * @return Array contendo os Pratos que irao compor a refeicao completa.
-	 * @throws Exception
+	 * @throws SistemaException
 	 */
 	private ArrayList<Prato> criaArrayList(String componentes) throws SistemaException {
 		if (componentes.trim().isEmpty()) {
@@ -178,5 +179,38 @@ public class RestauranteController {
 			}
 		}
 		return false;
+	}
+	
+	public String ordenaPorPreco(){
+		String saida = "";
+		Collections.sort(this.cardapio);
+		for(int i = 0; i < this.cardapio.size(); i++){
+			if(i < this.cardapio.size() - 1){
+				saida += this.cardapio.get(i).getNome() + ";"; 
+			}
+			else{
+				saida += this.cardapio.get(i).getNome();
+			}
+		}
+		return saida;
+	}
+	
+	public String ordenaPorNomes(){
+		String saida = "";
+		ArrayList<String> nomes = new ArrayList<String>();
+		for(int i = 0; i < this.cardapio.size(); i++){
+			nomes.add(this.cardapio.get(i).getNome());
+		}
+		Collections.sort(nomes);
+	
+		for(int i = 0; i < nomes.size(); i++){
+			if(i < nomes.size() - 1){
+				saida += nomes.get(i) + ";";
+			}
+			else{
+				saida += nomes.get(i);
+			}	
+		}
+		return saida;
 	}
 }

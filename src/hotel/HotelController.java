@@ -54,7 +54,7 @@ public class HotelController {
 	 * 
 	 * @return
 	 * 		O ID unico do usuario
-	 * @throws Exception
+	 * @throws SistemaException
 	 * 		Quando há alguma string invalida
 	 */
 	public String cadastraHospede(String nome, String email, String data) throws SistemaException {
@@ -370,6 +370,15 @@ public class HotelController {
 		return true;
 	}
 	
+	/**
+	 * Checa a expressao regular do email
+	 * @param email
+	 * 		email a ser verificado
+	 * @param msg
+	 * 		mensagem de excecao (caso ocorra)
+	 * @throws StringInvalidaException
+	 * 		Quando a string eh invalida ou o formato do email eh irregular
+	 */
 	public void checaEmail(String email, String msg) throws StringInvalidaException {
 		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
 				&& !email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
