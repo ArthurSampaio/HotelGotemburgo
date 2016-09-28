@@ -8,7 +8,7 @@ package cartao;
 
 /**
  * 
- * Classe cartao representando o cartao fidelidade que um hospede vai possuir,
+ * Classe cartao representando o cartao fidelidade que um hospede vai possuir
  * para garantir beneficios, que podem variar de acordo com o tipo do cartao,
  * Padrao, Premium ou Vip.
  *
