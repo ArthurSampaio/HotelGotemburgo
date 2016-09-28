@@ -5,8 +5,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import cartao.Cartao;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
+import excecoes.ValorInvalidoException;
 import estadia.Estadia;
 
 /**
@@ -22,6 +24,7 @@ public class Cliente {
 	private String dataNasc;
 	private String email;
 	private HashMap<String, Estadia> estadias;
+	private Cartao cartaoFidelidade;
 
 	//MENSAGENS DEFAULT DE ERRO DE ATRIBUTOS VAZIOS
 	private static final String ERRO_CADASTRO_NOME_VAZIO = "Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.";
@@ -55,7 +58,7 @@ public class Cliente {
 	 * @throws Exception
 	 *             Quando alguma das strings é invalida.
 	 */
-	public Cliente(String nome, String email, String dataNasc, boolean hosp) throws StringInvalidaException {
+	public Cliente(String nome, String email, String dataNasc, boolean hosp) throws StringInvalidaException, ValorInvalidoException {
 		
 		if (stringInvalida(nome)) {
 			throw new StringInvalidaException(ERRO_CADASTRO_NOME_VAZIO);
@@ -78,13 +81,14 @@ public class Cliente {
 		this.email = email;
 		this.hospedado = hosp;
 		this.estadias = new HashMap<String, Estadia>();
+		this.cartaoFidelidade = new Cartao();
 
 	}
 
 	/**
 	 * Construtor para quando o cliente nao estiver hospedado
 	 */
-	public Cliente(String nome, String email, String dataNasc) throws StringInvalidaException {
+	public Cliente(String nome, String email, String dataNasc) throws StringInvalidaException, ValorInvalidoException {
 		this(nome, email, dataNasc, false);
 	}
 
@@ -137,6 +141,16 @@ public class Cliente {
 			checaEmail(valor, ERRO_ATUALIZACAO_EMAIL_INVALIDO);
 			this.setEmail(valor);
 		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	public void addPontos(double gastos){
+		cartaoFidelidade.addPontos(gastos);
 		
 		
 	}

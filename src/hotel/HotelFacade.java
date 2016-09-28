@@ -100,7 +100,7 @@ public class HotelFacade {
 		args = new String[] { "hotel.HotelFacade","acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc1.txt",
 			 "acceptance_test/testes_uc2.txt",
 				"acceptance_test/testes_uc3.txt", "acceptance_test/testes_uc4.txt",
-				"acceptance_test/testes_uc4_exception.txt" };
+				"acceptance_test/testes_uc4_exception.txt" , "acceptance_test/testes_uc6.txt"};
 		EasyAccept.main(args);
 
 	}
