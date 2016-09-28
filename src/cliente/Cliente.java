@@ -176,7 +176,10 @@ public class Cliente {
 			return this.getDataNasc();
 		} else if (tipoInformacao.equalsIgnoreCase("Email")) {
 			return this.getEmail();
-		} else {
+		} else if (tipoInformacao.equalsIgnoreCase("Pontos")){
+			return String.format("%d",this.cartaoFidelidade.getPontos());
+		}
+		else {
 			throw new Exception(CLIENTE_SEM_INFORMACAO);
 		}
 	}
