@@ -1,5 +1,6 @@
 package prato;
 
+import excecoes.SistemaException;
 import excecoes.ValorInvalidoException;
 
 /**
@@ -26,7 +27,7 @@ public class Prato extends ItemCardapio {
 	 *            Preco do base do prato.
 	 * @throws ValorInvalidoException
 	 */
-	public Prato(String nome, String descricao, double preco) throws Exception {
+	public Prato(String nome, String descricao, double preco) throws SistemaException {
 		super(nome, descricao);
 
 		if (preco < 0) {

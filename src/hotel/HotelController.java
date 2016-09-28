@@ -14,6 +14,7 @@ import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
 import quarto.Quarto;
 import quarto.QuartoFactory;
+import restaurante.RestauranteController;
 
 /**
  * Classe que representa o Controller do Hotel 
@@ -26,6 +27,7 @@ import quarto.QuartoFactory;
  */
 public class HotelController {
 	private Map<String, Cliente> clientes;
+	private RestauranteController restaurante;
 	private List<Cliente> transacoes;
 	private ClienteFactory factoryCliente;
 	private QuartoFactory factoryQuarto;
@@ -35,6 +37,7 @@ public class HotelController {
 	 */
 	public HotelController() {
 		this.clientes = new HashMap<String, Cliente>();
+		this.restaurante = new RestauranteController();
 		this.transacoes = new ArrayList<Cliente>();
 		this.factoryCliente = new ClienteFactory();
 		this.factoryQuarto = new QuartoFactory();
@@ -372,5 +375,22 @@ public class HotelController {
 				&& !email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
 			throw new StringInvalidaException(msg);
 		}
+	}
+	
+	public void cadastraPrato(String nome, double preco, String descricao) throws SistemaException {
+		restaurante.cadastraPrato(nome, preco, descricao);
+	}
+
+	public String consultaRestaurante(String nome, String info) throws Exception {
+		return restaurante.consultaRestaurante(nome, info);
+	}
+
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws SistemaException {
+		restaurante.cadastraRefeicao(nome, descricao, componentes);
+	}
+
+	
+	public void removeItemCardapio(String nome) throws SistemaException{
+		restaurante.removeItemCardapio(nome);
 	}
 }

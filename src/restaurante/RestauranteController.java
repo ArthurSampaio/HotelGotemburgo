@@ -5,6 +5,7 @@ import java.util.List;
 
 import excecoes.AtributoInvalidoException;
 import excecoes.ItemCardapioInvalidoException;
+import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
 import prato.ItemCardapio;
 import prato.Prato;
@@ -65,7 +66,7 @@ public class RestauranteController {
 	 *             Lanca excecao do metodo cria prato.
 	 */
 	public void cadastraPrato(String nome, double preco, String descricao)
-			throws Exception {
+			throws SistemaException {
 		Prato prato = fabrica.criaPrato(nome, preco, descricao);
 		addItem(prato);
 	}
@@ -82,7 +83,7 @@ public class RestauranteController {
 	 *             Lanca execao do metodo cria refeicao.
 	 */
 	public void cadastraRefeicao(String nome, String descricao,
-			String componentes) throws Exception {
+			String componentes) throws SistemaException {
 		ArrayList<Prato> pratos = criaArrayList(componentes);
 		Refeicao refeicao = fabrica.criaRefeicao(nome, descricao, pratos);
 		cardapio.add(refeicao);
@@ -99,7 +100,7 @@ public class RestauranteController {
 	 * @throws AtributoInvalidoException
 	 */
 	public String consultaRestaurante(String nome, String info)
-			throws Exception {
+			throws SistemaException {
 		if (nome.trim().isEmpty() || nome == null) {
 			throw new StringInvalidaException(
 					"Erro na consulta do restaurante. Nome do prato esto vazio.");
@@ -135,9 +136,9 @@ public class RestauranteController {
 	 * @return Array contendo os Pratos que irao compor a refeicao completa.
 	 * @throws Exception
 	 */
-	private ArrayList<Prato> criaArrayList(String componentes) throws Exception {
+	private ArrayList<Prato> criaArrayList(String componentes) throws SistemaException {
 		if (componentes.trim().isEmpty()) {
-			throw new Exception(
+			throw new SistemaException(
 					"Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
 		}
 		String[] pratos = componentes.split(";");

@@ -2,16 +2,12 @@ package hotel;
 
 import easyaccept.EasyAccept;
 import excecoes.SistemaException;
-import restaurante.RestauranteController;
 
 public class HotelFacade {
 	private HotelController gerencia;
-	private RestauranteController restaurante;
 
 	public HotelFacade() {
 		this.gerencia = new HotelController();
-		this.restaurante = new RestauranteController();
-
 	}
 
 	public void iniciaSistema() {
@@ -70,21 +66,21 @@ public class HotelFacade {
 	}
 
 	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
-		restaurante.cadastraPrato(nome, preco, descricao);
+		gerencia.cadastraPrato(nome, preco, descricao);
 	}
 
 	public String consultaRestaurante(String nome, String info) throws Exception {
-		return restaurante.consultaRestaurante(nome, info);
+		return gerencia.consultaRestaurante(nome, info);
 	}
 
 	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
-		restaurante.cadastraRefeicao(nome, descricao, componentes);
+		gerencia.cadastraRefeicao(nome, descricao, componentes);
 	}
 
 	
 	public void removeItemCardapio(String nome){
 		try{
-			restaurante.removeItemCardapio(nome);
+			gerencia.removeItemCardapio(nome);
 		}catch(Exception e){
 		System.out.println(e.getMessage());
 			

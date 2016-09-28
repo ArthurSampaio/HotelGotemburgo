@@ -3,6 +3,8 @@ package prato;
 import java.util.ArrayList;
 import java.util.List;
 
+import excecoes.SistemaException;
+
 /**
  * Classe representando uma refeicao completa
  * 
@@ -24,15 +26,15 @@ public class Refeicao extends ItemCardapio {
 	 * @param pratos
 	 *            Conjuto de pratos que compoem a refeicao
 	 */
-	public Refeicao(String nome, String descricao, ArrayList<Prato> pratos) throws Exception {
+	public Refeicao(String nome, String descricao, ArrayList<Prato> pratos) throws SistemaException {
 		super(nome, descricao);
 		for(int i = 0; i < pratos.size(); i++){
 			if (pratos.get(i) == null){
-				throw new Exception ("Prato vazio");
+				throw new SistemaException ("Prato vazio");
 			}
 		}
 		if (pratos.size() != 3 && pratos.size() != 4){
-			throw new Exception ("Refeicao deve ser composta por 3 ou 4 pratos");
+			throw new SistemaException ("Refeicao deve ser composta por 3 ou 4 pratos");
 		}
 		this.menu = pratos;
 	}
