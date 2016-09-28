@@ -100,11 +100,9 @@ public class HotelController {
 		adicionaTransacao(cliente, idQuarto);
 		Estadia estadia = cliente.getEstadia().get(idQuarto);
 		
-		cliente.removeEstadia(estadia);
 		cliente.addPontos(estadia.calculaValorEstadia());
-		return String.format("R$%.2f", estadia.calculaValorEstadia());
-		
-		
+		cliente.removeEstadia(estadia);
+		return String.format("R$%.2f", estadia.calculaValorEstadia());		
 	}
 	
 	/**
