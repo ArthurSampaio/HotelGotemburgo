@@ -30,7 +30,6 @@ public class Comparador implements Comparator<ItemCardapio> {
 	/**
 	 * Compara por nome e por preco
 	 */
-	@Override
 	public int compare(ItemCardapio o1, ItemCardapio o2) {
 		if(this.tipoOrdenacao.equalsIgnoreCase("Nome")){
 			return o1.getNome().compareTo(o2.getNome());
