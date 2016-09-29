@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import cartao.Cartao;
+import excecoes.CadastroInvalidoException;
+import excecoes.CadastroVazioException;
+import excecoes.IdadeInvalidaException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
@@ -26,23 +29,9 @@ public class Cliente {
 	private HashMap<String, Estadia> estadias;
 	private Cartao cartaoFidelidade;
 
-	//MENSAGENS DEFAULT DE ERRO DE ATRIBUTOS VAZIOS
-	private static final String ERRO_CADASTRO_NOME_VAZIO = "Erro no cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.";
-	private static final String ERRO_CADASTRO_DATA_VAZIO = "Erro no cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.";
-	private static final String ERRO_CADASTRO_EMAIL_VAZIO = "Erro no cadastro de Hospede. Email do(a) hospede nao pode ser vazio.";
-	//MENSAGENS DEFAULT DE ATRIBUTOS INVALIDOS
-	private static final String ERRO_CADASTRO_NOME_INVALIDO = "Erro no cadastro de Hospede. Nome do(a) hospede esta invalido.";
-	private static final String ERRO_CADASTRO_DATA_INVALIDO = "Erro no cadastro de Hospede. Formato de data invalido.";
-	private static final String ERRO_CADASTRO_MENOR_IDADE = "Erro no cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.";
-	//MENSGENS DEFAULT DE ATUALIZACAO DE ATRIBUTOS
-	private static final String ERRO_ATUALIZACAO_NOME_VAZIO = "Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede nao pode ser vazio.";
-	private static final String ERRO_ATUALIZACAO_NOME_INVALIDO = "Erro na atualizacao do cadastro de Hospede. Nome do(a) hospede esta invalido.";
-	private static final String ERRO_ATUALIZACAO_DATA_VAZIO = "Erro na atualizacao do cadastro de Hospede. Data de Nascimento do(a) hospede nao pode ser vazio.";
-	private static final String ERRO_ATUALIZACAO_DATA_INVALIDO = "Erro na atualizacao do cadastro de Hospede. Formato de data invalido.";
-	private static final String ERRO_ATUALIZACAO_DATA_MENOR_IDADE = "Erro na atualizacao do cadastro de Hospede. A idade do(a) hospede deve ser maior que 18 anos.";
-	private static final String ERRO_ATUALIZACAO_EMAIL_VAZIO ="Erro na atualizacao do cadastro de Hospede. Email do(a) hospede nao pode ser vazio.";
-	private static final String ERRO_ATUALIZACAO_EMAIL_INVALIDO ="Erro na atualizacao do cadastro de Hospede. Email do(a) hospede esta invalido.";
-	//mensagem default de cliente sem informacao
+
+	private static final String ERRO_CADASTRO = "Erro no cadastro de Hospede. ";
+	private static final String ERRO_ATUALIZACAO = "Erro na atualizacao do cadastro de Hospede. ";
 	private static final String CLIENTE_SEM_INFORMACAO = "O cliente nao possue a informacao especificada.";
 	/**
 	 * Construtor da Classe Cliente
@@ -55,26 +44,29 @@ public class Cliente {
 	 *            O Email do cliente
 	 * @param hosp
 	 *            Representa se esta hospedado ou nao
+	 * @throws CadastroVazioException 
+	 * @throws CadastroInvalidoException 
+	 * @throws IdadeInvalidaException 
 	 * @throws Exception
 	 *             Quando alguma das strings é invalida.
 	 */
-	public Cliente(String nome, String email, String dataNasc, boolean hosp) throws StringInvalidaException, ValorInvalidoException {
+	public Cliente(String nome, String email, String dataNasc, boolean hosp) throws ValorInvalidoException, CadastroVazioException, CadastroInvalidoException, IdadeInvalidaException {
 		
 		if (stringInvalida(nome)) {
-			throw new StringInvalidaException(ERRO_CADASTRO_NOME_VAZIO);
+			throw new CadastroVazioException(ERRO_CADASTRO, "Nome");
 		}
 
 		if (stringInvalida(dataNasc)) {
-			throw new StringInvalidaException(ERRO_CADASTRO_DATA_VAZIO);
+			throw new CadastroVazioException(ERRO_CADASTRO,"Data de Nascimento");
 		}
 
 		if (stringInvalida(email)) {
-			throw new StringInvalidaException(ERRO_CADASTRO_EMAIL_VAZIO);
+			throw new CadastroVazioException(ERRO_CADASTRO, "Email");
 		}
-		checaNome(nome, ERRO_CADASTRO_NOME_INVALIDO );
-		checaEmail(email, "Erro no cadastro de Hospede. Email do(a) hospede esta invalido.");
-		checaData(dataNasc, ERRO_CADASTRO_DATA_INVALIDO);
-		checaIdade(dataNasc, ERRO_CADASTRO_MENOR_IDADE);
+		checaNome(nome, ERRO_CADASTRO);
+		checaEmail(email, ERRO_CADASTRO);
+		checaData(dataNasc, ERRO_CADASTRO);
+		checaIdade(dataNasc, ERRO_CADASTRO);
 
 		this.nome = nome;
 		this.dataNasc = dataNasc;
@@ -87,8 +79,11 @@ public class Cliente {
 
 	/**
 	 * Construtor para quando o cliente nao estiver hospedado
+	 * @throws CadastroVazioException 
+	 * @throws CadastroInvalidoException 
+	 * @throws IdadeInvalidaException 
 	 */
-	public Cliente(String nome, String email, String dataNasc) throws StringInvalidaException, ValorInvalidoException {
+	public Cliente(String nome, String email, String dataNasc) throws StringInvalidaException, ValorInvalidoException, CadastroVazioException, CadastroInvalidoException, IdadeInvalidaException {
 		this(nome, email, dataNasc, false);
 	}
 
@@ -120,32 +115,30 @@ public class Cliente {
 		}
 		if (tipoInformacao.equalsIgnoreCase("Nome")) {
 			if (stringInvalida(valor)) {
-				throw new StringInvalidaException(ERRO_ATUALIZACAO_NOME_VAZIO);
+				throw new CadastroInvalidoException(ERRO_ATUALIZACAO, "Nome do(a) hospede nao pode ser vazio.");
 			}
-			checaNome(valor, ERRO_ATUALIZACAO_NOME_INVALIDO);
+			checaNome(valor, ERRO_ATUALIZACAO);
 
 			this.setNome(valor);
 		} else if (tipoInformacao.equalsIgnoreCase("Data de Nascimento")) {
 
 			if (stringInvalida(valor)) {
-				throw new StringInvalidaException(ERRO_ATUALIZACAO_DATA_VAZIO);
+				throw new CadastroInvalidoException(ERRO_ATUALIZACAO, "Data de Nascimento do(a) hospede nao pode ser vazio.");
 			}
-			checaData(valor, ERRO_ATUALIZACAO_DATA_INVALIDO);
-			checaIdade(valor, ERRO_ATUALIZACAO_DATA_MENOR_IDADE);
+			checaData(valor, ERRO_ATUALIZACAO);
+			checaIdade(valor, ERRO_ATUALIZACAO);
 			this.setDataNasc(valor);
 		} else if (tipoInformacao.equalsIgnoreCase("Email")) {
 
 			if (stringInvalida(valor)) {
-				throw new StringInvalidaException(ERRO_ATUALIZACAO_EMAIL_VAZIO);
+				throw new CadastroInvalidoException(ERRO_ATUALIZACAO, "Email do(a) hospede nao pode ser vazio.");
 			}
-			checaEmail(valor, ERRO_ATUALIZACAO_EMAIL_INVALIDO);
+			checaEmail(valor, ERRO_ATUALIZACAO);
 			this.setEmail(valor);
 		}
 		
 		
 	}
-	
-	
 	
 	
 	
@@ -339,29 +332,30 @@ public class Cliente {
 		}
 	}
 
-	private void checaNome(String nome, String msg) throws StringInvalidaException {
+	private void checaNome(String nome, String erro) throws CadastroVazioException, CadastroInvalidoException {
 		if (!nome.matches("[a-zA-Z ]*")) {
-			throw new StringInvalidaException(msg);
+			throw new CadastroInvalidoException(erro,"Nome do(a) hospede esta invalido.");
 		}
+		
 	}
+	
 
-	public void checaEmail(String email, String msg) throws StringInvalidaException {
+	public void checaEmail(String email, String erro) throws CadastroInvalidoException {
 		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
 				&& !email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-			throw new StringInvalidaException(msg);
+			throw new CadastroInvalidoException(erro,"Email do(a) hospede esta invalido.");
 		}
 	}
 
-	private void checaData(String data, String msg) throws StringInvalidaException {
+	private void checaData(String data, String erro) throws CadastroInvalidoException {
 		if (!data.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}")) {
-			throw new StringInvalidaException(msg);
-		}
+			throw new CadastroInvalidoException(erro,"Formato de data invalido.");		}
 	}
 
-	private void checaIdade(String data, String msg) throws StringInvalidaException {
+	private void checaIdade(String data, String msg) throws IdadeInvalidaException {
 		String ano = data.split("/")[2];
 		if (Integer.parseInt(ano) > 1998) {
-			throw new StringInvalidaException(msg);
+			throw new IdadeInvalidaException(msg);
 		}
 	}
 }
