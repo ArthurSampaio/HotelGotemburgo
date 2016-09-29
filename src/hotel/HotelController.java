@@ -28,7 +28,7 @@ import restaurante.RestauranteController;
 public class HotelController {
 	private Map<String, Cliente> clientes;
 	private RestauranteController restaurante;
-	private List<Cliente> transacoes;
+	private List<Transacao> transacoes;
 	private ClienteFactory factoryCliente;
 	private QuartoFactory factoryQuarto;
 
@@ -38,7 +38,7 @@ public class HotelController {
 	public HotelController() {
 		this.clientes = new HashMap<String, Cliente>();
 		this.restaurante = new RestauranteController();
-		this.transacoes = new ArrayList<Cliente>();
+		this.transacoes = new ArrayList<Transacao>();
 		this.factoryCliente = new ClienteFactory();
 		this.factoryQuarto = new QuartoFactory();
 	}
@@ -100,12 +100,13 @@ public class HotelController {
 	 */
 	public String realizaCheckout(String email, String idQuarto) throws Exception{
 		Cliente cliente = getCliente(email);
-		adicionaTransacao(cliente, idQuarto);
 		Estadia estadia = cliente.getEstadia().get(idQuarto);
+		double valorTransacao = estadia.calculaValorEstadia();
+		adicionaTransacao(cliente, idQuarto, valorTransacao);
 		
 		cliente.addPontos(estadia.calculaValorEstadia());
 		cliente.removeEstadia(estadia);
-		return String.format("R$%.2f", estadia.calculaValorEstadia());		
+		return String.format("R$%.2f", valorTransacao);		
 	}
 	
 	/**
@@ -117,21 +118,11 @@ public class HotelController {
 	 * @throws Exception
 	 * 		Quando ocorre um erro ao criar um novo cliente
 	 */
-	public void adicionaTransacao(Cliente cliente, String idQuarto) throws Exception{
-		Estadia estadia = cliente.getEstadia().get(idQuarto);
+	public void adicionaTransacao(Cliente cliente, String detalhe, double valorTransacao) throws Exception{
 		String nome = cliente.getNome();
 		String email = cliente.getEmail();
-		String dataNasc = cliente.getDataNasc();
-		if(contemClienteTransacao(email)){
-			Cliente clienteTransacao = getClienteTransacao(email);
-			clienteTransacao.adicionaEstadia(estadia);
-		}
-		else{
-			
-			Cliente clienteTransacao = factoryCliente.criaCliente(nome, email, dataNasc);
-			clienteTransacao.adicionaEstadia(estadia);
-			this.transacoes.add(clienteTransacao);
-		}
+		Transacao transacao = new Transacao(nome, email, valorTransacao, detalhe);
+		this.transacoes.add(transacao);
 	}
 
 
@@ -144,7 +135,7 @@ public class HotelController {
 	 */
 	public boolean contemClienteTransacao(String email){
 		for(int i = 0; i < this.transacoes.size(); i++){
-			if(this.transacoes.get(i).getEmail().equalsIgnoreCase(email)){
+			if(this.transacoes.get(i).getEmailCliente().equalsIgnoreCase(email)){
 				return true;
 			}
 		}
@@ -152,15 +143,15 @@ public class HotelController {
 	}
 	
 	/**
-	 * Busca um cliente da lista de transacoes
+	 * Busca uma Transacao da lista de transacoes
 	 * @param email
-	 * 		email do cliente
+	 * 		email do cliente para busca
 	 * @return
-	 * 		O cliente encontrado ou null
+	 * 		A transacao encontrada ou null
 	 */
-	public Cliente getClienteTransacao(String email){
+	public Transacao getClienteTransacao(String email){
 		for(int i = 0; i < this.transacoes.size(); i++){
-			if(this.transacoes.get(i).getEmail().equalsIgnoreCase(email)){
+			if(this.transacoes.get(i).getEmailCliente().equalsIgnoreCase(email)){
 				return this.transacoes.get(i);
 			}
 		}
@@ -178,7 +169,7 @@ public class HotelController {
 	public double getTotalTransacoes() throws Exception{
 		double total = 0.0;
 		for(int i = 0; i < this.transacoes.size(); i++){
-			total += this.transacoes.get(i).totalEstadias();
+			total += this.transacoes.get(i).getValorTransacao();
 		}
 		return total;
 	}
@@ -191,9 +182,9 @@ public class HotelController {
 		String saida = "";
 		for(int i = 0; i < this.transacoes.size(); i++){
 			if(i < this.transacoes.size() - 1){
-				saida += this.transacoes.get(i).getNome() + ";";
+				saida += this.transacoes.get(i).getNomeCliente() + ";";
 			}else{
-				saida += this.transacoes.get(i).getNome();
+				saida += this.transacoes.get(i).getNomeCliente();
 
 			}
 		}
@@ -232,16 +223,17 @@ public class HotelController {
 	 * @throws Exception
 	 */
 	public String consultaTransacoes(String info, int indice) throws Exception{
-		Cliente cliente = this.transacoes.get(indice);
+		Transacao transacao = this.transacoes.get(indice);
 		if(info.equalsIgnoreCase("Total")){
-			return cliente.getInfoHospedagem(info);
+			return String.format("R$%.2f", transacao.getValorTransacao());
 		}else if(info.equalsIgnoreCase("Nome")){
-			return this.transacoes.get(indice).getNome();
+			return transacao.getNomeCliente();
 		}
 		else{
 			throw new Exception("Nao ha a informacao especificada.");
 		}
 	}
+	
 	
 	/**
 	 * Retorna uma determinada informacao do hospede
@@ -402,4 +394,14 @@ public class HotelController {
 	public void removeItemCardapio(String nome) throws SistemaException{
 		restaurante.removeItemCardapio(nome);
 	}
+	
+	public String consultaMenuRestaurante(){
+		return restaurante.imprimeCardapio();
+	}
+	
+	public void ordenaMenu(String tipoOrdenacao) throws SistemaException{
+		restaurante.ordenaCardapio(tipoOrdenacao);
+	}
+	
+	
 }

@@ -8,6 +8,7 @@ import excecoes.AtributoInvalidoException;
 import excecoes.ItemCardapioInvalidoException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
+import prato.Comparador;
 import prato.ItemCardapio;
 import prato.Prato;
 import prato.Refeicao;
@@ -181,34 +182,18 @@ public class RestauranteController {
 		return false;
 	}
 	
-	public String ordenaPorPreco(){
+	public void ordenaCardapio(String tipoOrdenacao) throws SistemaException{
+		Collections.sort(this.cardapio, new Comparador(tipoOrdenacao));
+		}
+	
+	public String imprimeCardapio(){
 		String saida = "";
-		Collections.sort(this.cardapio);
 		for(int i = 0; i < this.cardapio.size(); i++){
 			if(i < this.cardapio.size() - 1){
-				saida += this.cardapio.get(i).getNome() + ";"; 
+				saida += this.cardapio.get(i).getNome() + ";";
 			}
 			else{
 				saida += this.cardapio.get(i).getNome();
-			}
-		}
-		return saida;
-	}
-	
-	public String ordenaPorNomes(){
-		String saida = "";
-		ArrayList<String> nomes = new ArrayList<String>();
-		for(int i = 0; i < this.cardapio.size(); i++){
-			nomes.add(this.cardapio.get(i).getNome());
-		}
-		Collections.sort(nomes);
-	
-		for(int i = 0; i < nomes.size(); i++){
-			if(i < nomes.size() - 1){
-				saida += nomes.get(i) + ";";
-			}
-			else{
-				saida += nomes.get(i);
 			}	
 		}
 		return saida;

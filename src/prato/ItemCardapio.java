@@ -1,5 +1,7 @@
 package prato;
 
+import java.util.Comparator;
+
 import excecoes.StringInvalidaException;
 
 /**
@@ -9,7 +11,7 @@ import excecoes.StringInvalidaException;
  *
  */
 
-public abstract class ItemCardapio implements Comparable<ItemCardapio>{
+public abstract class ItemCardapio implements Comparable<ItemCardapio>, Comparator<ItemCardapio>{
 	
 	private String nome;
 	private String descricao;
@@ -64,6 +66,10 @@ public abstract class ItemCardapio implements Comparable<ItemCardapio>{
 			ItemCardapio outroItem = (ItemCardapio)outro;
 			return (this.nome.equalsIgnoreCase(outroItem.getNome()) && this.descricao.equalsIgnoreCase(outroItem.getDescricao()));
 		}return false;
+	}
+	
+	public int compare(ItemCardapio um, ItemCardapio dois){
+		return um.getNome().compareToIgnoreCase(dois.getNome());
 	}
 	
 	public int compareTo(ItemCardapio outro){

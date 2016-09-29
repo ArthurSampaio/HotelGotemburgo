@@ -87,6 +87,18 @@ public class HotelFacade {
 		}
 	}
 	
+	public String consultaMenuRestaurante(){
+		return gerencia.consultaMenuRestaurante();
+	}
+	
+	public void ordenaMenu(String tipoOrdenacao){
+		try{
+			gerencia.ordenaMenu(tipoOrdenacao);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
 
 	public void fechaSistema() {
 
