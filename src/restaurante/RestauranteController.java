@@ -127,7 +127,12 @@ public class RestauranteController {
 		ItemCardapio item = this.getItem(nome);
 		String preco = String.format("R$%.2f", item.getPreco());
 		return preco;
-
+	}
+	
+	public double getItemPreco(String nome) throws ItemCardapioInvalidoException {
+		ItemCardapio item = this.getItem(nome);
+		double preco = item.getPreco();
+		return preco;
 	}
 
 	/**

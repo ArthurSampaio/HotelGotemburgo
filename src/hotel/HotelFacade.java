@@ -31,6 +31,14 @@ public class HotelFacade {
 			return e.getMessage();
 		}
 	}
+	
+	public String realizaPedido(String email, String itemMenu){
+		try{
+			return gerencia.realizaPedido(email, itemMenu);
+		}catch(Exception e){
+			return e.getMessage();
+		}
+	}
 
 	public String consultaTransacoes(String atributo) {
 		try {

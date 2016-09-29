@@ -109,6 +109,8 @@ public class HotelController {
 		return String.format("R$%.2f", valorTransacao);		
 	}
 	
+	
+	
 	/**
 	 * Adiciona uma transacao numa lista de transacoes quando um cliente faz checkout
 	 * @param cliente
@@ -228,7 +230,10 @@ public class HotelController {
 			return String.format("R$%.2f", transacao.getValorTransacao());
 		}else if(info.equalsIgnoreCase("Nome")){
 			return transacao.getNomeCliente();
+		}else if(info.equalsIgnoreCase("detalhes")){
+			return transacao.getDetalhe();
 		}
+		
 		else{
 			throw new Exception("Nao ha a informacao especificada.");
 		}
@@ -403,5 +408,10 @@ public class HotelController {
 		restaurante.ordenaCardapio(tipoOrdenacao);
 	}
 	
-	
+	public String realizaPedido(String emailCliente, String pedido)throws Exception{
+		Cliente cliente = this.getCliente(emailCliente);
+		double valorTransacao = restaurante.getItemPreco(pedido);
+		adicionaTransacao(cliente, pedido, valorTransacao);
+		return String.format("R$%.2f", valorTransacao);
+	}
 }
