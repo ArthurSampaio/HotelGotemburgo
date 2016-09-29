@@ -15,8 +15,7 @@ public class Padrao implements CartaoInterface {
 		return totalPontos;
 	}
 
-	public double aplicaDesconto(double desconto) {
-		// TODO Auto-generated method stub
+	public double aplicaDesconto(double preco) {
 		return 0;
 	}
 

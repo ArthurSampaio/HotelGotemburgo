@@ -101,7 +101,7 @@ public class HotelController {
 	public String realizaCheckout(String email, String idQuarto) throws Exception{
 		Cliente cliente = getCliente(email);
 		Estadia estadia = cliente.getEstadia().get(idQuarto);
-		double valorTransacao = estadia.calculaValorEstadia();
+		double valorTransacao = estadia.calculaValorEstadia() - cliente.aplicaDesconto(estadia.calculaValorEstadia());
 		adicionaTransacao(cliente, idQuarto, valorTransacao);
 		
 		cliente.addPontos(estadia.calculaValorEstadia());
@@ -410,7 +410,8 @@ public class HotelController {
 	
 	public String realizaPedido(String emailCliente, String pedido)throws Exception{
 		Cliente cliente = this.getCliente(emailCliente);
-		double valorTransacao = restaurante.getItemPreco(pedido);
+		double valorTransacao = restaurante.getItemPreco(pedido) - cliente.aplicaDesconto(restaurante.getItemPreco(pedido));
+		cliente.addPontos(restaurante.getItemPreco(pedido));
 		adicionaTransacao(cliente, pedido, valorTransacao);
 		return String.format("R$%.2f", valorTransacao);
 	}

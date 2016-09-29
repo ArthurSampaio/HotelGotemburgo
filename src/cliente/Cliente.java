@@ -358,4 +358,8 @@ public class Cliente {
 			throw new IdadeInvalidaException(msg);
 		}
 	}
+	
+	public double aplicaDesconto(double preco){
+		return cartaoFidelidade.aplicaDesconto(preco);
+	}
 }

@@ -21,9 +21,8 @@ public class Premium implements CartaoInterface {
 
 	}
 
-	public double aplicaDesconto(double desconto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double aplicaDesconto(double preco) {
+			return preco * 0.1;
 	}
 
 }

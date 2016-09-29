@@ -8,7 +8,7 @@ iniciaSistema
 ########################
 
 expect "225" getInfoHospede id="sven@sverige.se" atributo="Pontos"
-expect "30" getInfoHospede id="nobel@got.se" atributo="Pontos"
+expect "50" getInfoHospede id="nobel@got.se" atributo="Pontos"
 expect "50" getInfoHospede id="ines@brasil.com.br" atributo="Pontos"
 expect "20" getInfoHospede id="agnetha@abba.se" atributo="Pontos"
 
@@ -18,7 +18,7 @@ expect "R$750,00" realizaCheckout email="ines@brasil.com.br" quarto="2B"
 #Agora apenas Sven eh Premium, e deve ganhar 30% (+ 10 p cada 100,00)
 expect "360" getInfoHospede id="sven@sverige.se" atributo="Pontos"
 expect "125" getInfoHospede id="ines@brasil.com.br" atributo="Pontos"
-expect "30" getInfoHospede id="nobel@got.se" atributo="Pontos"
+expect "50" getInfoHospede id="nobel@got.se" atributo="Pontos"
 expect "20" getInfoHospede id="agnetha@abba.se" atributo="Pontos"
 
 #Ele tambem ganha 10% de desconto nos gastos, e ganha 30% de pontos (gasto > 100 reais)

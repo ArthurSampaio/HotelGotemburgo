@@ -67,5 +67,9 @@ public class Cartao {
 	public void setPontos(int pontos) {
 		this.pontos = pontos;
 	}
+	
+	public double aplicaDesconto(double preco){
+		return cartao.aplicaDesconto(preco);
+	}
 
 }

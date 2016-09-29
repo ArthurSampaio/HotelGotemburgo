@@ -15,9 +15,13 @@ public class Vip implements CartaoInterface {
 		return totalPontos;
 	}
 
-	public double aplicaDesconto(double desconto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double aplicaDesconto(double preco) {
+		double desconto = preco * 0.15;
+		if (preco >= 100){
+			double extra = (preco/100);
+			desconto += (int)extra * 10;
+		}
+		return desconto;
 	}
 
 }
