@@ -23,7 +23,7 @@ expect "20" getInfoHospede id="agnetha@abba.se" atributo="Pontos"
 
 #Ele tambem ganha 10% de desconto nos gastos, e ganha 30% de pontos (gasto > 100 reais)
 expect "R$45,77" realizaPedido hospede="sven@sverige.se" itemMenu="Delicia da serra"
-expect "375" getHospedeInfo id="sven@sverige.se" atributo="Pontos"
+expect "375" getInfoHospede id="sven@sverige.se" atributo="Pontos"
 
 
 #############################################
@@ -37,7 +37,7 @@ realizaCheckin email="sven@sverige.se" dias=4 quarto="5A" tipoQuarto="Presidenci
 expect "R$1620,00" realizaCheckout email="sven@sverige.se" quarto="5A"
 expect "1095" getInfoHospede id="sven@sverige.se" atributo="Pontos"
 
-expect "R$43,23" realizaPedido hospede="svens@sverige.se" itemMenu="Delicia da serra"
+expect "R$43,23" realizaPedido hospede="sven@sverige.se" itemMenu="Delicia da serra"
 expect "1120" getInfoHospede id="sven@sverige.se" atributo="Pontos"
 
 realizaCheckin email="sven@sverige.se" dias=2 quarto="5A" tipoQuarto="Presidencial"
