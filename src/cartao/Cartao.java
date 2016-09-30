@@ -105,6 +105,13 @@ public class Cartao {
 		
 	}
 	
+	/**
+	 * Aplica desconto numa compra dependendo do tipo de cartao do cliente
+	 * @param preco
+	 * 		Preco da compra
+	 * @return
+	 * 		Compra com desconto aplicado
+	 */
 	public double aplicaDesconto(double preco){
 		return cartao.aplicaDesconto(preco);
 	}
