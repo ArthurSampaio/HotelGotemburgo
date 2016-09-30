@@ -7,7 +7,7 @@ import excecoes.ValorInvalidoException;
  * 
  * @author m4reana
  * @author Arthur Sampaio
- * @aurthor Joao Mauricio
+ * @author Joao Mauricio
  *
  */
 
