@@ -40,7 +40,7 @@ public class Cartao {
 	}
 
 	private void checaPontos() {
-		if (this.pontos < 350) {
+		if (this.pontos <= 350) {
 			this.cartao = new Padrao();
 		}else if(this.pontos < 1000){
 			this.cartao = new Premium();
@@ -96,8 +96,9 @@ public class Cartao {
 	}
 
 	public void setPontos(int pontos) {
-		this.checaPontos();
 		this.pontos = pontos;
+		this.checaPontos();
+		
 	}
 	
 	public double aplicaDesconto(double preco){
