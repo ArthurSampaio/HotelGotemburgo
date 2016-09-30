@@ -4,6 +4,8 @@ public class Vip implements CartaoInterface {
 
 	private final double BONUS_VIP = 0.50;
 
+	private final double VALOR_CONVERSAO = 0.7;
+	
 	/**
 	  * O cartao VIP acumula a parte inteira de 50% do total
 	 * gasto na compra.
@@ -22,6 +24,13 @@ public class Vip implements CartaoInterface {
 			desconto += (int)extra * 10;
 		}
 		return desconto;
+	}
+
+	@Override
+	public double convertePontos(int pt) {
+		double pnts = VALOR_CONVERSAO * pt;
+		pnts += (pt/10) * BONUS_VIP;
+		return pnts;
 	}
 
 }

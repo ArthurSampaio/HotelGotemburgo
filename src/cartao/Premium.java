@@ -25,4 +25,13 @@ public class Premium implements CartaoInterface {
 			return preco * 0.1;
 	}
 
+	@Override
+	public double convertePontos(int pt) {
+		
+		double pnts = BONUS_PREMIUM * pt;
+		pnts += (pt/10) * 0.2;
+		return pnts;
+		
+	}
+
 }

@@ -18,4 +18,6 @@ public interface CartaoInterface {
 
 	public double aplicaDesconto(double desconto);
 
+	public double convertePontos(int pt);
+	
 }

@@ -1,10 +1,12 @@
 package cartao;
 
+import excecoes.ConvertePontosException;
 import excecoes.ValorInvalidoException;
 
 /**
  * 
  * @author m4reana
+ * @author Arthur Sampaio
  *
  */
 
@@ -57,6 +59,35 @@ public class Cartao {
 		int pontosObtidos = this.cartao.addPontos(gastos);
 		this.setPontos(getPontos() + pontosObtidos);
 		this.checaPontos();
+		
+	}
+	
+	
+	/**
+	 * Calcula e retorna o valor da conversao de pontos para reais
+	 * @param pt
+	 * 		A quantidade de pontos a serem convertidas
+	 * @return
+	 * 		o valor em reais dos pontos convertidos
+	 * @throws ConvertePontosException
+	 * 		Quando a quantidade de pontos a ser convertida eh maior que a quantidade de pontos do cartao
+	 */
+	public double convertePontos(int pt)throws ConvertePontosException{
+		if (pt > this.getPontos()){
+			throw new ConvertePontosException();
+		}else{
+			//Armazena o valor convertido dos pontos
+			double grana = this.cartao.convertePontos(pt);
+			//Decresce a quantidade de pontos
+			this.setPontos(this.getPontos() - pt);
+			//Checa o tipo do cartão
+			this.checaPontos();
+			//retorna o valor em reais dos pontos convertidos
+			return grana;
+			
+		}
+		
+		
 		
 	}
 
