@@ -23,5 +23,9 @@ public class Padrao implements CartaoInterface {
 	public double convertePontos(int pt) {
 		return pt*BONUS_PADRAO;
 	}
+	
+	public String toString(){
+		return "Padrao";
+	}
 
 }

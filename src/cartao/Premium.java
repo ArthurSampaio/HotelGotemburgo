@@ -33,5 +33,9 @@ public class Premium implements CartaoInterface {
 		return pnts;
 		
 	}
+	
+	public String toString(){
+		return "Premium";
+	}
 
 }

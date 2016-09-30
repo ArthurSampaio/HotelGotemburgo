@@ -20,4 +20,6 @@ public interface CartaoInterface {
 
 	public double convertePontos(int pt);
 	
+	public String toString();
+	
 }

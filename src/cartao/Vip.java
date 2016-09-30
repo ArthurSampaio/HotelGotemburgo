@@ -32,5 +32,9 @@ public class Vip implements CartaoInterface {
 		pnts += (pt/10) * BONUS_VIP;
 		return pnts;
 	}
+	
+	public String toString(){
+		return "Vip";
+	}
 
 }
