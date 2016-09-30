@@ -402,6 +402,17 @@ public class HotelController {
 		}
 	}
 	
+	/**
+	 * Cadastra um novo prato no Restaurante.
+	 * @param nome
+	 * 		Nome do prato.
+	 * @param preco
+	 * 		Preco do prato.
+	 * @param descricao
+	 * 		Descricao do prato.
+	 * @throws SistemaException
+	 * 		Quando nome ou descricao sao invalidos e quando preco eh negativo.
+	 */
 	public void cadastraPrato(String nome, double preco, String descricao) throws SistemaException {
 		restaurante.cadastraPrato(nome, preco, descricao);
 	}
@@ -410,11 +421,21 @@ public class HotelController {
 		return restaurante.consultaRestaurante(nome, info);
 	}
 
+	/**
+	 * Cadastra uma nova refeicao
+	 * @param nome
+	 * 		Nome da refeicao
+	 * @param descricao
+	 * 		Descricao da refeicao
+	 * @param componentes
+	 * 		Pratos que fazem parte
+	 * @throws SistemaException
+	 * 		Quando nome ou descricao sao invalidos e quando prato nao esta cadastrado no restaurante
+	 */
 	public void cadastraRefeicao(String nome, String descricao, String componentes) throws SistemaException {
 		restaurante.cadastraRefeicao(nome, descricao, componentes);
 	}
 
-	
 	public void removeItemCardapio(String nome) throws SistemaException{
 		restaurante.removeItemCardapio(nome);
 	}
@@ -427,6 +448,17 @@ public class HotelController {
 		restaurante.ordenaCardapio(tipoOrdenacao);
 	}
 	
+	/**
+	 * Realiza um pedido no Restaurante
+	 * @param emailCliente
+	 * 		Email do cliente que esta efetuando o pedido.
+	 * @param pedido
+	 * 		Nome do Item do Cardapio desejado.
+	 * @return
+	 * 		Retrona o valor da transacao ja com descontos aplicados.
+	 * @throws Exception
+	 * 		Quando nao ha cliente cadastrado com esse email ou quando nao ha Item no Cardapio com esse nome
+	 */
 	public String realizaPedido(String emailCliente, String pedido)throws Exception{
 		Cliente cliente = this.getCliente(emailCliente);
 		double valorTransacao = restaurante.getItemPreco(pedido) - cliente.aplicaDesconto(restaurante.getItemPreco(pedido));

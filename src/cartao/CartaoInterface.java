@@ -16,7 +16,14 @@ public interface CartaoInterface {
 	 */
 	public int addPontos(double gasto);
 
-	public double aplicaDesconto(double desconto);
+	/**
+	 * Aplica desconto em uma certa compra
+	 * @param gasto
+	 * 		Valor da transacao.
+	 * @return 
+	 *		Retorna o desconto dependendo do tipo de cartao
+	 */
+	public double aplicaDesconto(double gasto);
 
 	public double convertePontos(int pt);
 	

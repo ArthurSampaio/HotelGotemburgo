@@ -7,6 +7,7 @@ import excecoes.ValorInvalidoException;
  * 
  * @author m4reana
  * @author Arthur Sampaio
+ * @aurthor Joao Mauricio
  *
  */
 
@@ -39,6 +40,9 @@ public class Cartao {
 
 	}
 
+	/**
+	 * Checa os pontos e atualiza tipo de cartao caso necessario.
+	 */
 	private void checaPontos() {
 		if (this.pontos <= 350) {
 			this.cartao = new Padrao();

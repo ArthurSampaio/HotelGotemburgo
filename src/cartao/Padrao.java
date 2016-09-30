@@ -19,7 +19,6 @@ public class Padrao implements CartaoInterface {
 		return 0;
 	}
 
-	@Override
 	public double convertePontos(int pt) {
 		return pt*BONUS_PADRAO;
 	}

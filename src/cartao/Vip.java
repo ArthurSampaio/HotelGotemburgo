@@ -26,7 +26,6 @@ public class Vip implements CartaoInterface {
 		return desconto;
 	}
 
-	@Override
 	public double convertePontos(int pt) {
 		double pnts = VALOR_CONVERSAO * pt;
 		pnts += (pt/10) * BONUS_VIP;
