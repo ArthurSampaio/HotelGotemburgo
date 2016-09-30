@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import cartao.Cartao;
 import excecoes.CadastroInvalidoException;
 import excecoes.CadastroVazioException;
+import excecoes.ConvertePontosException;
 import excecoes.IdadeInvalidaException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
@@ -144,9 +145,13 @@ public class Cliente {
 	
 	public void addPontos(double gastos){
 		cartaoFidelidade.addPontos(gastos);
-		
-		
+			
 	}
+	
+	public double convertePontos(int pontos) throws ConvertePontosException{
+		return this.cartaoFidelidade.convertePontos(pontos);
+	}
+	
 
 	/**
 	 * Retorna uma determinada informacao do usuario
