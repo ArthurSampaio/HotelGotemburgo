@@ -65,6 +65,25 @@ public class HotelController {
 	}
 	
 	/**
+	 * Converte uma dada quantidade de pontos em reais.
+	 * @param email
+	 * 		O email do cliente
+	 * @param qtdPontos
+	 * 		Os pontos a serem convertidos
+	 * @return
+	 * 		O valor em reais 
+	 * @throws SistemaException 
+	 */
+	public String convertePontos(String email, int qtdPontos) throws SistemaException{
+		Cliente cliente = this.getCliente(email);
+		double valor = cliente.convertePontos(qtdPontos);		
+		this.adicionaTransacao(cliente, "CONVERSAO DE PONTOS", valor);
+		return String.format("R$%.2f", valor);
+		
+	}
+	
+	
+	/**
 	 * Realiza checkin de um cliente
 	 * @param email
 	 * 		email do cliente
@@ -120,7 +139,7 @@ public class HotelController {
 	 * @throws Exception
 	 * 		Quando ocorre um erro ao criar um novo cliente
 	 */
-	public void adicionaTransacao(Cliente cliente, String detalhe, double valorTransacao) throws Exception{
+	public void adicionaTransacao(Cliente cliente, String detalhe, double valorTransacao) throws SistemaException{
 		String nome = cliente.getNome();
 		String email = cliente.getEmail();
 		Transacao transacao = new Transacao(nome, email, valorTransacao, detalhe);
@@ -327,7 +346,7 @@ public class HotelController {
 	 * @throws Exception
 	 * 		Quando hospede nao esta cadastrado no sistema
 	 */
-	public Cliente getCliente(String email) throws Exception {
+	public Cliente getCliente(String email) throws SistemaException {
 		if (!clientes.containsKey(email)) {
 			throw new EmailInexistenteException(
 					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");

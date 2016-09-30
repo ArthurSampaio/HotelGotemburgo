@@ -107,6 +107,16 @@ public class HotelFacade {
 		}
 	}
 	
+	
+	public String convertePontos(String email, int pontos){
+		try{
+			return this.gerencia.convertePontos(email, pontos);
+		}catch(SistemaException e){
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
 
 	public void fechaSistema() {
 
@@ -116,7 +126,8 @@ public class HotelFacade {
 		args = new String[] { "hotel.HotelFacade","acceptance_test/testes_uc1_exception.txt", "acceptance_test/testes_uc1.txt",
 			 "acceptance_test/testes_uc2.txt",
 				"acceptance_test/testes_uc3.txt", "acceptance_test/testes_uc4.txt",
-				"acceptance_test/testes_uc4_exception.txt" ,"acceptance_test/testes_uc5.txt", "acceptance_test/testes_uc6.txt"};
+				"acceptance_test/testes_uc4_exception.txt" ,"acceptance_test/testes_uc5.txt", "acceptance_test/testes_uc6.txt", 
+				"acceptance_test/testes_uc7.txt"};
 		EasyAccept.main(args);
 
 	}
