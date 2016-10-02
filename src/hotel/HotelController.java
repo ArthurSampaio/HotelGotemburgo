@@ -1,5 +1,8 @@
 package hotel;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -125,7 +128,7 @@ public class HotelController {
 		
 		cliente.addPontos(estadia.calculaValorEstadia());
 		cliente.removeEstadia(estadia);
-		return String.format("R$%.2f", valorTransacao);		
+		return String.format("R$%.2f", arredonda(valorTransacao));		
 	}
 	
 	
@@ -224,7 +227,7 @@ public class HotelController {
 		if(info.equalsIgnoreCase("Quantidade")){
 			return "" + this.transacoes.size();
 		}else if(info.equalsIgnoreCase("Total")){
-			return String.format("R$%.2f", getTotalTransacoes());
+			return String.format("R$%.2f", arredonda(getTotalTransacoes()));
 		}else if(info.equalsIgnoreCase("Nome")){
 			return getNomesTransacoes();
 		}
@@ -482,6 +485,25 @@ public class HotelController {
 		double valorTransacao = restaurante.getItemPreco(pedido) - cliente.aplicaDesconto(restaurante.getItemPreco(pedido));
 		cliente.addPontos(restaurante.getItemPreco(pedido));
 		adicionaTransacao(cliente, pedido, valorTransacao);
-		return String.format("R$%.2f", valorTransacao);
+		//System.out.println(arredonda(valorTransacao));
+		return String.format("R$%.2f", arredonda(valorTransacao));
+	}
+	
+	public static double arredonda(double valor){
+		String novoValor = Double.toString(valor);
+		int count = 0;
+		int afterPoint = 0;
+		boolean passou = false;
+		for (int i = 0; i < novoValor.length(); ++i){
+			if (novoValor.charAt(i) == '.') {
+				passou = true;
+				afterPoint = i;
+			}
+			if (passou){
+				count++;
+			}
+		}
+		if (count > 2 && (afterPoint + 3) < novoValor.length()  && novoValor.charAt(afterPoint + 3) < '5') valor += 0.01;
+		return valor;
 	}
 }

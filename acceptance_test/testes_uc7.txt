@@ -7,7 +7,7 @@ iniciaSistema
 # - Sven       : 1570 (VIP)                #
 # - Ines Brasil:  905 (Premium)            #
 # - Agnetha    :   20 (Normal)             #
-# - Nobel      :   50 (Normal)             #
+# - Nobel      :   30 (Normal)             #
 #                                          #
 ############################################
 
@@ -26,7 +26,7 @@ expect "20" getInfoHospede id="agnetha@abba.se" atributo="Pontos"
 expect "20" getInfoHospede id="nobel@got.se" atributo="Pontos"
 
 expect "R$45,77" realizaPedido hospede="ines@brasil.com.br" itemMenu="Delicia da serra"
-expect "R$43,22" realizaPedido hospede="sven@sverige.se" itemMenu="Delicia da serra"
+expect "R$43,23" realizaPedido hospede="sven@sverige.se" itemMenu="Delicia da serra"
 
 expect "1525" getInfoHospede id="sven@sverige.se" atributo="Pontos"
 expect "815" getInfoHospede id="ines@brasil.com.br" atributo="Pontos"
@@ -50,7 +50,7 @@ expect "320" getInfoHospede id="ines@brasil.com.br" atributo="Pontos"
 expect "20" getInfoHospede id="agnetha@abba.se" atributo="Pontos"
 expect "20" getInfoHospede id="nobel@got.se" atributo="Pontos"
 
-expect "26" consultaTransacoes atributo="Quantidade"
-expect "R$12687,05" consultaTransacoes atributo="Total"
+expect "21" consultaTransacoes atributo="Quantidade"
+expect "R$11688,07" consultaTransacoes atributo="Total"
 
 fechaSistema
