@@ -436,14 +436,32 @@ public class HotelController {
 		restaurante.cadastraRefeicao(nome, descricao, componentes);
 	}
 
+	/**
+	 * Remove um item do cardapio
+	 * @param nome
+	 * 		item a ser removido
+	 * @throws SistemaException
+	 * 		quando ocorre alguma situacao inesperada
+	 */
 	public void removeItemCardapio(String nome) throws SistemaException{
 		restaurante.removeItemCardapio(nome);
 	}
 	
+	/**
+	 * Consulta o menu 
+	 * @return
+	 * 		Imprime o menu
+	 */
 	public String consultaMenuRestaurante(){
 		return restaurante.imprimeCardapio();
 	}
 	
+	/**
+	 * Ordena o menu de acordo com o tipo de ordenacao escolhida
+	 * @param tipoOrdenacao
+	 * 		define o tipo de ordenecao
+	 * @throws SistemaException
+	 */
 	public void ordenaMenu(String tipoOrdenacao) throws SistemaException{
 		restaurante.ordenaCardapio(tipoOrdenacao);
 	}
