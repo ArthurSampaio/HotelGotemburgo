@@ -118,6 +118,34 @@ public class Cartao {
 	
 	public String toString(){
 		return cartao.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + pontos;
+		return result;
+	}
+
+	/**
+	 * Dois cartaoes sao iguais se possuirem a mesma quantidade de pontos
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Cartao){
+			Cartao cartao = (Cartao)obj;
+			if(cartao.getPontos() == this.getPontos()){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
 	}	
+	
+	
+	
 
 }
