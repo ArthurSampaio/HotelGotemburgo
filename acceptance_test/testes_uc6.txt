@@ -37,7 +37,7 @@ realizaCheckin email="sven@sverige.se" dias=4 quarto="5A" tipoQuarto="Presidenci
 expect "R$1620,00" realizaCheckout email="sven@sverige.se" quarto="5A"
 expect "1095" getInfoHospede id="sven@sverige.se" atributo="Pontos"
 
-expect "R$43,22" realizaPedido hospede="sven@sverige.se" itemMenu="Delicia da serra"
+expect "R$43,23" realizaPedido hospede="sven@sverige.se" itemMenu="Delicia da serra"
 expect "1120" getInfoHospede id="sven@sverige.se" atributo="Pontos"
 
 realizaCheckin email="sven@sverige.se" dias=2 quarto="5A" tipoQuarto="Presidencial"
@@ -71,7 +71,7 @@ expect "20" getInfoHospede id="agnetha@abba.se" atributo="Pontos"
 expect "50" getInfoHospede id="nobel@got.se" atributo="Pontos"
 
 expect "17" consultaTransacoes atributo="Quantidade"
-expect "R$11502,45" consultaTransacoes atributo="Total"
+expect "R$11502,46" consultaTransacoes atributo="Total"
 expect "Sven Gudmar Svenson;Ines Brasil;Agnetha Faltskog;Alfred Nobel;Alfred Nobel;Alfred Nobel;Ines Brasil;Sven Gudmar Svenson;Ines Brasil;Sven Gudmar Svenson;Sven Gudmar Svenson;Sven Gudmar Svenson;Sven Gudmar Svenson;Ines Brasil;Ines Brasil;Ines Brasil;Ines Brasil" consultaTransacoes atributo="Nome"
 
 fechaSistema

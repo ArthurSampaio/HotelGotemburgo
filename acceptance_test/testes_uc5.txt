@@ -12,7 +12,7 @@ expect "Algkot com vegetais;Artsoppa com panquecas;Bresaola com rucula e parmesa
 
 cadastraPrato nome="Pudim de leite" preco=6.50 descricao="Um a sobremesa a base de leite com calda caramelizada e ameixas."
 
-expect "Algkot com vegetais;Artsoppa com panquecas;Bresaola com rucula e parmesao;Bruschetta;Carne de sol com fritas;Delicia da serra;Espresso;Galeto com farofa;Kanelbullar;Kotbullar com lingon;Pasto italiano;Penne ao pesto;Rapadura;Svensk mat;Tapioca;Tiramisu;Pudim de leite" consultaMenuRestaurante
+expect "Algkot com vegetais;Artsoppa com panquecas;Bresaola com rucula e parmesao;Bruschetta;Carne de sol com fritas;Delicia da serra;Espresso;Galeto com farofa;Kanelbullar;Kotbullar com lingon;Pasto italiano;Penne ao pesto;Pudim de leite;Rapadura;Svensk mat;Tapioca;Tiramisu" consultaMenuRestaurante
 
 ordenaMenu tipoOrdenacao="Nome"
 
