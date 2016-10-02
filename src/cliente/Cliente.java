@@ -142,12 +142,25 @@ public class Cliente {
 	}
 	
 	
-	
+	/**
+	 * Converte os gastos em pontos no cartao fidelidade
+	 * @param gastos
+	 * 		valor dos gastos a serem convertidos em pontos
+	 */
 	public void addPontos(double gastos){
 		cartaoFidelidade.addPontos(gastos);
 			
 	}
 	
+	/**
+	 * Converte pontos armazenados no cartao fidelidade em dinheiro
+	 * @param pontos
+	 * 		quantidade de pontos a serem convertidos
+	 * @return
+	 * 		O valor em double do dinheiro
+	 * @throws ConvertePontosException
+	 * 		Quando ocorre alguma situacao inesperada
+	 */
 	public double convertePontos(int pontos) throws ConvertePontosException{
 		return this.cartaoFidelidade.convertePontos(pontos);
 	}
@@ -207,6 +220,13 @@ public class Cliente {
 		}
 	}
 
+	/**
+	 * Verifica se uma dada string é invalida
+	 * @param string
+	 * 		String a ser verificada
+	 * @return
+	 * 		O sucesso da operacao
+	 */
 	public boolean stringInvalida(String string) {
 		return (string.trim().isEmpty() || string == null);
 
@@ -337,6 +357,7 @@ public class Cliente {
 		}
 	}
 
+	
 	private void checaNome(String nome, String erro) throws CadastroVazioException, CadastroInvalidoException {
 		if (!nome.matches("[a-zA-Z ]*")) {
 			throw new CadastroInvalidoException(erro,"Nome do(a) hospede esta invalido.");
@@ -344,7 +365,12 @@ public class Cliente {
 		
 	}
 	
-
+	/**
+	 * Checa se o email passado pelo usuario eh valido
+	 * @param email
+	 * @param erro
+	 * @throws CadastroInvalidoException
+	 */
 	public void checaEmail(String email, String erro) throws CadastroInvalidoException {
 		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
 				&& !email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
@@ -352,6 +378,7 @@ public class Cliente {
 		}
 	}
 
+	
 	private void checaData(String data, String erro) throws CadastroInvalidoException {
 		if (!data.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}")) {
 			throw new CadastroInvalidoException(erro,"Formato de data invalido.");		}
@@ -364,6 +391,13 @@ public class Cliente {
 		}
 	}
 	
+	/**
+	 * Aplica o desconto para um determinado tipo de cartao fidelidade
+	 * @param preco
+	 * 		valor a calcular o desconto
+	 * @return
+	 * 		O desconto
+	 */
 	public double aplicaDesconto(double preco){
 		return cartaoFidelidade.aplicaDesconto(preco);
 	}
