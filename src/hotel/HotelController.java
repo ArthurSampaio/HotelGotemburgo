@@ -487,6 +487,13 @@ public class HotelController {
 		return String.format("R$%.2f", valorTransacao);
 	}
 	
+	/**
+	 * Arredonda o valor de uma transacao para 2 casas decimais, ja que se trata de dinheiro.
+	 * @param valor
+	 * 		Valor da transacao
+	 * @return
+	 * 		Valor arredondado
+	 */
 	private double arredonda(double valor){
 		valor *= 100.0;
 		valor = Math.ceil(valor);
