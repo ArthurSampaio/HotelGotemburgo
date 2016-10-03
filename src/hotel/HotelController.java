@@ -1,8 +1,5 @@
 package hotel;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,9 +77,9 @@ public class HotelController {
 	public String convertePontos(String email, int qtdPontos) throws SistemaException{
 		Cliente cliente = this.getCliente(email);
 		double valor = cliente.convertePontos(qtdPontos);		
-		this.adicionaTransacao(cliente, "CONVERSAO DE PONTOS", valor);
+		//this.adicionaTransacao(cliente, "CONVERSAO DE PONTOS", valor);
+		valor = arredonda(valor);
 		return String.format("R$%.2f", valor);
-		
 	}
 	
 	
@@ -125,10 +122,11 @@ public class HotelController {
 		Estadia estadia = cliente.getEstadia().get(idQuarto);
 		double valorTransacao = estadia.calculaValorEstadia() - cliente.aplicaDesconto(estadia.calculaValorEstadia());
 		adicionaTransacao(cliente, idQuarto, valorTransacao);
+		valorTransacao = arredonda(valorTransacao);
 		
 		cliente.addPontos(estadia.calculaValorEstadia());
 		cliente.removeEstadia(estadia);
-		return String.format("R$%.2f", arredonda(valorTransacao));		
+		return String.format("R$%.2f", valorTransacao);		
 	}
 	
 	
@@ -195,7 +193,7 @@ public class HotelController {
 		for(int i = 0; i < this.transacoes.size(); i++){
 			total += this.transacoes.get(i).getValorTransacao();
 		}
-		return total;
+		return arredonda(total);
 	}
 	
 	/**
@@ -227,7 +225,7 @@ public class HotelController {
 		if(info.equalsIgnoreCase("Quantidade")){
 			return "" + this.transacoes.size();
 		}else if(info.equalsIgnoreCase("Total")){
-			return String.format("R$%.2f", arredonda(getTotalTransacoes()));
+			return String.format("R$%.2f", getTotalTransacoes());
 		}else if(info.equalsIgnoreCase("Nome")){
 			return getNomesTransacoes();
 		}
@@ -483,27 +481,16 @@ public class HotelController {
 	public String realizaPedido(String emailCliente, String pedido)throws Exception{
 		Cliente cliente = this.getCliente(emailCliente);
 		double valorTransacao = restaurante.getItemPreco(pedido) - cliente.aplicaDesconto(restaurante.getItemPreco(pedido));
-		cliente.addPontos(restaurante.getItemPreco(pedido));
 		adicionaTransacao(cliente, pedido, valorTransacao);
-		//System.out.println(arredonda(valorTransacao));
-		return String.format("R$%.2f", arredonda(valorTransacao));
+		valorTransacao = arredonda(valorTransacao);
+		cliente.addPontos(restaurante.getItemPreco(pedido));
+		return String.format("R$%.2f", valorTransacao);
 	}
 	
-	public static double arredonda(double valor){
-		String novoValor = Double.toString(valor);
-		int count = 0;
-		int afterPoint = 0;
-		boolean passou = false;
-		for (int i = 0; i < novoValor.length(); ++i){
-			if (novoValor.charAt(i) == '.') {
-				passou = true;
-				afterPoint = i;
-			}
-			if (passou){
-				count++;
-			}
-		}
-		if (count > 2 && (afterPoint + 3) < novoValor.length()  && novoValor.charAt(afterPoint + 3) < '5') valor += 0.01;
+	private double arredonda(double valor){
+		valor *= 100.0;
+		valor = Math.ceil(valor);
+		valor /= 100.0;
 		return valor;
 	}
 }
