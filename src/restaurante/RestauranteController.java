@@ -2,13 +2,13 @@ package restaurante;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import excecoes.AtributoInvalidoException;
 import excecoes.ItemCardapioInvalidoException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
-import prato.Comparador;
 import prato.ItemCardapio;
 import prato.Prato;
 import prato.Refeicao;
@@ -20,9 +20,11 @@ import prato.Refeicao;
  *
  */
 public class RestauranteController {
+	
 	private List<ItemCardapio> cardapio;
-
 	private FactoryItemCardapio fabrica;
+	private FactoryComparador factoryComparador;
+	private Comparator<ItemCardapio> comparador;
 
 	/**
 	 * Construtor de Restaurante Controller.
@@ -30,6 +32,8 @@ public class RestauranteController {
 	public RestauranteController() {
 		this.cardapio = new ArrayList<ItemCardapio>();
 		this.fabrica = new FactoryItemCardapio();
+		this.factoryComparador = new FactoryComparador();
+		this.comparador = null;
 	}
 
 	/**
@@ -54,6 +58,9 @@ public class RestauranteController {
 	 */
 	public void addItem(ItemCardapio item) {
 		cardapio.add(item);
+		if(this.comparador != null){
+			Collections.sort(this.cardapio, this.comparador);
+		}
 	}
 
 	/**
@@ -188,7 +195,8 @@ public class RestauranteController {
 	}
 	
 	public void ordenaCardapio(String tipoOrdenacao) throws SistemaException{
-		Collections.sort(this.cardapio, new Comparador(tipoOrdenacao));
+		this.comparador = this.factoryComparador.criaComparador(tipoOrdenacao);
+		Collections.sort(this.cardapio, this.comparador);
 		}
 	
 	public String imprimeCardapio(){
