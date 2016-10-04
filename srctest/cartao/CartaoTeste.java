@@ -2,6 +2,7 @@ package cartao;
 
 import static org.junit.Assert.*;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class CartaoTeste {
 	public void UpgradeEDowngrade() {
 
 		/*
-		 * Todos os cartoes começam Padrao
+		 * Todos os cartoes comecam Padrao
 		 */
 		assertEquals("Padrao", cartao.toString());
 		assertEquals("Padrao", cartao2.toString());
@@ -57,23 +58,22 @@ public class CartaoTeste {
 		assertEquals("Vip", cartao2.toString());
 
 	}
-	
-//	
-//	@Test
-//	public void addPontos(){
-//		try{
-//			cartao.addPontos(-200);
-//			fail();
-//			
-//		}catch(Exception e){
-//			assertEquals("", e.getMessage());
-//			
-//		}
-//		
-//	@Test
-//	public void convertePontos(){
-//		
-//	}
-	
+
+	@Test
+	public void addPontos() {
+		try {
+			cartao.addPontos(-200);
+			Assert.fail();
+
+		} catch (Exception e) {
+			assertEquals("Valor invalido", e.getMessage());
+
+		}
+	}
+
+	// @Test
+	// public void convertePontos(){
+	//
+	// }
 
 }

@@ -146,8 +146,9 @@ public class Cliente {
 	 * Converte os gastos em pontos no cartao fidelidade
 	 * @param gastos
 	 * 		valor dos gastos a serem convertidos em pontos
+	 * @throws ValorInvalidoException 
 	 */
-	public void addPontos(double gastos){
+	public void addPontos(double gastos) throws ValorInvalidoException{
 		cartaoFidelidade.addPontos(gastos);
 			
 	}
