@@ -495,8 +495,7 @@ public class HotelController {
 	 * 		Valor arredondado
 	 */
 	private double arredonda(double valor){
-		valor *= 100.0;
-		valor = Math.ceil(valor);
+		valor = Math.ceil(valor*100);
 		valor /= 100.0;
 		return valor;
 	}
