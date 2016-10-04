@@ -51,6 +51,6 @@ expect "20" getInfoHospede id="agnetha@abba.se" atributo="Pontos"
 expect "20" getInfoHospede id="nobel@got.se" atributo="Pontos"
 
 expect "21" consultaTransacoes atributo="Quantidade"
-expect "R$11688,07" consultaTransacoes atributo="Total"
+expect "R$11688,09" consultaTransacoes atributo="Total"
 
 fechaSistema

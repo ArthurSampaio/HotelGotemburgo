@@ -71,7 +71,7 @@ expect "20" getInfoHospede id="agnetha@abba.se" atributo="Pontos"
 expect "50" getInfoHospede id="nobel@got.se" atributo="Pontos"
 
 expect "17" consultaTransacoes atributo="Quantidade"
-expect "R$11502,46" consultaTransacoes atributo="Total"
+expect "R$11502,47" consultaTransacoes atributo="Total"
 expect "Sven Gudmar Svenson;Ines Brasil;Agnetha Faltskog;Alfred Nobel;Alfred Nobel;Alfred Nobel;Ines Brasil;Sven Gudmar Svenson;Ines Brasil;Sven Gudmar Svenson;Sven Gudmar Svenson;Sven Gudmar Svenson;Sven Gudmar Svenson;Ines Brasil;Ines Brasil;Ines Brasil;Ines Brasil" consultaTransacoes atributo="Nome"
 
 fechaSistema

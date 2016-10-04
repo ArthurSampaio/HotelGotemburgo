@@ -121,8 +121,8 @@ public class HotelController {
 		Cliente cliente = getCliente(email);
 		Estadia estadia = cliente.getEstadia().get(idQuarto);
 		double valorTransacao = estadia.calculaValorEstadia() - cliente.aplicaDesconto(estadia.calculaValorEstadia());
-		adicionaTransacao(cliente, idQuarto, valorTransacao);
 		valorTransacao = arredonda(valorTransacao);
+		adicionaTransacao(cliente, idQuarto, valorTransacao);
 		
 		cliente.addPontos(estadia.calculaValorEstadia());
 		cliente.removeEstadia(estadia);
@@ -193,7 +193,7 @@ public class HotelController {
 		for(int i = 0; i < this.transacoes.size(); i++){
 			total += this.transacoes.get(i).getValorTransacao();
 		}
-		return arredonda(total);
+		return total;
 	}
 	
 	/**
@@ -481,8 +481,8 @@ public class HotelController {
 	public String realizaPedido(String emailCliente, String pedido)throws Exception{
 		Cliente cliente = this.getCliente(emailCliente);
 		double valorTransacao = restaurante.getItemPreco(pedido) - cliente.aplicaDesconto(restaurante.getItemPreco(pedido));
-		adicionaTransacao(cliente, pedido, valorTransacao);
 		valorTransacao = arredonda(valorTransacao);
+		adicionaTransacao(cliente, pedido, valorTransacao);
 		cliente.addPontos(restaurante.getItemPreco(pedido));
 		return String.format("R$%.2f", valorTransacao);
 	}
