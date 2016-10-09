@@ -1,12 +1,14 @@
 package prato;
 
 
+import excecoes.AtributoInvalidoException;
 import excecoes.StringInvalidaException;
 
 /**
  * Classe que representa um item do cardapio.
  * @author Joao Mauricio Carvalho
  * @author Mariana Mendes
+ * @author Arthur Sampaio
  *
  */
 
@@ -22,13 +24,13 @@ public abstract class ItemCardapio implements Comparable<ItemCardapio>{
 	 * @param descricao
 	 * 			Descricao do item.
 	 */
-	public ItemCardapio(String nome, String descricao) throws StringInvalidaException{
+	public ItemCardapio(String nome, String descricao){
 		if(nome.trim().isEmpty() || nome == null){
-			throw new StringInvalidaException();
+			throw new AtributoInvalidoException();
 		}
 		
 		if(descricao.trim().isEmpty() || nome == null){
-			throw new StringInvalidaException();
+			throw new AtributoInvalidoException();
 		}
 		this.nome = nome;
 		this.descricao = descricao;
