@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import cartao.Cartao;
+import excecoes.AtributoInvalidoException;
 import excecoes.CadastroInvalidoException;
 import excecoes.CadastroVazioException;
 import excecoes.ConvertePontosException;
 import excecoes.IdadeInvalidaException;
+import excecoes.QuartoInvalidoException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
@@ -178,9 +180,9 @@ public class Cliente {
 	 * @throws StringInvalidaException
 	 *             quando ha uma string invalida
 	 */
-	public String getInfoHospede(String tipoInformacao) throws Exception, StringInvalidaException {
+	public String getInfoHospede(String tipoInformacao) {
 		if (stringInvalida(tipoInformacao)) {
-			throw new StringInvalidaException();
+			throw new AtributoInvalidoException();
 		}
 		if (tipoInformacao.equalsIgnoreCase("Nome")) {
 			return this.getNome();
@@ -192,7 +194,7 @@ public class Cliente {
 			return String.format("%d",this.cartaoFidelidade.getPontos());
 		}
 		else {
-			throw new Exception(CLIENTE_SEM_INFORMACAO);
+			throw new AtributoInvalidoException(CLIENTE_SEM_INFORMACAO);
 		}
 	}
 
@@ -206,18 +208,18 @@ public class Cliente {
 	 * @throws StringInvalidaException
 	 * 		Quando a string for invalida ou nula
 	 */
-	public String getInfoHospedagem(String info) throws Exception, StringInvalidaException {
+	public String getInfoHospedagem(String info) throws SistemaException{
 		if (stringInvalida(info)) {
-			throw new StringInvalidaException();
+			throw new AtributoInvalidoException();
 		} else if (info.equalsIgnoreCase("Hospedagens ativas")) {
-			return "" + this.estadias.size();
+			return "" + this.estadias.size(); 
 		} else if (info.equalsIgnoreCase("Quarto")) {
 			return IDquartos();
 		} else if (info.equalsIgnoreCase("Total")) {
 			return String.format("R$%.2f", totalEstadias());
 
 		} else {
-			throw new Exception(CLIENTE_SEM_INFORMACAO);
+			throw new AtributoInvalidoException(CLIENTE_SEM_INFORMACAO);
 		}
 	}
 
@@ -256,7 +258,7 @@ public class Cliente {
 	 * 		O valor das estadias
 	 * @throws Exception
 	 */
-	public double totalEstadias() throws Exception {
+	public double totalEstadias() throws SistemaException {
 		double total = 0.0;
 		for (Entry<String, Estadia> entry : this.estadias.entrySet()) {
 			total += entry.getValue().calculaValorEstadia();
@@ -280,10 +282,10 @@ public class Cliente {
 	 * 		Especifica a estadia
 	 * @throws Exception
 	 */
-	public void removeEstadia(Estadia estadia) throws Exception {
+	public void removeEstadia(Estadia estadia) throws SistemaException {
 		String id = estadia.getIDQuarto();
 		if (!this.estadias.containsKey(id)) {
-			throw new Exception("Cliente nao possui estadia no quarto especificado.");
+			throw new QuartoInvalidoException("Cliente nao possui estadia no quarto especificado.");
 		}
 		this.estadias.remove(id);
 		if (this.estadias.size() == 0) {
