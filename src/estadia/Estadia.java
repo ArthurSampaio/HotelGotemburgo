@@ -1,5 +1,6 @@
 package estadia;
 import excecoes.QuartoInvalidoException;
+import excecoes.SistemaException;
 import excecoes.ValorInvalidoException;
 import quarto.Quarto;
 
@@ -53,7 +54,7 @@ public class Estadia {
 	 * @return
 	 * 		O valor da estadia. 
 	 */
-	public double calculaValorEstadia()throws Exception{
+	public double calculaValorEstadia()throws SistemaException{
 		return this.quarto.getDiaria() * this.dias;
 	}
 
