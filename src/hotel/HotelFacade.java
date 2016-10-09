@@ -19,7 +19,7 @@ public class HotelFacade {
 
 	}
 
-	public void realizaCheckin(String email, int dias, String idQuarto, String tipoQuarto) throws Exception {
+	public void realizaCheckin(String email, int dias, String idQuarto, String tipoQuarto) throws SistemaException {
 		gerencia.realizaChekin(email, dias, idQuarto, tipoQuarto);
 
 	}

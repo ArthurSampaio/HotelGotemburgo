@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import cliente.Cliente;
 import cliente.ClienteFactory;
 import estadia.Estadia;
+import excecoes.AtributoInvalidoException;
 import excecoes.EmailInexistenteException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
@@ -96,9 +97,9 @@ public class HotelController {
 	 * @throws Exception
 	 * 		Quando o quarto ja esta ocupado
 	 */
-	public void realizaChekin(String email, int dias, String id, String tipoQuarto) throws Exception{
+	public void realizaChekin(String email, int dias, String id, String tipoQuarto) throws SistemaException{
 		if(!verificaQuartoDisponivel(id)){
-			throw new Exception("Erro ao realizar checkin. Quarto " + id + " ja esta ocupado.");
+			throw new SistemaException("Erro ao realizar checkin. Quarto " + id + " ja esta ocupado.");
 		}
 		Cliente cliente = this.getCliente(email);
 		Quarto quarto = factoryQuarto.criaQuarto(id, tipoQuarto);
@@ -117,7 +118,7 @@ public class HotelController {
 	 * 		Retorna uma string com o valor da estadia
 	 * @throws Exception
 	 */
-	public String realizaCheckout(String email, String idQuarto) throws Exception{
+	public String realizaCheckout(String email, String idQuarto) throws SistemaException{
 		Cliente cliente = getCliente(email);
 		Estadia estadia = cliente.getEstadia().get(idQuarto);
 		double valorTransacao = estadia.calculaValorEstadia() - cliente.aplicaDesconto(estadia.calculaValorEstadia());
@@ -188,7 +189,7 @@ public class HotelController {
 	 * @throws Exception
 	 * 		Quando ocorre um erro no calculo das estadias
 	 */
-	public double getTotalTransacoes() throws Exception{
+	public double getTotalTransacoes(){
 		double total = 0.0;
 		for(int i = 0; i < this.transacoes.size(); i++){
 			total += this.transacoes.get(i).getValorTransacao();
@@ -221,7 +222,7 @@ public class HotelController {
 	 * 		retorna a informacao requerida
 	 * @throws Exception
 	 */
-	public String consultaTransacoes(String info) throws Exception{
+	public String consultaTransacoes(String info){
 		if(info.equalsIgnoreCase("Quantidade")){
 			return "" + this.transacoes.size();
 		}else if(info.equalsIgnoreCase("Total")){
@@ -230,7 +231,7 @@ public class HotelController {
 			return getNomesTransacoes();
 		}
 		else{
-			throw new Exception("Nao ha a informacao especificada.");
+			throw new AtributoInvalidoException("Nao ha a informacao especificada.");
 		}
 	}
 	
@@ -244,7 +245,7 @@ public class HotelController {
 	 * 		retorna a informacao requerida no indice especificado
 	 * @throws Exception
 	 */
-	public String consultaTransacoes(String info, int indice) throws Exception{
+	public String consultaTransacoes(String info, int indice) throws SistemaException{
 		Transacao transacao = this.transacoes.get(indice);
 		if(info.equalsIgnoreCase("Total")){
 			return String.format("R$%.2f", transacao.getValorTransacao());
@@ -255,7 +256,7 @@ public class HotelController {
 		}
 		
 		else{
-			throw new Exception("Nao ha a informacao especificada.");
+			throw new SistemaException("Nao ha a informacao especificada.");
 		}
 	}
 	
@@ -273,7 +274,7 @@ public class HotelController {
 	 * @throws EmailInexistenteException
 	 * 				Quando nao há o email passado como parametro cadastrado no sistema            
 	 */
-	public String getInfoHospede(String email, String info) throws Exception {
+	public String getInfoHospede(String email, String info) throws SistemaException {
 		Cliente cliente = getCliente(email);
 		return cliente.getInfoHospede(info);
 
@@ -290,10 +291,10 @@ public class HotelController {
 	 * @throws Exception
 	 * 		Quando o cliente nao esta hospedado
 	 */
-	public String getInfoHospedagem(String email, String info)throws Exception{
+	public String getInfoHospedagem(String email, String info)throws SistemaException{
 		Cliente cliente = getCliente(email);
 		if(!cliente.isHospedado()){
-			throw new Exception("Erro na consulta de hospedagem. Hospede " + cliente.getNome() + " nao esta hospedado(a).");
+			throw new SistemaException("Erro na consulta de hospedagem. Hospede " + cliente.getNome() + " nao esta hospedado(a).");
 		}
 		return cliente.getInfoHospedagem(info);
 	}
@@ -314,7 +315,7 @@ public class HotelController {
 	 * @throws EmailInexistenteException
 	 * 				Quando nao há o email passado como parametro cadastrado no sistema            
 	 */
-	public String atualizaCadastro(String email, String tipoInfo, String novaInfo) throws Exception {
+	public String atualizaCadastro(String email, String tipoInfo, String novaInfo) throws SistemaException {
 		if (!clientes.containsKey(email)) {
 			throw new EmailInexistenteException(
 					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
@@ -396,10 +397,10 @@ public class HotelController {
 	 * @throws StringInvalidaException
 	 * 		Quando a string eh invalida ou o formato do email eh irregular
 	 */
-	public void checaEmail(String email, String msg) throws StringInvalidaException {
+	public void checaEmail(String email, String msg){
 		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
 				&& !email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-			throw new StringInvalidaException(msg);
+			throw new AtributoInvalidoException(msg);
 		}
 	}
 	
@@ -418,7 +419,7 @@ public class HotelController {
 		restaurante.cadastraPrato(nome, preco, descricao);
 	}
 
-	public String consultaRestaurante(String nome, String info) throws Exception {
+	public String consultaRestaurante(String nome, String info) throws SistemaException {
 		return restaurante.consultaRestaurante(nome, info);
 	}
 
@@ -478,7 +479,7 @@ public class HotelController {
 	 * @throws Exception
 	 * 		Quando nao ha cliente cadastrado com esse email ou quando nao ha Item no Cardapio com esse nome
 	 */
-	public String realizaPedido(String emailCliente, String pedido)throws Exception{
+	public String realizaPedido(String emailCliente, String pedido)throws SistemaException{
 		Cliente cliente = this.getCliente(emailCliente);
 		double valorTransacao = restaurante.getItemPreco(pedido) - cliente.aplicaDesconto(restaurante.getItemPreco(pedido));
 		valorTransacao = arredonda(valorTransacao);
