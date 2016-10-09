@@ -2,6 +2,7 @@ package restaurante;
 
 import java.util.Comparator;
 
+import excecoes.AtributoInvalidoException;
 import excecoes.StringInvalidaException;
 import prato.ComparadorNome;
 import prato.ComparadorPreco;
@@ -15,9 +16,9 @@ import prato.ItemCardapio;
  */
 public class FactoryComparador {
 
-	public Comparator<ItemCardapio> criaComparador(String criterioOrdenacao) throws StringInvalidaException{
+	public Comparator<ItemCardapio> criaComparador(String criterioOrdenacao){
 		if(!(criterioOrdenacao.equalsIgnoreCase("nome") || criterioOrdenacao.equalsIgnoreCase("preco"))){
-			throw new StringInvalidaException("Criterio de ordenacao invalido.");
+			throw new AtributoInvalidoException("Criterio de ordenacao invalido.");
 		}
 		if(criterioOrdenacao.equalsIgnoreCase("nome")){
 			return new ComparadorNome();

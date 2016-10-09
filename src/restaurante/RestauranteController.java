@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import excecoes.AtributoInvalidoException;
+import excecoes.CadastroRefeicaoException;
 import excecoes.ItemCardapioInvalidoException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
@@ -17,6 +18,7 @@ import prato.Refeicao;
  * Classe representando Controller do Restaurante.
  * 
  * @author marianams
+ * @author sampaio 
  *
  */
 public class RestauranteController {
@@ -42,7 +44,7 @@ public class RestauranteController {
 	 * @return Objeto que eh um item do cardapio
 	 * @throws ItemCardapioInvalidoException 
 	 */
-	public ItemCardapio getItem(String nomeDoItem) throws ItemCardapioInvalidoException {
+	public ItemCardapio getItem(String nomeDoItem) throws SistemaException {
 		for (int i = 0; i < cardapio.size(); ++i){
 			if (cardapio.get(i).getNome().equals(nomeDoItem)){
 				return cardapio.get(i);
@@ -111,7 +113,7 @@ public class RestauranteController {
 	public String consultaRestaurante(String nome, String info)
 			throws SistemaException {
 		if (nome.trim().isEmpty() || nome == null) {
-			throw new StringInvalidaException(
+			throw new AtributoInvalidoException(
 					"Erro na consulta do restaurante. Nome do prato esto vazio.");
 		}
 		if (info.equalsIgnoreCase("preco")) {
@@ -130,13 +132,13 @@ public class RestauranteController {
 	 * @return O preco de um item do cardapio em formato String.
 	 * @throws ItemCardapioInvalidoException 
 	 */
-	private String getPrecoItem(String nome) throws ItemCardapioInvalidoException {
+	private String getPrecoItem(String nome) throws SistemaException {
 		ItemCardapio item = this.getItem(nome);
 		String preco = String.format("R$%.2f", item.getPreco());
 		return preco;
 	}
 	
-	public double getItemPreco(String nome) throws ItemCardapioInvalidoException {
+	public double getItemPreco(String nome) throws SistemaException {
 		ItemCardapio item = this.getItem(nome);
 		double preco = item.getPreco();
 		return preco;
@@ -152,16 +154,16 @@ public class RestauranteController {
 	 */
 	private ArrayList<Prato> criaArrayList(String componentes) throws SistemaException {
 		if (componentes.trim().isEmpty()) {
-			throw new SistemaException(
-					"Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
+			throw new CadastroRefeicaoException(
+					"Componente(s) esta(o) vazio(s).");
 		}
 		String[] pratos = componentes.split(";");
 		ArrayList<Prato> novosPratos = new ArrayList<Prato>();
 
 		for (int i = 0; i < pratos.length; i++) {
 			if (!buscaItem(pratos[i])) {
-				throw new StringInvalidaException(
-						"Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
+				throw new CadastroRefeicaoException(
+						"So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
 			}
 			Prato pratoNovo = (Prato) getItem(pratos[i]);
 			novosPratos.add(pratoNovo);
