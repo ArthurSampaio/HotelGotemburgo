@@ -9,6 +9,8 @@ public class EmailInexistenteException extends SistemaException{
 		super(MENSAGEM);
 	}
 	
+	
+	
 	public EmailInexistenteException(String mensagem){
 		super(mensagem);
 	}
