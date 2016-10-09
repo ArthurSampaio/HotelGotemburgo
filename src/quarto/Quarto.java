@@ -1,5 +1,7 @@
 package quarto;
 
+import excecoes.AtributoInvalidoException;
+import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
 
@@ -21,9 +23,9 @@ public class Quarto{
 	 * @throws StringInvalidaException
 	 * 		Quando uma ID eh invalida, nula ou vazia
 	 */
-	public Quarto(String id, TipoDeQuarto tipo)throws StringInvalidaException{
+	public Quarto(String id, TipoDeQuarto tipo){
 		if(id == null || id.trim().isEmpty()){
-			throw new StringInvalidaException(ID_VAZIO_NULO);
+			throw new AtributoInvalidoException(ID_VAZIO_NULO);
 		}
 		this.ID = id;
 		this.diaria = tipo;
@@ -41,7 +43,7 @@ public class Quarto{
 	 * @throws ValorInvalidoException
 	 * 		Quando o desconto for menor que zero
 	 */
-	public double getDiaria(double desconto) throws ValorInvalidoException{
+	public double getDiaria(double desconto) throws SistemaException{
 		if(desconto < 0){
 			throw new ValorInvalidoException();
 		}
@@ -53,7 +55,7 @@ public class Quarto{
 	 * @return
 	 * 		Valor da diaria sem desconto
 	 */
-	public double getDiaria()throws ValorInvalidoException{
+	public double getDiaria() throws SistemaException{
 		return this.getDiaria(0);
 	}
 	
@@ -71,9 +73,9 @@ public class Quarto{
 	 * @param iD
 	 * 		O novo ID do quarto
 	 */
-	public void setID(String id) throws StringInvalidaException{
+	public void setID(String id){
 		if(id == null || id.trim().isEmpty()){
-			throw new StringInvalidaException();
+			throw new AtributoInvalidoException();
 		}
 		this.ID = id;
 	}

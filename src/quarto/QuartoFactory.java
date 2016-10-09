@@ -2,6 +2,7 @@ package quarto;
 
 import java.util.HashMap;
 
+import excecoes.AtributoInvalidoException;
 import excecoes.StringInvalidaException;
 
 /**
@@ -28,19 +29,19 @@ public class QuartoFactory {
 	 * @throws StringInvalidaException
 	 * 		Quando ID ou Tipo sao invalidas. 
 	 */
-	public Quarto criaQuarto(String ID, String tipo) throws Exception, StringInvalidaException{
+	public Quarto criaQuarto(String ID, String tipo){
 		if(ID == null || ID.trim().isEmpty()){
-			throw new StringInvalidaException("O ID nao pode ser invalida ou nula.");
+			throw new AtributoInvalidoException("O ID nao pode ser invalida ou nula.");
 		}
 		if(tipo == null || tipo.trim().isEmpty()){
-			throw new StringInvalidaException("Tipo nao pode ser nulo ou invalido.");
+			throw new AtributoInvalidoException("Tipo nao pode ser nulo ou invalido.");
 		}
 		
 		if(tipo.equalsIgnoreCase("simples") || tipo.equalsIgnoreCase("luxo") ||
 				tipo.equalsIgnoreCase("presidencial")){
 			return new Quarto(ID, this.setTipoDeQuarto(tipo));
 		}else{
-			throw new Exception("Tipo invalido para o hotel.");
+			throw new AtributoInvalidoException("Tipo invalido para o hotel.");
 		}
 
 		
