@@ -6,11 +6,9 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import cartao.Cartao;
-import excecoes.AtributoInvalidoException;
+import excecoes.AtributoClienteException;
 import excecoes.CadastroInvalidoException;
-import excecoes.CadastroVazioException;
 import excecoes.ConvertePontosException;
-import excecoes.IdadeInvalidaException;
 import excecoes.QuartoInvalidoException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
@@ -33,8 +31,6 @@ public class Cliente {
 	private Cartao cartaoFidelidade;
 
 
-	private static final String ERRO_CADASTRO = "Erro no cadastro de Hospede. ";
-	private static final String ERRO_ATUALIZACAO = "Erro na atualizacao do cadastro de Hospede. ";
 	private static final String CLIENTE_SEM_INFORMACAO = "O cliente nao possue a informacao especificada.";
 	/**
 	 * Construtor da Classe Cliente
@@ -53,23 +49,23 @@ public class Cliente {
 	 * @throws Exception
 	 *             Quando alguma das strings é invalida.
 	 */
-	public Cliente(String nome, String email, String dataNasc, boolean hosp) throws ValorInvalidoException, CadastroVazioException, CadastroInvalidoException, IdadeInvalidaException {
+	public Cliente(String nome, String email, String dataNasc, boolean hosp) throws ValorInvalidoException, AtributoClienteException, Exception {
 		
 		if (stringInvalida(nome)) {
-			throw new CadastroVazioException(ERRO_CADASTRO, "Nome");
+			throw new AtributoClienteException(" Nome");
 		}
 
 		if (stringInvalida(dataNasc)) {
-			throw new CadastroVazioException(ERRO_CADASTRO,"Data de Nascimento");
+			throw new AtributoClienteException(" Data de Nascimento");
 		}
 
 		if (stringInvalida(email)) {
-			throw new CadastroVazioException(ERRO_CADASTRO, "Email");
+			throw new AtributoClienteException(" Email");
 		}
-		checaNome(nome, ERRO_CADASTRO);
-		checaEmail(email, ERRO_CADASTRO);
-		checaData(dataNasc, ERRO_CADASTRO);
-		checaIdade(dataNasc, ERRO_CADASTRO);
+		checaNome(nome);
+		checaEmail(email);
+		checaData(dataNasc);
+		checaIdade(dataNasc);
 
 		this.nome = nome;
 		this.dataNasc = dataNasc;
@@ -86,7 +82,7 @@ public class Cliente {
 	 * @throws CadastroInvalidoException 
 	 * @throws IdadeInvalidaException 
 	 */
-	public Cliente(String nome, String email, String dataNasc) throws StringInvalidaException, ValorInvalidoException, CadastroVazioException, CadastroInvalidoException, IdadeInvalidaException {
+	public Cliente(String nome, String email, String dataNasc) throws StringInvalidaException, ValorInvalidoException, Exception {
 		this(nome, email, dataNasc, false);
 	}
 
@@ -111,32 +107,32 @@ public class Cliente {
 	 * @throws StringInvalidaException
 	 *             Quando ha alguma string invalida (null ou vazia)
 	 */
-	public void atualizaCadastro(String tipoInformacao, String valor)throws SistemaException, StringInvalidaException {
+	public void atualizaCadastro(String tipoInformacao, String valor)throws SistemaException, StringInvalidaException, Exception {
 	
 		if (stringInvalida(tipoInformacao)) {
 			throw new StringInvalidaException();
 		}
 		if (tipoInformacao.equalsIgnoreCase("Nome")) {
 			if (stringInvalida(valor)) {
-				throw new CadastroInvalidoException(ERRO_ATUALIZACAO, "Nome do(a) hospede nao pode ser vazio.");
+				throw new AtributoClienteException(" Nome");
 			}
-			checaNome(valor, ERRO_ATUALIZACAO);
+			checaNome(valor);
 
 			this.setNome(valor);
 		} else if (tipoInformacao.equalsIgnoreCase("Data de Nascimento")) {
 
 			if (stringInvalida(valor)) {
-				throw new CadastroInvalidoException(ERRO_ATUALIZACAO, "Data de Nascimento do(a) hospede nao pode ser vazio.");
+				throw new AtributoClienteException(" Data de Nascimento");
 			}
-			checaData(valor, ERRO_ATUALIZACAO);
-			checaIdade(valor, ERRO_ATUALIZACAO);
+			checaData(valor);
+			checaIdade(valor);
 			this.setDataNasc(valor);
 		} else if (tipoInformacao.equalsIgnoreCase("Email")) {
 
 			if (stringInvalida(valor)) {
-				throw new CadastroInvalidoException(ERRO_ATUALIZACAO, "Email do(a) hospede nao pode ser vazio.");
+				throw new AtributoClienteException(" Email");
 			}
-			checaEmail(valor, ERRO_ATUALIZACAO);
+			checaEmail(valor);
 			this.setEmail(valor);
 		}
 		
@@ -182,7 +178,7 @@ public class Cliente {
 	 */
 	public String getInfoHospede(String tipoInformacao) {
 		if (stringInvalida(tipoInformacao)) {
-			throw new AtributoInvalidoException();
+			throw new AtributoClienteException(tipoInformacao);
 		}
 		if (tipoInformacao.equalsIgnoreCase("Nome")) {
 			return this.getNome();
@@ -194,7 +190,7 @@ public class Cliente {
 			return String.format("%d",this.cartaoFidelidade.getPontos());
 		}
 		else {
-			throw new AtributoInvalidoException(CLIENTE_SEM_INFORMACAO);
+			throw new AtributoClienteException(CLIENTE_SEM_INFORMACAO);
 		}
 	}
 
@@ -210,7 +206,7 @@ public class Cliente {
 	 */
 	public String getInfoHospedagem(String info) throws SistemaException{
 		if (stringInvalida(info)) {
-			throw new AtributoInvalidoException();
+			throw new AtributoClienteException(info);
 		} else if (info.equalsIgnoreCase("Hospedagens ativas")) {
 			return "" + this.estadias.size(); 
 		} else if (info.equalsIgnoreCase("Quarto")) {
@@ -219,7 +215,7 @@ public class Cliente {
 			return String.format("R$%.2f", totalEstadias());
 
 		} else {
-			throw new AtributoInvalidoException(CLIENTE_SEM_INFORMACAO);
+			throw new AtributoClienteException(CLIENTE_SEM_INFORMACAO);
 		}
 	}
 
@@ -361,9 +357,9 @@ public class Cliente {
 	}
 
 	
-	private void checaNome(String nome, String erro) throws CadastroVazioException, CadastroInvalidoException {
+	private void checaNome(String nome) throws Exception {
 		if (!nome.matches("[a-zA-Z ]*")) {
-			throw new CadastroInvalidoException(erro,"Nome do(a) hospede esta invalido.");
+			throw new Exception(" Nome do(a) hospede esta invalido.");
 		}
 		
 	}
@@ -372,25 +368,25 @@ public class Cliente {
 	 * Checa se o email passado pelo usuario eh valido
 	 * @param email
 	 * @param erro
-	 * @throws CadastroInvalidoException
+	 * @throws Exception 
 	 */
-	public void checaEmail(String email, String erro) throws CadastroInvalidoException {
+	public void checaEmail(String email) throws Exception {
 		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
 				&& !email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-			throw new CadastroInvalidoException(erro,"Email do(a) hospede esta invalido.");
+			throw new Exception(" Email do(a) hospede esta invalido.");
 		}
 	}
 
 	
-	private void checaData(String data, String erro) throws CadastroInvalidoException {
+	private void checaData(String data) throws Exception {
 		if (!data.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}")) {
-			throw new CadastroInvalidoException(erro,"Formato de data invalido.");		}
+			throw new Exception(" Formato de data invalido.");		}
 	}
 
-	private void checaIdade(String data, String msg) throws IdadeInvalidaException {
+	private void checaIdade(String data) throws Exception {
 		String ano = data.split("/")[2];
 		if (Integer.parseInt(ano) > 1998) {
-			throw new IdadeInvalidaException(msg);
+			throw new Exception(" A idade do(a) hospede deve ser maior que 18 anos.");
 		}
 	}
 	

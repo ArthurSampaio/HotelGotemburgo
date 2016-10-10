@@ -1,6 +1,6 @@
 package quarto;
 
-import excecoes.AtributoInvalidoException;
+import excecoes.AtributoClienteException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
@@ -25,7 +25,7 @@ public class Quarto{
 	 */
 	public Quarto(String id, TipoDeQuarto tipo){
 		if(id == null || id.trim().isEmpty()){
-			throw new AtributoInvalidoException(ID_VAZIO_NULO);
+			throw new AtributoClienteException(ID_VAZIO_NULO);
 		}
 		this.ID = id;
 		this.diaria = tipo;
@@ -72,10 +72,11 @@ public class Quarto{
 	 * Altera o ID do quarto
 	 * @param iD
 	 * 		O novo ID do quarto
+	 * @throws Exception 
 	 */
-	public void setID(String id){
+	public void setID(String id) throws Exception{
 		if(id == null || id.trim().isEmpty()){
-			throw new AtributoInvalidoException();
+			throw new Exception();
 		}
 		this.ID = id;
 	}

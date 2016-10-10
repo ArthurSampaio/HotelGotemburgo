@@ -25,9 +25,10 @@ public class Prato extends ItemCardapio {
 	 * 
 	 * @param preco
 	 *            Preco do base do prato.
+	 * @throws Exception 
 	 * @throws ValorInvalidoException
 	 */
-	public Prato(String nome, String descricao, double preco) throws SistemaException {
+	public Prato(String nome, String descricao, double preco) throws Exception {
 		super(nome, descricao);
 
 		if (preco < 0) {

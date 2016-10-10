@@ -10,7 +10,7 @@ import prato.Prato;
 import prato.Refeicao;
  
 public class FactoryItemCardapio {
-	public Prato criaPrato(String nome, double preco, String descricao) throws SistemaException {
+	public Prato criaPrato(String nome, double preco, String descricao) throws Exception {
 		if (nome.trim().isEmpty() || nome == null) {
 			throw new ItemCardapioInvalidoException("Erro no cadastro do prato. Nome do prato esta vazio.");
 		}
@@ -26,7 +26,7 @@ public class FactoryItemCardapio {
  
 	}
  
-	public Refeicao criaRefeicao(String nome, String descricao, ArrayList<Prato> pratos) throws SistemaException{
+	public Refeicao criaRefeicao(String nome, String descricao, ArrayList<Prato> pratos) throws Exception{
 		if(nome.trim().isEmpty() || nome == null){
 			throw new ItemCardapioInvalidoException("Erro no cadastro de refeicao. Nome da refeicao esta vazio.");
 		}

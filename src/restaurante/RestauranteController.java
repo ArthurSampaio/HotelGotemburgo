@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import excecoes.AtributoInvalidoException;
+import excecoes.AtributoClienteException;
 import excecoes.CadastroRefeicaoException;
 import excecoes.ItemCardapioInvalidoException;
 import excecoes.SistemaException;
@@ -73,11 +73,10 @@ public class RestauranteController {
 	 *            Preco do prato
 	 * @param descricao
 	 *            Texto de descricao do prato.
-	 * @throws SistemaException
-	 *             Lanca excecao do metodo cria prato.
+	 * @throws Exception 
 	 */
 	public void cadastraPrato(String nome, double preco, String descricao)
-			throws SistemaException {
+			throws Exception {
 		Prato prato = fabrica.criaPrato(nome, preco, descricao);
 		addItem(prato);
 	}
@@ -90,11 +89,10 @@ public class RestauranteController {
 	 *            Descricao da refeicao.
 	 * @param componentes
 	 *            Pratos que vao compor a refeicao.
-	 * @throws SistemaException
-	 *             Lanca execao do metodo cria refeicao.
+	 * @throws Exception 
 	 */
 	public void cadastraRefeicao(String nome, String descricao,
-			String componentes) throws SistemaException {
+			String componentes) throws Exception {
 		ArrayList<Prato> pratos = criaArrayList(componentes);
 		Refeicao refeicao = fabrica.criaRefeicao(nome, descricao, pratos);
 		cardapio.add(refeicao);
@@ -108,12 +106,13 @@ public class RestauranteController {
 	 *            Informacao desejada, preco ou descricao de um item do
 	 *            cardapio.
 	 * @return Informacao requerida do item.
-	 * @throws AtributoInvalidoException
+	 * @throws Exception 
+	 * @throws AtributoClienteException
 	 */
 	public String consultaRestaurante(String nome, String info)
-			throws SistemaException {
+			throws Exception {
 		if (nome.trim().isEmpty() || nome == null) {
-			throw new AtributoInvalidoException(
+			throw new Exception(
 					"Erro na consulta do restaurante. Nome do prato esto vazio.");
 		}
 		if (info.equalsIgnoreCase("preco")) {
@@ -121,7 +120,7 @@ public class RestauranteController {
 		} else if (info.equalsIgnoreCase("descricao")) {
 			return getItem(nome).toString();
 		} else {
-			throw new AtributoInvalidoException();
+			throw new Exception();
 		}
 	}
 

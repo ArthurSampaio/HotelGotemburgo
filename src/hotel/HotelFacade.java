@@ -1,6 +1,10 @@
 package hotel;
 
 import easyaccept.EasyAccept;
+import excecoes.AtualizaCadastroException;
+import excecoes.CadastroInvalidoException;
+import excecoes.EmailInexistenteException;
+import excecoes.RemocaoException;
 import excecoes.SistemaException;
 
 public class HotelFacade {
@@ -13,7 +17,7 @@ public class HotelFacade {
 	public void iniciaSistema() {
 	}
 
-	public String cadastraHospede(String nome, String email, String data) throws SistemaException {
+	public String cadastraHospede(String nome, String email, String data) throws SistemaException, CadastroInvalidoException {
 		return gerencia.cadastraHospede(nome, email, data);
 	
 
@@ -64,12 +68,12 @@ public class HotelFacade {
 		return gerencia.getInfoHospedagem(email, info);
 	}
 
-	public String atualizaCadastro(String email, String tipoInfo, String novaInfo) throws Exception {
+	public String atualizaCadastro(String email, String tipoInfo, String novaInfo) throws Exception, AtualizaCadastroException {
 		return gerencia.atualizaCadastro(email, tipoInfo, novaInfo);
 
 	}
 
-	public void removeHospede(String email) throws SistemaException {
+	public void removeHospede(String email) throws RemocaoException, EmailInexistenteException {
 			gerencia.removeHospede(email);
 	}
 

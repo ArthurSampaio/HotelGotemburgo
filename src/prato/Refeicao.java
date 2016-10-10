@@ -25,8 +25,9 @@ public class Refeicao extends ItemCardapio {
 	 *            Descricao da refeicao
 	 * @param pratos
 	 *            Conjuto de pratos que compoem a refeicao
+	 * @throws Exception 
 	 */
-	public Refeicao(String nome, String descricao, ArrayList<Prato> pratos) throws SistemaException {
+	public Refeicao(String nome, String descricao, ArrayList<Prato> pratos) throws Exception {
 		super(nome, descricao);
 		for(int i = 0; i < pratos.size(); i++){
 			if (pratos.get(i) == null){

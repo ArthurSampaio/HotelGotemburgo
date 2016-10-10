@@ -2,7 +2,7 @@ package quarto;
 
 import java.util.HashMap;
 
-import excecoes.AtributoInvalidoException;
+import excecoes.AtributoClienteException;
 import excecoes.StringInvalidaException;
 
 /**
@@ -31,17 +31,17 @@ public class QuartoFactory {
 	 */
 	public Quarto criaQuarto(String ID, String tipo){
 		if(ID == null || ID.trim().isEmpty()){
-			throw new AtributoInvalidoException("O ID nao pode ser invalida ou nula.");
+			throw new AtributoClienteException("O ID nao pode ser invalida ou nula.");
 		}
 		if(tipo == null || tipo.trim().isEmpty()){
-			throw new AtributoInvalidoException("Tipo nao pode ser nulo ou invalido.");
+			throw new AtributoClienteException("Tipo nao pode ser nulo ou invalido.");
 		}
 		
 		if(tipo.equalsIgnoreCase("simples") || tipo.equalsIgnoreCase("luxo") ||
 				tipo.equalsIgnoreCase("presidencial")){
 			return new Quarto(ID, this.setTipoDeQuarto(tipo));
 		}else{
-			throw new AtributoInvalidoException("Tipo invalido para o hotel.");
+			throw new AtributoClienteException("Tipo invalido para o hotel.");
 		}
 
 		
