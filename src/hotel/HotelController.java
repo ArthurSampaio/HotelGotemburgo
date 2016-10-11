@@ -555,4 +555,22 @@ public class HotelController {
 	public void geraRelatorioMenu() throws IOException, SistemaException{
 		restaurante.geraRelatorioMenu();
 	}
+	
+	public void geraRelatorioTransacoes() throws IOException{
+		String path = new File("./arquivos_sistema/relatorios/cad_transacoes.txt").getCanonicalPath();
+		PrintWriter out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
+		out.println("Historio de Transacoes:");
+		
+		for (int i = 0; i < transacoes.size(); ++i){
+			Transacao atual = transacoes.get(i);
+			out.println("Nome: " + atual.getNomeCliente() + " Gasto:R$" + atual.getValorTransacao() + " Detalhes: " + atual.getDetalhe());
+		}
+		out.close();
+	}
+	
+	public void geraRelatorios() throws IOException, SistemaException{
+		geraRelatorioMenu();
+		geraRelatorioTransacoes();
+		geraRelatorioCliente();
+	}
 }
