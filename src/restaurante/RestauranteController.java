@@ -1,10 +1,17 @@
 package restaurante;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
+import cliente.Cliente;
 import excecoes.AtributoClienteException;
 import excecoes.CadastroRefeicaoException;
 import excecoes.ItemCardapioInvalidoException;
@@ -211,5 +218,19 @@ public class RestauranteController {
 			}	
 		}
 		return saida;
+	}
+	
+	public void geraRelatorioMenu() throws IOException, SistemaException{
+		String path = new File("./arquivos_sistema/relatorios/cad_restaurante.txt").getCanonicalPath();
+		PrintWriter out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
+		out.println("Menu do Restaurante: " + cardapio.size() + " itens no cardapio");
+		
+		for (int i = 0; i < cardapio.size(); ++i){
+			out.println("==> Item " + (i + 1) + ":");
+			out.println("Nome: " + cardapio.get(i).getNome() + " Preco: R$" + cardapio.get(i).getPreco());
+			out.println("Descricao: " + cardapio.get(i).getDescricao());
+			out.println("");
+		}
+		out.close();
 	}
 }

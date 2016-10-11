@@ -126,7 +126,13 @@ public class HotelFacade {
 
 	public void fechaSistema() {
 		try {
-			gerencia.geraRelatorioCliente();
+			try {
+				gerencia.geraRelatorioCliente();
+				gerencia.geraRelatorioMenu();
+			} catch (SistemaException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

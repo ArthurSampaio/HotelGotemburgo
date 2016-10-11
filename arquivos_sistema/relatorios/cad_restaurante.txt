@@ -1,0 +1,69 @@
+Menu do Restaurante: 17 itens no cardapio
+==> Item 1:
+Nome: Rapadura Preco: R$0.5
+Descricao: Sobremesa doce com sabor semelhante ao acucar mascavo.
+
+==> Item 2:
+Nome: Espresso Preco: R$2.5
+Descricao: Tradicional cafe italiano.
+
+==> Item 3:
+Nome: Tapioca Preco: R$3.0
+Descricao: Essa deliciosa receita nordestina possui como base a farinha de mandioca.
+
+==> Item 4:
+Nome: Pudim de leite Preco: R$6.5
+Descricao: Um a sobremesa a base de leite com calda caramelizada e ameixas.
+
+==> Item 5:
+Nome: Bresaola com rucula e parmesao Preco: R$10.5
+Descricao: Carne de vaca ressecada e salgada de sabor intenso.
+
+==> Item 6:
+Nome: Bruschetta Preco: R$10.5
+Descricao: Uma entrada italiana feito a base de pao, alho, queijo e tomates.
+
+==> Item 7:
+Nome: Tiramisu Preco: R$12.0
+Descricao: Sobremesa cremosa a base de mascaporne e com sabor de cafe.
+
+==> Item 8:
+Nome: Kanelbullar Preco: R$15.0
+Descricao: Um pequeno pao de massa fofinha e sabor de canela.
+
+==> Item 9:
+Nome: Galeto com farofa Preco: R$15.5
+Descricao: Galeto assado na brasa servido com farofa de calabresa e bacon.
+
+==> Item 10:
+Nome: Artsoppa com panquecas Preco: R$18.5
+Descricao: Deliciosa sopa de ervilhas com carne. Essa comida tradicional da Suecia eh saboreada principalmente nas quintas-feiras.
+
+==> Item 11:
+Nome: Penne ao pesto Preco: R$34.5
+Descricao: Tradicional massa italiana feita ao molho pesto.
+
+==> Item 12:
+Nome: Kotbullar com lingon Preco: R$38.5
+Descricao: Almondegas de carne feito no tradicional estilo sueco.
+
+==> Item 13:
+Nome: Delicia da serra Preco: R$50.85
+Descricao: Uma selecao de pratos da culinaria regional nordestina.
+
+==> Item 14:
+Nome: Carne de sol com fritas Preco: R$53.0
+Descricao: Carne de sol saborosa servida com fritas como acompanhamento.
+
+==> Item 15:
+Nome: Pasto italiano Preco: R$60.75
+Descricao: Varios pratos italianos para saborear.
+
+==> Item 16:
+Nome: Algkot com vegetais Preco: R$75.0
+Descricao: Carne de alce grelhada e servida com vegetais cozidos no vapor.
+
+==> Item 17:
+Nome: Svensk mat Preco: R$97.65
+Descricao: Uma variedade de comidas populares na Suecia.
+

@@ -1,1 +1,41 @@
-teste é teste né pai
+Cadastro de Hospedes: 8 hospedes registrados
+==> Hospede 1
+Email: ines@brasil.com.br
+Nome: Ines Brasil
+Data de nascimento: 25/10/1969
+ 
+==> Hospede 2
+Email: nobel@got.se
+Nome: Alfred Nobel
+Data de nascimento: 21/10/1983
+ 
+==> Hospede 3
+Email: agnetha@abba.se
+Nome: Agnetha Faltskog
+Data de nascimento: 05/04/1950
+ 
+==> Hospede 4
+Email: sven@sverige.se
+Nome: Sven Gudmar Svenson
+Data de nascimento: 10/02/1978
+ 
+==> Hospede 5
+Email: sven@sverige.se
+Nome: Sven Svensson
+Data de nascimento: 10/02/1978
+ 
+==> Hospede 6
+Email: agnetha@abba.se
+Nome: Agnetha Faltskog
+Data de nascimento: 05/04/1950
+ 
+==> Hospede 7
+Email: sven@sverige.se
+Nome: Sven Svensson
+Data de nascimento: 10/02/1978
+ 
+==> Hospede 8
+Email: sven@sverige.se
+Nome: Sven Svensson
+Data de nascimento: 10/02/1978
+ 

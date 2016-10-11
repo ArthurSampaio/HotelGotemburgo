@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import cliente.Cliente;
 import cliente.ClienteFactory;
@@ -533,10 +534,25 @@ public class HotelController {
 		return valor;
 	}
 	
-	public void geraRelatorioCliente() throws IOException{
+	public void geraRelatorioCliente() throws IOException, SistemaException{
 		String path = new File("./arquivos_sistema/relatorios/cad_hospedes.txt").getCanonicalPath();
 		PrintWriter out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
-		out.println("teste é teste né pai");
+		out.println("Cadastro de Hospedes: " + clientes.size() + " hospedes registrados");
+		Set<String> chaves = clientes.keySet();
+		int numCliente = 1;
+		for (String cliente : chaves){
+			out.println("==> Hospede " + numCliente);
+			numCliente++;
+			Cliente atual = getCliente(cliente);
+			out.println("Email: " + atual.getEmail());
+			out.println("Nome: " + atual.getNome());
+			out.println("Data de nascimento: " + atual.getDataNasc());
+			out.println(" ");
+		}
 		out.close();
+	}
+	
+	public void geraRelatorioMenu() throws IOException, SistemaException{
+		restaurante.geraRelatorioMenu();
 	}
 }
