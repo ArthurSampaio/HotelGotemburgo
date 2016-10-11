@@ -2,6 +2,7 @@ package hotel;
 
 import java.io.IOException;
 
+import db.BancoDeDados;
 import easyaccept.EasyAccept;
 import excecoes.AtualizaCadastroException;
 import excecoes.CadastroInvalidoException;
@@ -11,12 +12,18 @@ import excecoes.SistemaException;
 
 public class HotelFacade {
 	private HotelController gerencia;
+	private BancoDeDados bd;
 
 	public HotelFacade() {
 		this.gerencia = new HotelController();
+		this.bd = bd.getInstance();
 	}
 
-	public void iniciaSistema() {
+	public void iniciaSistema() throws IOException {
+		bd.iniciaSistema();
+		gerencia = bd.getHotelController();
+		
+		
 	}
 
 	public String cadastraHospede(String nome, String email, String data) throws SistemaException, CadastroInvalidoException {
@@ -125,17 +132,7 @@ public class HotelFacade {
 	
 
 	public void fechaSistema() {
-		try {
-			try {
-				gerencia.geraRelatorios();
-			} catch (SistemaException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		bd.fechaSistema();
 	}
 
 	public static void main(String[] args) {
