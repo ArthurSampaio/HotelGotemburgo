@@ -577,9 +577,46 @@ public class HotelController {
 		}	
 	}
 	
+	private void geraRelatorioHotel(){
+		try {
+			String path = new File("./arquivos_sistema/relatorios/cad_hospedes.txt").getCanonicalPath();
+			BufferedReader in = new BufferedReader(new FileReader(path));
+			String pathout = new File("./arquivos_sistema/relatorios/hotel_principal.txt").getCanonicalPath();
+			PrintWriter out= new PrintWriter(new BufferedWriter(new FileWriter(pathout)));
+			String linha;
+			
+			out.println("====================================");
+			while ( (linha = in.readLine()) != null ){
+				out.println(linha);
+			}
+			out.println("====================================");
+			path = new File("./arquivos_sistema/relatorios/cad_restaurante.txt").getCanonicalPath();
+			in = new BufferedReader(new FileReader(path));
+			
+			while ( (linha = in.readLine()) != null ){
+				out.println(linha);
+			}
+			
+			out.println("====================================");
+			path = new File("./arquivos_sistema/relatorios/cad_transacoes.txt").getCanonicalPath();
+			in = new BufferedReader(new FileReader(path));
+			
+			while ( (linha = in.readLine()) != null ){
+				out.println(linha);
+			}
+			in.close();
+			out.close();
+		
+		} catch (IOException e) {
+			
+		}
+		
+	}
+	
 	public void geraRelatorios() throws IOException, SistemaException{
 		geraRelatorioMenu();
 		geraRelatorioTransacoes();
 		geraRelatorioCliente();
+		geraRelatorioHotel();
 	}
 }
