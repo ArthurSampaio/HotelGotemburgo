@@ -9,8 +9,10 @@ import cartao.Cartao;
 import excecoes.AtributoClienteException;
 import excecoes.CadastroInvalidoException;
 import excecoes.ConvertePontosException;
+import excecoes.FormatoInvalidoException;
 import excecoes.QuartoInvalidoException;
 import excecoes.SistemaException;
+import excecoes.SistemaUncheckedException;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
 import estadia.Estadia;
@@ -357,9 +359,9 @@ public class Cliente {
 	}
 
 	
-	private void checaNome(String nome) throws Exception {
+	private void checaNome(String nome) throws FormatoInvalidoException {
 		if (!nome.matches("[a-zA-Z ]*")) {
-			throw new Exception(" Nome do(a) hospede esta invalido.");
+			throw new FormatoInvalidoException(" Nome");
 		}
 		
 	}
@@ -370,17 +372,17 @@ public class Cliente {
 	 * @param erro
 	 * @throws Exception 
 	 */
-	public void checaEmail(String email) throws Exception {
+	public void checaEmail(String email) throws FormatoInvalidoException {
 		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
 				&& !email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-			throw new Exception(" Email do(a) hospede esta invalido.");
+			throw new FormatoInvalidoException(" Email");
 		}
 	}
 
 	
-	private void checaData(String data) throws Exception {
+	private void checaData(String data) throws SistemaUncheckedException {
 		if (!data.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}")) {
-			throw new Exception(" Formato de data invalido.");		}
+			throw new SistemaUncheckedException(" Formato de data invalido.");		}
 	}
 
 	private void checaIdade(String data) throws Exception {
