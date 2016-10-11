@@ -26,13 +26,7 @@ public abstract class ItemCardapio implements Comparable<ItemCardapio>{
 	 * @throws Exception 
 	 */
 	public ItemCardapio(String nome, String descricao) throws NomeItemCardapioException, DescricaoItemCardapioException{
-		if(nome.trim().isEmpty() || nome == null){
-			throw new NomeItemCardapioException();
-		}
-		
-		if(descricao.trim().isEmpty() || nome == null){
-			throw new DescricaoItemCardapioException();
-		}
+	
 		this.nome = nome;
 		this.descricao = descricao;
 	}
