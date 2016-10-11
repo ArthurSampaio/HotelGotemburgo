@@ -25,15 +25,12 @@ public class Prato extends ItemCardapio {
 	 * 
 	 * @param preco
 	 *            Preco do base do prato.
-	 * @throws Exception 
+	 * @throws Exception
 	 * @throws ValorInvalidoException
 	 */
 	public Prato(String nome, String descricao, double preco) throws SistemaException {
 		super(nome, descricao);
 
-		if (preco < 0) {
-			throw new ValorInvalidoException("Preco do prato eh invalido.");
-		}
 		this.preco = preco;
 	}
 
@@ -64,8 +61,8 @@ public class Prato extends ItemCardapio {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return this.getDescricao();
 	}
 

@@ -25,18 +25,11 @@ public class Refeicao extends ItemCardapio {
 	 *            Descricao da refeicao
 	 * @param pratos
 	 *            Conjuto de pratos que compoem a refeicao
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public Refeicao(String nome, String descricao, ArrayList<Prato> pratos) throws SistemaException {
 		super(nome, descricao);
-		for(int i = 0; i < pratos.size(); i++){
-			if (pratos.get(i) == null){
-				throw new SistemaException ("Prato vazio");
-			}
-		}
-		if (pratos.size() != 3 && pratos.size() != 4){
-			throw new SistemaException ("Uma refeicao completa deve possuir no minimo 3 e no maximo 4 pratos.");
-		}
+
 		this.menu = pratos;
 	}
 
@@ -72,21 +65,21 @@ public class Refeicao extends ItemCardapio {
 		result = prime * result + ((getNome() == null) ? 0 : getNome().hashCode());
 		return result;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		String saida = "";
-		saida += this.getDescricao() +  " Serao servidos:";
-		
-		for(int i = 0; i < this.menu.size(); i++ ){
-			saida += " (" + (i+1) + ") " + menu.get(i).getNome();
-			if(i > menu.size()-2){
+		saida += this.getDescricao() + " Serao servidos:";
+
+		for (int i = 0; i < this.menu.size(); i++) {
+			saida += " (" + (i + 1) + ") " + menu.get(i).getNome();
+			if (i > menu.size() - 2) {
 				saida += ".";
-			}
-			else{
+			} else {
 				saida += ",";
 			}
-		
-		}return saida;
+
+		}
+		return saida;
 	}
 
 	@Override

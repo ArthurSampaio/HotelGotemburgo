@@ -77,15 +77,14 @@ public class RestauranteController {
 	 *            Preco do prato
 	 * @param descricao
 	 *            Texto de descricao do prato.
+	 * @throws SistemaException 
 	 * @throws Exception
 	 */
-	public void cadastraPrato(String nome, double preco, String descricao) throws CadastroItemCardapioException {
-		try {
-			Prato prato = fabrica.criaPrato(nome, preco, descricao);
-			addItem(prato);
-		} catch (Exception e) {
-			throw new CadastroItemCardapioException("do prato. ", e.getMessage());
-		}
+	public void cadastraPrato(String nome, double preco, String descricao) throws SistemaException {
+
+		Prato prato = fabrica.criaPrato(nome, preco, descricao);
+		addItem(prato);
+
 	}
 
 	/**
@@ -96,17 +95,14 @@ public class RestauranteController {
 	 *            Descricao da refeicao.
 	 * @param componentes
 	 *            Pratos que vao compor a refeicao.
-	 * @throws CadastroItemCardapioException 
+	 * @throws SistemaException
 	 * @throws Exception
 	 */
-	public void cadastraRefeicao(String nome, String descricao, String componentes) throws CadastroItemCardapioException{
-		try {
-			ArrayList<Prato> pratos = criaArrayList(componentes);
-			Refeicao refeicao = fabrica.criaRefeicao(nome, descricao, pratos);
-			cardapio.add(refeicao);
-		} catch (Exception e) {
-			throw new CadastroItemCardapioException("de refeicao. ", e.getMessage());
-		}
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws SistemaException {
+		ArrayList<Prato> pratos = criaArrayList(componentes);
+		Refeicao refeicao = fabrica.criaRefeicao(nome, descricao, pratos);
+		cardapio.add(refeicao);
+
 	}
 
 	/**
@@ -162,14 +158,14 @@ public class RestauranteController {
 	 */
 	private ArrayList<Prato> criaArrayList(String componentes) throws SistemaException {
 		if (componentes.trim().isEmpty()) {
-			throw new SistemaException("Componente(s) esta(o) vazio(s).");
+			throw new SistemaException("Erro no cadastro de refeicao. Componente(s) esta(o) vazio(s).");
 		}
 		String[] pratos = componentes.split(";");
 		ArrayList<Prato> novosPratos = new ArrayList<Prato>();
 
 		for (int i = 0; i < pratos.length; i++) {
 			if (!buscaItem(pratos[i])) {
-				throw new SistemaException("So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
+				throw new SistemaException("Erro no cadastro de refeicao. So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
 			}
 			Prato pratoNovo = (Prato) getItem(pratos[i]);
 			novosPratos.add(pratoNovo);

@@ -441,9 +441,10 @@ public class HotelController {
 	 *            Preco do prato.
 	 * @param descricao
 	 *            Descricao do prato.
+	 * @throws SistemaException 
 	 * @throws Exception 
 	 */
-	public void cadastraPrato(String nome, double preco, String descricao) throws CadastroItemCardapioException {
+	public void cadastraPrato(String nome, double preco, String descricao) throws SistemaException {
 		restaurante.cadastraPrato(nome, preco, descricao);
 	}
 

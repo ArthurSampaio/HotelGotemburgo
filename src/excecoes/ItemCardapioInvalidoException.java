@@ -11,4 +11,9 @@ public class ItemCardapioInvalidoException extends SistemaException{
 	public ItemCardapioInvalidoException(String mensagem){
 		super(mensagem);
 	}
+	
+	
+	public ItemCardapioInvalidoException(String atributo, String erro){
+		super(atributo+ erro);
+	}
 }
