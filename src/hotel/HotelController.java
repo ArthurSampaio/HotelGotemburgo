@@ -38,7 +38,7 @@ import restaurante.RestauranteController;
  *
  */
 public class HotelController {
-	private Map<String, Cliente> clientes;
+	private List<Cliente> clientes;
 	private RestauranteController restaurante;
 	private List<Transacao> transacoes;
 	private ClienteFactory factoryCliente;
@@ -48,7 +48,7 @@ public class HotelController {
 	 * Construtor do HotelController
 	 */
 	public HotelController() {
-		this.clientes = new HashMap<String, Cliente>();
+		this.clientes = new ArrayList<Cliente>();
 		this.restaurante = new RestauranteController();
 		this.transacoes = new ArrayList<Transacao>();
 		this.factoryCliente = new ClienteFactory();
@@ -72,7 +72,8 @@ public class HotelController {
 	public String cadastraHospede(String nome, String email, String data) throws SistemaException {
 		try {
 			Cliente novoCliente = this.factoryCliente.criaCliente(nome, email, data);
-			clientes.put(email, novoCliente);
+			if (getIndiceCliente(email) == -1)
+				clientes.add(novoCliente);
 
 			return email;
 		} catch (Exception e) {
@@ -330,32 +331,19 @@ public class HotelController {
 	 *             sistema
 	 */
 	public String atualizaCadastro(String email, String tipoInfo, String novaInfo) throws SistemaException {
-		if (!clientes.containsKey(email)) {
+		if (getIndiceCliente(email) == -1) {
 			throw new EmailInexistenteException(
 					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
 		}
 		try {
-			if (tipoInfo.equalsIgnoreCase("email")) {
-				// precisa deste procedimento para calcular o hash da chave do
-				// mapa
-				Cliente cliente = clientes.get(email);
-				clientes.put(novaInfo, cliente);
-				// clientes.remove(email); ESSA GAMBIARRA ATÉ AJEITAREM OS
-				// TESTES
-				clientes.get(novaInfo).atualizaCadastro(tipoInfo, novaInfo);
-				return clientes.get(novaInfo).getInfoHospede(tipoInfo);
-
-			} else {
-				Cliente cliente = this.clientes.get(email);
+				Cliente cliente = getCliente(email);
 				cliente.atualizaCadastro(tipoInfo, novaInfo);
-				this.getInfoHospede(email, tipoInfo);
-
-			}
+				return cliente.getEmail();
 		} catch (Exception e) {
 			throw new AtualizaCadastroException(e.getMessage());
 		}
 
-		return null;
+		
 	}
 
 	/**
@@ -368,11 +356,22 @@ public class HotelController {
 	 *             Quando hospede nao esta cadastrado no sistema
 	 */
 	public Cliente getCliente(String email) throws SistemaException {
-		if (!clientes.containsKey(email)) {
-			throw new EmailInexistenteException(
-					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
+		for (int i = 0; i < clientes.size(); i++){
+			if (clientes.get(i).getEmail().equals(email)){
+				return clientes.get(i);
+			}
 		}
-		return clientes.get(email);
+		throw new EmailInexistenteException(
+					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
+	}
+	
+	public int getIndiceCliente(String email){
+		for (int i = 0; i < clientes.size(); i++){
+			if (clientes.get(i).getEmail().equals(email)){
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	/**
@@ -389,11 +388,11 @@ public class HotelController {
 		}catch(Exception e){
 			throw new RemocaoException(e.getMessage());
 		}
-		if (!clientes.containsKey(email)) {
+		if (getIndiceCliente(email) == -1) {
 			throw new EmailInexistenteException(
 					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
 		}
-		clientes.remove(email);
+		clientes.remove(getIndiceCliente(email));
 	}
 
 	/**
@@ -405,8 +404,8 @@ public class HotelController {
 	 *         ou nao(false)
 	 */
 	public boolean verificaQuartoDisponivel(String id) {
-		for (Entry<String, Cliente> entry : this.clientes.entrySet()) {
-			if (entry.getValue().isHospedado() && entry.getValue().getEstadia().containsKey(id)) {
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i).isHospedado() && clientes.get(i).getEstadia().containsKey(id)) {
 				return false;
 			}
 		}
@@ -538,12 +537,10 @@ public class HotelController {
 		String path = new File("./arquivos_sistema/relatorios/cad_hospedes.txt").getCanonicalPath();
 		PrintWriter out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
 		out.println("Cadastro de Hospedes: " + clientes.size() + " hospedes registrados");
-		Set<String> chaves = clientes.keySet();
-		int numCliente = 1;
-		for (String cliente : chaves){
-			out.println("==> Hospede " + numCliente);
-			numCliente++;
-			Cliente atual = getCliente(cliente);
+	
+		for (int i = 0; i < clientes.size(); i++){
+			out.println("==> Hospede " + (i + 1));
+			Cliente atual = getCliente(clientes.get(i).getEmail());
 			out.println("Email: " + atual.getEmail());
 			out.println("Nome: " + atual.getNome());
 			out.println("Data de nascimento: " + atual.getDataNasc());
