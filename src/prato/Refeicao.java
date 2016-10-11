@@ -35,7 +35,7 @@ public class Refeicao extends ItemCardapio {
 			}
 		}
 		if (pratos.size() != 3 && pratos.size() != 4){
-			throw new SistemaException ("Refeicao deve ser composta por 3 ou 4 pratos");
+			throw new SistemaException ("Uma refeicao completa deve possuir no minimo 3 e no maximo 4 pratos.");
 		}
 		this.menu = pratos;
 	}

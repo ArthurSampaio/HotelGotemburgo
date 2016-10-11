@@ -9,15 +9,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
-import cliente.Cliente;
 import excecoes.AtributoClienteException;
 import excecoes.CadastroItemCardapioException;
 import excecoes.CadastroRefeicaoException;
 import excecoes.ItemCardapioInvalidoException;
 import excecoes.SistemaException;
-import excecoes.StringInvalidaException;
 import prato.ItemCardapio;
 import prato.Prato;
 import prato.Refeicao;
@@ -84,10 +81,12 @@ public class RestauranteController {
 	 * @throws Exception
 	 */
 	public void cadastraPrato(String nome, double preco, String descricao) throws CadastroItemCardapioException {
-		
+		try {
 			Prato prato = fabrica.criaPrato(nome, preco, descricao);
 			addItem(prato);
-		
+		} catch (Exception e) {
+			throw new CadastroItemCardapioException("do prato. ", e.getMessage());
+		}
 	}
 
 	/**
@@ -98,12 +97,17 @@ public class RestauranteController {
 	 *            Descricao da refeicao.
 	 * @param componentes
 	 *            Pratos que vao compor a refeicao.
+	 * @throws CadastroItemCardapioException 
 	 * @throws Exception
 	 */
-	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
-		ArrayList<Prato> pratos = criaArrayList(componentes);
-		Refeicao refeicao = fabrica.criaRefeicao(nome, descricao, pratos);
-		cardapio.add(refeicao);
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws CadastroItemCardapioException{
+		try {
+			ArrayList<Prato> pratos = criaArrayList(componentes);
+			Refeicao refeicao = fabrica.criaRefeicao(nome, descricao, pratos);
+			cardapio.add(refeicao);
+		} catch (Exception e) {
+			throw new CadastroItemCardapioException("de refeicao. ", e.getMessage());
+		}
 	}
 
 	/**

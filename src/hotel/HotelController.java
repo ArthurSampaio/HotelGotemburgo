@@ -462,7 +462,7 @@ public class HotelController {
 	 *            Pratos que fazem parte
 	 * @throws Exception 
 	 */
-	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws SistemaException {
 		restaurante.cadastraRefeicao(nome, descricao, componentes);
 	}
 

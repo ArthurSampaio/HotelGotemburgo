@@ -1,11 +1,8 @@
 package prato;
 
 
-import excecoes.AtributoClienteException;
 import excecoes.DescricaoItemCardapioException;
 import excecoes.NomeItemCardapioException;
-import excecoes.SistemaException;
-import excecoes.StringInvalidaException;
 
 /**
  * Classe que representa um item do cardapio.
