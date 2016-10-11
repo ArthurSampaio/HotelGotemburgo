@@ -572,6 +572,10 @@ public class HotelController {
 				Transacao atual = transacoes.get(i);
 				out.println("Nome: " + atual.getNomeCliente() + " Gasto:R$" + atual.getValorTransacao() + " Detalhes: " + atual.getDetalhe());
 			}
+			out.println("===== Resumo de transacoes =====");
+			out.println("Lucro total: R$ " + getTotalTransacoes());
+			out.println("Total de transacoes: " + transacoes.size());
+			out.println("Lucro medio por transacao: R$" + (getTotalTransacoes()/transacoes.size()));
 		} catch (IOException e) {
 		} finally{
 			out.close();

@@ -113,3 +113,7 @@ Nome: Ines Brasil Gasto:R$45.77 Detalhes: Delicia da serra
 Nome: Sven Gudmar Svenson Gasto:R$43.23 Detalhes: Delicia da serra
 Nome: Ines Brasil Gasto:R$50.85 Detalhes: Delicia da serra
 Nome: Sven Gudmar Svenson Gasto:R$45.77 Detalhes: Delicia da serra
+===== Resumo de transacoes =====
+Lucro total: R$ 11688.090000000002
+Total de transacoes: 21
+Lucro medio por transacao: R$556.5757142857144
