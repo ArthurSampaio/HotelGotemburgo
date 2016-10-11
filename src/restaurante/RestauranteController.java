@@ -13,7 +13,7 @@ import java.util.Set;
 
 import cliente.Cliente;
 import excecoes.AtributoClienteException;
-import excecoes.CadastroPratoException;
+import excecoes.CadastroItemCardapioException;
 import excecoes.CadastroRefeicaoException;
 import excecoes.ItemCardapioInvalidoException;
 import excecoes.SistemaException;
@@ -83,13 +83,11 @@ public class RestauranteController {
 	 *            Texto de descricao do prato.
 	 * @throws Exception
 	 */
-	public void cadastraPrato(String nome, double preco, String descricao) throws CadastroPratoException {
-		try {
+	public void cadastraPrato(String nome, double preco, String descricao) throws CadastroItemCardapioException {
+		
 			Prato prato = fabrica.criaPrato(nome, preco, descricao);
 			addItem(prato);
-		} catch (Exception e) {
-			throw new CadastroPratoException(e.getMessage());
-		}
+		
 	}
 
 	/**
