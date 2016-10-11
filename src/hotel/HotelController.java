@@ -1,5 +1,12 @@
 package hotel;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -524,5 +531,12 @@ public class HotelController {
 		valor = Math.ceil(valor * 100);
 		valor /= 100.0;
 		return valor;
+	}
+	
+	public void geraRelatorioCliente() throws IOException{
+		String path = new File("./arquivos_sistema/relatorios/cad_hospedes.txt").getCanonicalPath();
+		PrintWriter out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
+		out.println("teste é teste né pai");
+		out.close();
 	}
 }

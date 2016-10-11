@@ -1,5 +1,7 @@
 package hotel;
 
+import java.io.IOException;
+
 import easyaccept.EasyAccept;
 import excecoes.AtualizaCadastroException;
 import excecoes.CadastroInvalidoException;
@@ -123,7 +125,12 @@ public class HotelFacade {
 	
 
 	public void fechaSistema() {
-
+		try {
+			gerencia.geraRelatorioCliente();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
