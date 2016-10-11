@@ -13,6 +13,7 @@ import java.util.Set;
 
 import cliente.Cliente;
 import excecoes.AtributoClienteException;
+import excecoes.CadastroPratoException;
 import excecoes.CadastroRefeicaoException;
 import excecoes.ItemCardapioInvalidoException;
 import excecoes.SistemaException;
@@ -25,11 +26,11 @@ import prato.Refeicao;
  * Classe representando Controller do Restaurante.
  * 
  * @author marianams
- * @author sampaio 
+ * @author sampaio
  *
  */
 public class RestauranteController {
-	
+
 	private List<ItemCardapio> cardapio;
 	private FactoryItemCardapio fabrica;
 	private FactoryComparador factoryComparador;
@@ -49,11 +50,11 @@ public class RestauranteController {
 	 * 
 	 * @param nomeDoItem
 	 * @return Objeto que eh um item do cardapio
-	 * @throws ItemCardapioInvalidoException 
+	 * @throws ItemCardapioInvalidoException
 	 */
 	public ItemCardapio getItem(String nomeDoItem) throws SistemaException {
-		for (int i = 0; i < cardapio.size(); ++i){
-			if (cardapio.get(i).getNome().equals(nomeDoItem)){
+		for (int i = 0; i < cardapio.size(); ++i) {
+			if (cardapio.get(i).getNome().equals(nomeDoItem)) {
 				return cardapio.get(i);
 			}
 		}
@@ -67,7 +68,7 @@ public class RestauranteController {
 	 */
 	public void addItem(ItemCardapio item) {
 		cardapio.add(item);
-		if(this.comparador != null){
+		if (this.comparador != null) {
 			Collections.sort(this.cardapio, this.comparador);
 		}
 	}
@@ -80,12 +81,15 @@ public class RestauranteController {
 	 *            Preco do prato
 	 * @param descricao
 	 *            Texto de descricao do prato.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public void cadastraPrato(String nome, double preco, String descricao)
-			throws Exception {
-		Prato prato = fabrica.criaPrato(nome, preco, descricao);
-		addItem(prato);
+	public void cadastraPrato(String nome, double preco, String descricao) throws CadastroPratoException {
+		try {
+			Prato prato = fabrica.criaPrato(nome, preco, descricao);
+			addItem(prato);
+		} catch (Exception e) {
+			throw new CadastroPratoException(e.getMessage());
+		}
 	}
 
 	/**
@@ -96,10 +100,9 @@ public class RestauranteController {
 	 *            Descricao da refeicao.
 	 * @param componentes
 	 *            Pratos que vao compor a refeicao.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public void cadastraRefeicao(String nome, String descricao,
-			String componentes) throws Exception {
+	public void cadastraRefeicao(String nome, String descricao, String componentes) throws Exception {
 		ArrayList<Prato> pratos = criaArrayList(componentes);
 		Refeicao refeicao = fabrica.criaRefeicao(nome, descricao, pratos);
 		cardapio.add(refeicao);
@@ -113,14 +116,12 @@ public class RestauranteController {
 	 *            Informacao desejada, preco ou descricao de um item do
 	 *            cardapio.
 	 * @return Informacao requerida do item.
-	 * @throws Exception 
+	 * @throws Exception
 	 * @throws AtributoClienteException
 	 */
-	public String consultaRestaurante(String nome, String info)
-			throws Exception {
+	public String consultaRestaurante(String nome, String info) throws Exception {
 		if (nome.trim().isEmpty() || nome == null) {
-			throw new Exception(
-					"Erro na consulta do restaurante. Nome do prato esto vazio.");
+			throw new Exception("Erro na consulta do restaurante. Nome do prato esto vazio.");
 		}
 		if (info.equalsIgnoreCase("preco")) {
 			return getPrecoItem(nome);
@@ -136,14 +137,14 @@ public class RestauranteController {
 	 * @param nome
 	 *            Nome do item do cardapio.
 	 * @return O preco de um item do cardapio em formato String.
-	 * @throws ItemCardapioInvalidoException 
+	 * @throws ItemCardapioInvalidoException
 	 */
 	private String getPrecoItem(String nome) throws SistemaException {
 		ItemCardapio item = this.getItem(nome);
 		String preco = String.format("R$%.2f", item.getPreco());
 		return preco;
 	}
-	
+
 	public double getItemPreco(String nome) throws SistemaException {
 		ItemCardapio item = this.getItem(nome);
 		double preco = item.getPreco();
@@ -160,16 +161,14 @@ public class RestauranteController {
 	 */
 	private ArrayList<Prato> criaArrayList(String componentes) throws SistemaException {
 		if (componentes.trim().isEmpty()) {
-			throw new CadastroRefeicaoException(
-					"Componente(s) esta(o) vazio(s).");
+			throw new CadastroRefeicaoException("Componente(s) esta(o) vazio(s).");
 		}
 		String[] pratos = componentes.split(";");
 		ArrayList<Prato> novosPratos = new ArrayList<Prato>();
 
 		for (int i = 0; i < pratos.length; i++) {
 			if (!buscaItem(pratos[i])) {
-				throw new CadastroRefeicaoException(
-						"So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
+				throw new CadastroRefeicaoException("So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
 			}
 			Prato pratoNovo = (Prato) getItem(pratos[i]);
 			novosPratos.add(pratoNovo);
@@ -184,50 +183,47 @@ public class RestauranteController {
 	 * @throws ItemCardapioInvalidoException
 	 *             ,se o item for inexistente no cardapio.
 	 */
-	public void removeItemCardapio(String nome)
-			throws ItemCardapioInvalidoException {
+	public void removeItemCardapio(String nome) throws ItemCardapioInvalidoException {
 		if (!buscaItem(nome)) {
-			throw new ItemCardapioInvalidoException(
-					"Esse item nao existe no cardapio");
+			throw new ItemCardapioInvalidoException("Esse item nao existe no cardapio");
 		}
 		cardapio.remove(nome);
 	}
-	
-	private boolean buscaItem(String nome){
-		for (int i = 0; i < cardapio.size(); ++i){
-			if (cardapio.get(i).getNome().equalsIgnoreCase(nome)){
+
+	private boolean buscaItem(String nome) {
+		for (int i = 0; i < cardapio.size(); ++i) {
+			if (cardapio.get(i).getNome().equalsIgnoreCase(nome)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	public void ordenaCardapio(String tipoOrdenacao) throws SistemaException{
+
+	public void ordenaCardapio(String tipoOrdenacao) throws SistemaException {
 		this.comparador = this.factoryComparador.criaComparador(tipoOrdenacao);
 		Collections.sort(this.cardapio, this.comparador);
-		}
-	
-	public String imprimeCardapio(){
+	}
+
+	public String imprimeCardapio() {
 		String saida = "";
-		for(int i = 0; i < this.cardapio.size(); i++){
-			if(i < this.cardapio.size() - 1){
+		for (int i = 0; i < this.cardapio.size(); i++) {
+			if (i < this.cardapio.size() - 1) {
 				saida += this.cardapio.get(i).getNome() + ";";
-			}
-			else{
+			} else {
 				saida += this.cardapio.get(i).getNome();
-			}	
+			}
 		}
 		return saida;
 	}
-	
+
 	public void geraRelatorioMenu() {
 		PrintWriter out = null;
 		try {
 			String path = new File("./arquivos_sistema/relatorios/cad_restaurante.txt").getCanonicalPath();
-			out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
+			out = new PrintWriter(new BufferedWriter(new FileWriter(path)));
 			out.println("Menu do Restaurante: " + cardapio.size() + " itens no cardapio");
-			
-			for (int i = 0; i < cardapio.size(); ++i){
+
+			for (int i = 0; i < cardapio.size(); ++i) {
 				out.println("==> Item " + (i + 1) + ":");
 				out.println("Nome: " + cardapio.get(i).getNome() + " Preco: R$" + cardapio.get(i).getPreco());
 				out.println("Descricao: " + cardapio.get(i).getDescricao());
@@ -235,9 +231,9 @@ public class RestauranteController {
 			}
 			out.close();
 		} catch (IOException e) {
-		}finally{
+		} finally {
 			out.close();
 		}
-		
+
 	}
 }

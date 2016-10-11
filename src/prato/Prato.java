@@ -32,7 +32,7 @@ public class Prato extends ItemCardapio {
 		super(nome, descricao);
 
 		if (preco < 0) {
-			throw new ValorInvalidoException();
+			throw new ValorInvalidoException("Preco do prato eh invalido.");
 		}
 		this.preco = preco;
 	}

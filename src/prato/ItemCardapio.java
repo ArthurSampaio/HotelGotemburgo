@@ -2,6 +2,8 @@ package prato;
 
 
 import excecoes.AtributoClienteException;
+import excecoes.DescricaoItemCardapioException;
+import excecoes.NomeItemCardapioException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
 
@@ -26,13 +28,13 @@ public abstract class ItemCardapio implements Comparable<ItemCardapio>{
 	 * 			Descricao do item.
 	 * @throws Exception 
 	 */
-	public ItemCardapio(String nome, String descricao) throws SistemaException{
+	public ItemCardapio(String nome, String descricao) throws NomeItemCardapioException, DescricaoItemCardapioException{
 		if(nome.trim().isEmpty() || nome == null){
-			throw new SistemaException();
+			throw new NomeItemCardapioException();
 		}
 		
 		if(descricao.trim().isEmpty() || nome == null){
-			throw new SistemaException();
+			throw new DescricaoItemCardapioException();
 		}
 		this.nome = nome;
 		this.descricao = descricao;

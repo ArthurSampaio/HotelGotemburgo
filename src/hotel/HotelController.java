@@ -20,6 +20,7 @@ import estadia.Estadia;
 import excecoes.AtributoClienteException;
 import excecoes.AtualizaCadastroException;
 import excecoes.CadastroInvalidoException;
+import excecoes.CadastroPratoException;
 import excecoes.EmailInexistenteException;
 import excecoes.RemocaoException;
 import excecoes.SistemaException;
@@ -442,7 +443,7 @@ public class HotelController {
 	 *            Descricao do prato.
 	 * @throws Exception 
 	 */
-	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
+	public void cadastraPrato(String nome, double preco, String descricao) throws CadastroPratoException {
 		restaurante.cadastraPrato(nome, preco, descricao);
 	}
 

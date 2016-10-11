@@ -79,7 +79,7 @@ public class HotelFacade {
 			gerencia.removeHospede(email);
 	}
 
-	public void cadastraPrato(String nome, double preco, String descricao) throws Exception {
+	public void cadastraPrato(String nome, double preco, String descricao) throws SistemaException {
 		gerencia.cadastraPrato(nome, preco, descricao);
 	}
 
