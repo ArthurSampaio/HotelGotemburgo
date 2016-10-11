@@ -28,7 +28,7 @@ public class Prato extends ItemCardapio {
 	 * @throws Exception 
 	 * @throws ValorInvalidoException
 	 */
-	public Prato(String nome, String descricao, double preco) throws Exception {
+	public Prato(String nome, String descricao, double preco) throws SistemaException {
 		super(nome, descricao);
 
 		if (preco < 0) {

@@ -32,7 +32,7 @@ public class Cartao {
 	 */
 	public Cartao() throws ValorInvalidoException {
 		if (pontos < 0) {
-			throw new ValorInvalidoException("Valor invalido.");
+			throw new ValorInvalidoException();
 		}
 
 		this.pontos = 0;

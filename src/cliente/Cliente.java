@@ -51,7 +51,7 @@ public class Cliente {
 	 * @throws Exception
 	 *             Quando alguma das strings é invalida.
 	 */
-	public Cliente(String nome, String email, String dataNasc, boolean hosp) throws ValorInvalidoException, AtributoClienteException, Exception {
+	public Cliente(String nome, String email, String dataNasc, boolean hosp) throws ValorInvalidoException, AtributoClienteException, SistemaException {
 		
 		if (stringInvalida(nome)) {
 			throw new AtributoClienteException(" Nome");
@@ -84,7 +84,7 @@ public class Cliente {
 	 * @throws CadastroInvalidoException 
 	 * @throws IdadeInvalidaException 
 	 */
-	public Cliente(String nome, String email, String dataNasc) throws StringInvalidaException, ValorInvalidoException, Exception {
+	public Cliente(String nome, String email, String dataNasc) throws StringInvalidaException, ValorInvalidoException, SistemaException {
 		this(nome, email, dataNasc, false);
 	}
 
@@ -380,15 +380,15 @@ public class Cliente {
 	}
 
 	
-	private void checaData(String data) throws SistemaUncheckedException {
+	private void checaData(String data) throws SistemaException {
 		if (!data.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}")) {
-			throw new SistemaUncheckedException(" Formato de data invalido.");		}
+			throw new SistemaException(" Formato de data invalido.");		}
 	}
 
-	private void checaIdade(String data) throws Exception {
+	private void checaIdade(String data) throws SistemaException {
 		String ano = data.split("/")[2];
 		if (Integer.parseInt(ano) > 1998) {
-			throw new Exception(" A idade do(a) hospede deve ser maior que 18 anos.");
+			throw new SistemaException(" A idade do(a) hospede deve ser maior que 18 anos.");
 		}
 	}
 	
