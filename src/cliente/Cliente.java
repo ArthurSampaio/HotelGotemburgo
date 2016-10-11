@@ -12,7 +12,6 @@ import excecoes.ConvertePontosException;
 import excecoes.FormatoInvalidoException;
 import excecoes.QuartoInvalidoException;
 import excecoes.SistemaException;
-import excecoes.SistemaUncheckedException;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
 import estadia.Estadia;

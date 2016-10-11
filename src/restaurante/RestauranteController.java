@@ -12,7 +12,6 @@ import java.util.List;
 
 import excecoes.AtributoClienteException;
 import excecoes.CadastroItemCardapioException;
-import excecoes.CadastroRefeicaoException;
 import excecoes.ItemCardapioInvalidoException;
 import excecoes.SistemaException;
 import prato.ItemCardapio;
@@ -163,14 +162,14 @@ public class RestauranteController {
 	 */
 	private ArrayList<Prato> criaArrayList(String componentes) throws SistemaException {
 		if (componentes.trim().isEmpty()) {
-			throw new CadastroRefeicaoException("Componente(s) esta(o) vazio(s).");
+			throw new SistemaException("Componente(s) esta(o) vazio(s).");
 		}
 		String[] pratos = componentes.split(";");
 		ArrayList<Prato> novosPratos = new ArrayList<Prato>();
 
 		for (int i = 0; i < pratos.length; i++) {
 			if (!buscaItem(pratos[i])) {
-				throw new CadastroRefeicaoException("So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
+				throw new SistemaException("So eh possivel cadastrar refeicoes com pratos ja cadastrados.");
 			}
 			Prato pratoNovo = (Prato) getItem(pratos[i]);
 			novosPratos.add(pratoNovo);
