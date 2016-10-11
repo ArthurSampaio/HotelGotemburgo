@@ -103,7 +103,7 @@ public class BancoDeDados {
 	public void fechaSistema(){
 				
 		try{
-			this.hotelControllerOutput = ObjectOutputStream(
+			this.hotelControllerOutput = new ObjectOutputStream(
 					new FileOutputStream(path + "/" + file));
 			
 			hotelControllerOutput.writeObject(hotelController);
