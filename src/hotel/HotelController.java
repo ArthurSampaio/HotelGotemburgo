@@ -533,36 +533,47 @@ public class HotelController {
 		return valor;
 	}
 	
-	public void geraRelatorioCliente() throws IOException, SistemaException{
-		String path = new File("./arquivos_sistema/relatorios/cad_hospedes.txt").getCanonicalPath();
-		PrintWriter out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
-		out.println("Cadastro de Hospedes: " + clientes.size() + " hospedes registrados");
-	
-		for (int i = 0; i < clientes.size(); i++){
-			out.println("==> Hospede " + (i + 1));
-			Cliente atual = getCliente(clientes.get(i).getEmail());
-			out.println("Email: " + atual.getEmail());
-			out.println("Nome: " + atual.getNome());
-			out.println("Data de nascimento: " + atual.getDataNasc());
-			out.println(" ");
+	private void geraRelatorioCliente() throws SistemaException {
+		PrintWriter out = null;
+		try {
+			String path = new File("./arquivos_sistema/relatorios/cad_hospedes.txt").getCanonicalPath();
+			out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
+			out.println("Cadastro de Hospedes: " + clientes.size() + " hospedes registrados");
+		
+			for (int i = 0; i < clientes.size(); i++){
+				out.println("==> Hospede " + (i + 1));
+				Cliente atual = getCliente(clientes.get(i).getEmail());
+				out.println("Email: " + atual.getEmail());
+				out.println("Nome: " + atual.getNome());
+				out.println("Data de nascimento: " + atual.getDataNasc());
+				out.println(" ");
+			}
+		} catch (IOException e) {
 		}
-		out.close();
+		finally{
+			out.close();
+		}	
 	}
 	
-	public void geraRelatorioMenu() throws IOException, SistemaException{
+	private void geraRelatorioMenu() throws IOException, SistemaException{
 		restaurante.geraRelatorioMenu();
 	}
 	
-	public void geraRelatorioTransacoes() throws IOException{
-		String path = new File("./arquivos_sistema/relatorios/cad_transacoes.txt").getCanonicalPath();
-		PrintWriter out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
-		out.println("Historio de Transacoes:");
-		
-		for (int i = 0; i < transacoes.size(); ++i){
-			Transacao atual = transacoes.get(i);
-			out.println("Nome: " + atual.getNomeCliente() + " Gasto:R$" + atual.getValorTransacao() + " Detalhes: " + atual.getDetalhe());
-		}
-		out.close();
+	private void geraRelatorioTransacoes(){
+		PrintWriter out = null;
+		try {
+			String path = new File("./arquivos_sistema/relatorios/cad_transacoes.txt").getCanonicalPath();
+			out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
+			out.println("Historio de Transacoes:");
+			
+			for (int i = 0; i < transacoes.size(); ++i){
+				Transacao atual = transacoes.get(i);
+				out.println("Nome: " + atual.getNomeCliente() + " Gasto:R$" + atual.getValorTransacao() + " Detalhes: " + atual.getDetalhe());
+			}
+		} catch (IOException e) {
+		} finally{
+			out.close();
+		}	
 	}
 	
 	public void geraRelatorios() throws IOException, SistemaException{
