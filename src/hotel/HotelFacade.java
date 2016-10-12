@@ -131,8 +131,9 @@ public class HotelFacade {
 	}
 	
 
-	public void fechaSistema() {
+	public void fechaSistema() throws IOException, SistemaException {
 	//	bd.fechaSistema();
+		gerencia.geraRelatorios();
 	}
 
 	public static void main(String[] args) {

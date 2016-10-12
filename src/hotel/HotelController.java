@@ -3,6 +3,7 @@ package hotel;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -544,7 +545,18 @@ public class HotelController {
 				out.println("Data de nascimento: " + atual.getDataNasc());
 				out.println(" ");
 			}
-		} catch (IOException e) {
+		} 
+		catch (FileNotFoundException e) {
+			File f = new File( "arquivos_sistema/relatorios/cad_hospedes.txt" );
+			f.getParentFile().mkdirs();
+			try{
+				f.createNewFile();
+			
+			}catch(IOException ee){
+				System.err.println("IOException: " + e.getMessage());
+			}
+		}
+		catch (IOException e) {
 		}
 		finally{
 			out.close();
@@ -557,8 +569,9 @@ public class HotelController {
 	
 	private void geraRelatorioTransacoes(){
 		PrintWriter out = null;
+		String path; 
 		try {
-			String path = new File("./arquivos_sistema/relatorios/cad_transacoes.txt").getCanonicalPath();
+			path = new File ("./arquivos_sistema/relatorios/cad_transacoes.txt").getCanonicalPath();
 			out= new PrintWriter(new BufferedWriter(new FileWriter(path)));
 			out.println("Historio de Transacoes:");
 			
@@ -570,8 +583,20 @@ public class HotelController {
 			out.println("Lucro total: R$ " + String.format("%.2f", getTotalTransacoes()));
 			out.println("Total de transacoes: " + transacoes.size());
 			out.println("Lucro medio por transacao: R$" + String.format("%.2f", (getTotalTransacoes()/transacoes.size())));
-		} catch (IOException e) {
-		} finally{
+		} catch (FileNotFoundException e) {
+			File f = new File( "arquivos_sistema/relatorios/cad_transacoes.txt" );
+			f.getParentFile().mkdirs();
+			try{
+				f.createNewFile();
+			
+			}catch(IOException ee){
+				System.err.println("IOException: " + e.getMessage());
+			}
+		}catch(IOException e){
+			
+		}
+		
+		finally{
 			out.close();
 		}	
 	}
@@ -606,7 +631,17 @@ public class HotelController {
 			in.close();
 			out.close();
 		
-		} catch (IOException e) {
+		}catch (FileNotFoundException e) {
+			File f = new File( "arquivos_sistema/relatorios/hotel_principal.txt" );
+			f.getParentFile().mkdirs();
+			try{
+				f.createNewFile();
+			
+			}catch(IOException ee){
+				System.err.println("IOException: " + e.getMessage());
+			} 
+		}
+		catch (IOException e) {
 			
 		}
 		

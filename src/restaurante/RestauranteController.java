@@ -2,6 +2,7 @@ package restaurante;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -249,7 +250,17 @@ public class RestauranteController {
 				out.println("");
 			}
 			out.close();
-		} catch (IOException e) {
+		}catch (FileNotFoundException e) {
+			File f = new File( "arquivos_sistema/relatorios/cad_restaurante.txt" );
+			f.getParentFile().mkdirs();
+			try{
+				f.createNewFile();
+			
+			}catch(IOException ee){
+				System.err.println("IOException: " + e.getMessage());
+			}
+		}
+		catch (IOException e) {
 		} finally {
 			out.close();
 		}
