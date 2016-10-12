@@ -39,13 +39,15 @@ public class ClienteTeste {
 		try {
 			Cliente alguem = new Cliente("", "alguem@aleat.cc", "05/07/1990");
 		} catch (Exception e) {
-			Assert.assertEquals("Nome nao pode ser nulo ou vazio", e.getMessage());
+			
+			Assert.assertEquals(" Nome do(a) hospede nao pode ser vazio.", e.getMessage());
 		}
 
 		try {
 			Cliente alguem = new Cliente("Alguem Aleatorio", "", "05/07/1990");
 		} catch (Exception e) {
-			Assert.assertEquals("O email nao pode ser nulo ou vazio", e.getMessage());
+			
+			Assert.assertEquals(" Email do(a) hospede nao pode ser vazio.", e.getMessage());
 		}
 
 		try {

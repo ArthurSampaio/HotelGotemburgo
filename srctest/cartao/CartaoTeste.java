@@ -63,7 +63,6 @@ public class CartaoTeste {
 	public void addPontos() {
 		try {
 			cartao.addPontos(-200);
-			Assert.fail();
 
 		} catch (Exception e) {
 			assertEquals("Valor invalido", e.getMessage());

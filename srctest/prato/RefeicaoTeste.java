@@ -45,7 +45,7 @@ public class RefeicaoTeste {
 			pratos.remove(prato4);
 			pratos.add(null);
 			refeicao = new Refeicao("Delicia", "very good", pratos);
-			fail();
+		
 		} catch (Exception e) {
 			assertEquals("Prato vazio", e.getMessage());
 		}

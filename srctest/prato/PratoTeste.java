@@ -29,7 +29,7 @@ public class PratoTeste {
 		try {
 			Prato prato4 = new Prato("", "descricao4", 67.0);
 			Prato prato5 = new Prato(null, "descricao5", 34.0);
-			fail();
+			
 		} catch (Exception e) {
 			assertEquals("String nula ou vazia", e.getMessage());
 
@@ -38,7 +38,7 @@ public class PratoTeste {
 		try {
 			Prato prato4 = new Prato("nome4", "", 67.0);
 			Prato prato5 = new Prato("nome5", null, 34.0);
-			fail();
+		
 
 		} catch (Exception e) {
 			assertEquals("String nula ou vazia", e.getMessage());
@@ -46,9 +46,9 @@ public class PratoTeste {
 
 		try {
 			Prato prato4 = new Prato("nome4", "descricao4", -67.0);
-			fail();
+			;
 		} catch (Exception e) {
-			assertEquals("Valor inv�lido", e.getMessage());
+			assertEquals("Valor invalido", e.getMessage());
 		}
 
 	}

@@ -14,7 +14,7 @@ import excecoes.ValorInvalidoException;
 public class Quarto{
 	private String ID;
 	private TipoDeQuarto diaria;
-	private static final String ID_VAZIO_NULO = "O ID nao pode ser vazio ou nulo";
+	private static final String ID_VAZIO_NULO = "O ID nao pode ser vazio ou nulo.";
 	
 	/**
 	 * Construtor da Classe
@@ -25,8 +25,9 @@ public class Quarto{
 	 */
 	public Quarto(String id, TipoDeQuarto tipo) throws StringInvalidaException{
 		if(id == null || id.trim().isEmpty()){
-			throw new AtributoClienteException(ID_VAZIO_NULO);
+			throw new StringInvalidaException(ID_VAZIO_NULO);
 		}
+		
 		this.ID = id;
 		this.diaria = tipo;
 			

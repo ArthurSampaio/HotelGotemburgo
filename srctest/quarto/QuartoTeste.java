@@ -8,9 +8,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.Assert;
-
-
 public class QuartoTeste {
 	
 	private Quarto q1;
@@ -45,13 +42,13 @@ public class QuartoTeste {
 			Quarto luxo1 =  this.quarto.criaQuarto(null, "luxo");
 			fail();
 		}catch(Exception e){
-			assertEquals("O ID nao pode ser invalida ou nula.", e.getMessage());
+			assertEquals("O ID nao pode ser vazio ou nulo.", e.getMessage());
 		}		
 		try{
 			Quarto luxo =  this.quarto.criaQuarto("luxo ", " ");
 			Quarto luxo1 =  this.quarto.criaQuarto("arriba", null);
 		}catch(Exception e){
-			assertEquals("Tipo nao pode ser nulo ou invalido.", e.getMessage());
+			assertEquals("Tipo nao pode ser nulo ou vazio.", e.getMessage());
 		}
 				
 	}
