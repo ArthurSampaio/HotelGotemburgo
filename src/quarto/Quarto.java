@@ -23,7 +23,7 @@ public class Quarto{
 	 * @throws StringInvalidaException
 	 * 		Quando uma ID eh invalida, nula ou vazia
 	 */
-	public Quarto(String id, TipoDeQuarto tipo){
+	public Quarto(String id, TipoDeQuarto tipo) throws StringInvalidaException{
 		if(id == null || id.trim().isEmpty()){
 			throw new AtributoClienteException(ID_VAZIO_NULO);
 		}
@@ -40,7 +40,7 @@ public class Quarto{
 	 * 		Desconto para o calculo da diaria
 	 * @return
 	 * 		Um double informando o valor da diaria com desconto
-	 * @throws ValorInvalidoException
+	 * @throws SistemaException
 	 * 		Quando o desconto for menor que zero
 	 */
 	public double getDiaria(double desconto) throws SistemaException{
@@ -54,6 +54,7 @@ public class Quarto{
 	 * Retorna o valor da diaria sem desconto
 	 * @return
 	 * 		Valor da diaria sem desconto
+	 * @throws SistemaException
 	 */
 	public double getDiaria() throws SistemaException{
 		return this.getDiaria(0);
@@ -72,11 +73,11 @@ public class Quarto{
 	 * Altera o ID do quarto
 	 * @param iD
 	 * 		O novo ID do quarto
-	 * @throws Exception 
+	 * @throws SistemaException 
 	 */
-	public void setID(String id) throws Exception{
+	public void setID(String id) throws SistemaException{
 		if(id == null || id.trim().isEmpty()){
-			throw new Exception();
+			throw new SistemaException();
 		}
 		this.ID = id;
 	}
@@ -105,10 +106,4 @@ public class Quarto{
 			return false;
 		}
 	}
-
 }
-	
-	
-	
-
-

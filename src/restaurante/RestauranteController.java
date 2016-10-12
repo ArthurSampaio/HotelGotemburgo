@@ -24,6 +24,7 @@ import prato.Refeicao;
  * 
  * @author marianams
  * @author sampaio
+ * @author Tiago Pereira
  *
  */
 public class RestauranteController {
@@ -44,7 +45,7 @@ public class RestauranteController {
 	}
 
 	/**
-	 * 
+	 * Obtem um Item do cardapio
 	 * @param nomeDoItem
 	 * @return Objeto que eh um item do cardapio
 	 * @throws ItemCardapioInvalidoException
@@ -59,7 +60,7 @@ public class RestauranteController {
 	}
 
 	/**
-	 * 
+	 * Adiciona Item no cardapio
 	 * @param item
 	 *            Adiciona um novo item ao cardapio.
 	 */
@@ -71,15 +72,14 @@ public class RestauranteController {
 	}
 
 	/**
-	 * 
+	 * Cadastra um prato no cardapio
 	 * @param nome
 	 *            Nome do prato a ser cadastrado.
 	 * @param preco
 	 *            Preco do prato
 	 * @param descricao
 	 *            Texto de descricao do prato.
-	 * @throws SistemaException
-	 * @throws Exception
+	 * @throws CadastroItemCardapioException
 	 */
 	public void cadastraPrato(String nome, double preco, String descricao) throws CadastroItemCardapioException {
 
@@ -91,11 +91,10 @@ public class RestauranteController {
 			throw new CadastroItemCardapioException("do prato. ", e.getMessage());
 
 		}
-
 	}
 
 	/**
-	 * 
+	 * Cadastra uma refeicao no cardapio
 	 * @param nome
 	 *            Nome da refeicao a ser cadastrada.
 	 * @param descricao
@@ -103,7 +102,6 @@ public class RestauranteController {
 	 * @param componentes
 	 *            Pratos que vao compor a refeicao.
 	 * @throws SistemaException
-	 * @throws Exception
 	 */
 	public void cadastraRefeicao(String nome, String descricao, String componentes) throws SistemaException {
 		try {
@@ -116,39 +114,37 @@ public class RestauranteController {
 			throw new CadastroItemCardapioException("de refeicao. ", e.getMessage());
 
 		}
-
 	}
 
 	/**
-	 * 
+	 * Consulta alguma informacao de um item especificado
 	 * @param nome
 	 *            Nome da refeicao procurada.
 	 * @param info
 	 *            Informacao desejada, preco ou descricao de um item do
 	 *            cardapio.
 	 * @return Informacao requerida do item.
-	 * @throws Exception
-	 * @throws AtributoClienteException
+	 * @throws SistemaException
 	 */
-	public String consultaRestaurante(String nome, String info) throws Exception {
+	public String consultaRestaurante(String nome, String info) throws SistemaException {
 		if (nome.trim().isEmpty() || nome == null) {
-			throw new Exception("Erro na consulta do restaurante. Nome do prato esto vazio.");
+			throw new SistemaException("Erro na consulta do restaurante. Nome do prato esto vazio.");
 		}
 		if (info.equalsIgnoreCase("preco")) {
 			return getPrecoItem(nome);
 		} else if (info.equalsIgnoreCase("descricao")) {
 			return getItem(nome).toString();
 		} else {
-			throw new Exception();
+			throw new SistemaException();
 		}
 	}
 
 	/**
-	 * 
+	 * Retorna o preco de um determinado item (em string)
 	 * @param nome
 	 *            Nome do item do cardapio.
 	 * @return O preco de um item do cardapio em formato String.
-	 * @throws ItemCardapioInvalidoException
+	 * @throws SistemaException
 	 */
 	private String getPrecoItem(String nome) throws SistemaException {
 		ItemCardapio item = this.getItem(nome);
@@ -189,7 +185,7 @@ public class RestauranteController {
 	}
 
 	/**
-	 * 
+	 * Remove um item do cardapio
 	 * @param nome
 	 *            Nome do item do cardapio a ser removido
 	 * @throws ItemCardapioInvalidoException
@@ -211,11 +207,22 @@ public class RestauranteController {
 		return false;
 	}
 
+	/**
+	 * Ordena o cardapio por um determinado criterio de ordenacao
+	 * @param tipoOrdenacao
+	 * 		Criterio da ordenacao
+	 * @throws SistemaException
+	 */
 	public void ordenaCardapio(String tipoOrdenacao) throws SistemaException {
 		this.comparador = this.factoryComparador.criaComparador(tipoOrdenacao);
 		Collections.sort(this.cardapio, this.comparador);
 	}
 
+	/**
+	 * 
+	 * @return
+	 * 		Imprime o cardapio
+	 */
 	public String imprimeCardapio() {
 		String saida = "";
 		for (int i = 0; i < this.cardapio.size(); i++) {

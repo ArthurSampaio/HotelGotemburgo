@@ -8,11 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import cliente.Cliente;
 import cliente.ClienteFactory;
@@ -111,7 +107,7 @@ public class HotelController {
 	 *            ID do quarto
 	 * @param tipoQuarto
 	 *            Tipo do quarto
-	 * @throws Exception
+	 * @throws SistemaException
 	 *             Quando o quarto ja esta ocupado
 	 */
 	public void realizaChekin(String email, int dias, String id, String tipoQuarto) throws SistemaException {
@@ -133,7 +129,7 @@ public class HotelController {
 	 * @param idQuarto
 	 *            ID do quarto
 	 * @return Retorna uma string com o valor da estadia
-	 * @throws Exception
+	 * @throws SistemaException
 	 */
 	public String realizaCheckout(String email, String idQuarto) throws SistemaException {
 		Cliente cliente = getCliente(email);
@@ -155,7 +151,7 @@ public class HotelController {
 	 *            Cliente que esta fazendo checkout
 	 * @param idQuarto
 	 *            ID do quarto que ele esta fazendo checkout
-	 * @throws Exception
+	 * @throws SistemaException
 	 *             Quando ocorre um erro ao criar um novo cliente
 	 */
 	public void adicionaTransacao(Cliente cliente, String detalhe, double valorTransacao) throws SistemaException {
@@ -202,8 +198,6 @@ public class HotelController {
 	 * Retorna o total das transacoes
 	 * 
 	 * @return Retorna o total (em double) de transacoes
-	 * @throws Exception
-	 *             Quando ocorre um erro no calculo das estadias
 	 */
 	public double getTotalTransacoes() {
 		double total = 0.0;
@@ -235,7 +229,6 @@ public class HotelController {
 	 * @param info
 	 *            informacao requerida
 	 * @return retorna a informacao requerida
-	 * @throws Exception
 	 */
 	public String consultaTransacoes(String info) {
 		if (info.equalsIgnoreCase("Quantidade")) {
@@ -257,7 +250,7 @@ public class HotelController {
 	 * @param indice
 	 *            indice da lista de transacoes
 	 * @return retorna a informacao requerida no indice especificado
-	 * @throws Exception
+	 * @throws SistemaException
 	 */
 	public String consultaTransacoes(String info, int indice) throws SistemaException {
 		Transacao transacao = this.transacoes.get(indice);
@@ -280,13 +273,8 @@ public class HotelController {
 	 * @param tipoInformacao
 	 *            define qual informacao deve ser retornada
 	 * @return um string contendo a informacao requerida
-	 * @throws Exception
-	 *             quando um tipoInformacao nao existe no cliente
-	 * @throws StringInvalidaException
-	 *             quando ha uma string invalida
-	 * @throws EmailInexistenteException
-	 *             Quando nao há o email passado como parametro cadastrado no
-	 *             sistema
+	 * @throws SistemaException
+	 *             quando um tipoInformacao nao existe no cliente, string invalida ou cliente inexistente
 	 */
 	public String getInfoHospede(String email, String info) throws SistemaException {
 		Cliente cliente = getCliente(email);
@@ -302,7 +290,7 @@ public class HotelController {
 	 * @param info
 	 *            informacao requerida
 	 * @return retorna a informacao requerida
-	 * @throws Exception
+	 * @throws SistemaException
 	 *             Quando o cliente nao esta hospedado
 	 */
 	public String getInfoHospedagem(String email, String info) throws SistemaException {
@@ -315,21 +303,17 @@ public class HotelController {
 	}
 
 	/**
-	 * Retorna uma determinada informacao do hospede
-	 * 
-	 * @param tipoInformacao
-	 *            define qual informacao deve ser retornada
-	 * @param novaInfor
-	 *            define o novo valor da informacao
-	 * @return um string contendo a informacao requerida
-	 * 
-	 * @throws Exception
-	 *             quando um tipoInformacao nao existe no cliente
-	 * @throws StringInvalidaException
-	 *             quando ha uma string invalida
-	 * @throws EmailInexistenteException
-	 *             Quando nao há o email passado como parametro cadastrado no
-	 *             sistema
+	 * Atualiza o cadastro de um determinado cliente
+	 * @param email
+	 * 		Email do cliente a ser atualizado
+	 * @param tipoInfo
+	 * 		Tipo de informacao a ser atualizada
+	 * @param novaInfo
+	 * 		Nova informacao
+	 * @return
+	 * 		O email do cliente
+	 * @throws SistemaException
+	 * 		Quando ocorre um erro de String invalida, informacao invalida ou cliente inexistente
 	 */
 	public String atualizaCadastro(String email, String tipoInfo, String novaInfo) throws SistemaException {
 		if (getIndiceCliente(email) == -1) {
@@ -353,7 +337,7 @@ public class HotelController {
 	 * @param email
 	 *            email do cliente
 	 * @return Retorna o cliente quando encontrado
-	 * @throws Exception
+	 * @throws SistemaException
 	 *             Quando hospede nao esta cadastrado no sistema
 	 */
 	public Cliente getCliente(String email) throws SistemaException {
@@ -366,7 +350,7 @@ public class HotelController {
 					"Erro na consulta de hospede. Hospede de email " + email + " nao foi cadastrado(a).");
 	}
 	
-	public int getIndiceCliente(String email){
+	private int getIndiceCliente(String email){
 		for (int i = 0; i < clientes.size(); i++){
 			if (clientes.get(i).getEmail().equals(email)){
 				return i;
@@ -380,8 +364,10 @@ public class HotelController {
 	 * 
 	 * @param email
 	 *            Identifica qual o cliente deve ser removido
-	 * @throws Exception
+	 * @throws EmailInexistenteException
 	 *             Quando nao ha um cliente cadastrado com o email passado
+	 * @throws RemocaoException
+	 * 			Quando ocorre algum erro na remocao            
 	 */
 	public void removeHospede(String email) throws RemocaoException, EmailInexistenteException {
 		try{
@@ -420,15 +406,14 @@ public class HotelController {
 	 *            email a ser verificado
 	 * @param msg
 	 *            mensagem de excecao (caso ocorra)
-	 * @throws Exception 
-	 * @throws StringInvalidaException
+	 * @throws SistemaException
 	 *             Quando a string eh invalida ou o formato do email eh
 	 *             irregular
 	 */
-	public void checaEmail(String email, String msg) throws Exception {
+	public void checaEmail(String email, String msg) throws SistemaException {
 		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
 				&& !email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+\\.[ a-zA-Z]+")) {
-			throw new Exception(" Formato de email invalido.");
+			throw new SistemaException(" Formato de email invalido.");
 		}
 	}
 
@@ -441,14 +426,23 @@ public class HotelController {
 	 *            Preco do prato.
 	 * @param descricao
 	 *            Descricao do prato.
-	 * @throws SistemaException 
-	 * @throws Exception 
+	 * @throws CadastroItemCardapioException 
 	 */
 	public void cadastraPrato(String nome, double preco, String descricao) throws CadastroItemCardapioException {
 		restaurante.cadastraPrato(nome, preco, descricao);
 	}
 
-	public String consultaRestaurante(String nome, String info) throws Exception {
+	/**
+	 * Consulta uma informacao de um item no restaurante
+	 * @param nome
+	 * 		Nome do item
+	 * @param info
+	 * 		Informacao requerida do Item
+	 * @return
+	 * 		A informacao especificada
+	 * @throws SistemaException
+	 */
+	public String consultaRestaurante(String nome, String info) throws SistemaException {
 		return restaurante.consultaRestaurante(nome, info);
 	}
 
@@ -461,7 +455,7 @@ public class HotelController {
 	 *            Descricao da refeicao
 	 * @param componentes
 	 *            Pratos que fazem parte
-	 * @throws Exception 
+	 * @throws SistemaException 
 	 */
 	public void cadastraRefeicao(String nome, String descricao, String componentes) throws SistemaException {
 		restaurante.cadastraRefeicao(nome, descricao, componentes);
@@ -506,8 +500,8 @@ public class HotelController {
 	 *            Email do cliente que esta efetuando o pedido.
 	 * @param pedido
 	 *            Nome do Item do Cardapio desejado.
-	 * @return Retrona o valor da transacao ja com descontos aplicados.
-	 * @throws Exception
+	 * @return Retorna o valor da transacao ja com descontos aplicados.
+	 * @throws SistemaException
 	 *             Quando nao ha cliente cadastrado com esse email ou quando nao
 	 *             ha Item no Cardapio com esse nome
 	 */

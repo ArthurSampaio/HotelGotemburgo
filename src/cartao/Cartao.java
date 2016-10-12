@@ -90,9 +90,6 @@ public class Cartao {
 			return grana;
 			
 		}
-		
-	
-		
 	}
 
 	public int getPontos() {
@@ -144,8 +141,4 @@ public class Cartao {
 			return false;
 		}
 	}	
-	
-	
-	
-
 }

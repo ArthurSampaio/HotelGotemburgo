@@ -3,7 +3,7 @@ package quarto;
 import java.util.HashMap;
 
 import excecoes.AtributoClienteException;
-import excecoes.StringInvalidaException;
+import excecoes.SistemaException;
 
 /**
  * Factory para o tipo Quarto
@@ -26,10 +26,10 @@ public class QuartoFactory {
 	 * 		O tipo do quarto
 	 * @return
 	 * 		Um objeto do tipo quarto
-	 * @throws StringInvalidaException
+	 * @throws SistemaException
 	 * 		Quando ID ou Tipo sao invalidas. 
 	 */
-	public Quarto criaQuarto(String ID, String tipo){
+	public Quarto criaQuarto(String ID, String tipo)throws SistemaException{
 		if(ID == null || ID.trim().isEmpty()){
 			throw new AtributoClienteException("O ID nao pode ser invalida ou nula.");
 		}

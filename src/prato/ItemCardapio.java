@@ -1,6 +1,5 @@
 package prato;
 
-
 import excecoes.DescricaoItemCardapioException;
 import excecoes.NomeItemCardapioException;
 
@@ -9,6 +8,7 @@ import excecoes.NomeItemCardapioException;
  * @author Joao Mauricio Carvalho
  * @author Mariana Mendes
  * @author Arthur Sampaio
+ * @author Tiago Pereira
  *
  */
 
@@ -23,7 +23,7 @@ public abstract class ItemCardapio implements Comparable<ItemCardapio>{
 	 * 			Nome do item.
 	 * @param descricao
 	 * 			Descricao do item.
-	 * @throws Exception 
+	 * @throws NomeItemCardapioException 
 	 */
 	public ItemCardapio(String nome, String descricao) throws NomeItemCardapioException, DescricaoItemCardapioException{
 	
@@ -63,7 +63,6 @@ public abstract class ItemCardapio implements Comparable<ItemCardapio>{
 			return (this.nome.equalsIgnoreCase(outroItem.getNome()) && this.descricao.equalsIgnoreCase(outroItem.getDescricao()));
 		}return false;
 	}
-	
 	
 	public int compareTo(ItemCardapio outro){
 		if(this.getPreco() > outro.getPreco()){

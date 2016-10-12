@@ -20,8 +20,8 @@ public class HotelFacade {
 	}
 
 	public void iniciaSistema() throws IOException {
-		bd.iniciaSistema();
-		gerencia = bd.getHotelController();
+		//bd.iniciaSistema();
+	//	gerencia = bd.getHotelController();
 		
 		
 	}
@@ -132,7 +132,7 @@ public class HotelFacade {
 	
 
 	public void fechaSistema() {
-		bd.fechaSistema();
+	//	bd.fechaSistema();
 	}
 
 	public static void main(String[] args) {

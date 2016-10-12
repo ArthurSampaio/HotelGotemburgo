@@ -1,5 +1,10 @@
 package hotel;
 
+/**
+ * Classe Transacao
+ * @author Tiago Pereira
+ *
+ */
 public class Transacao {
 
 	private String nomeCliente;
@@ -7,6 +12,17 @@ public class Transacao {
 	private double valorTransacao;
 	private String detalhe;
 	
+	/**
+	 * Construtor da Classe
+	 * @param nomeCliente
+	 * 		Nome do cliente que realizou transacao
+	 * @param emailCliente
+	 * 		Email do Cliente que realizou Transacao
+	 * @param valorTransacao
+	 * 		Valor da transacao
+	 * @param detalhe
+	 * 		Detalhe da transacao, se foi um checkout ou um pedido no restaurante
+	 */
 	public Transacao(String nomeCliente, String emailCliente, double valorTransacao,
 			String detalhe){
 		this.nomeCliente = nomeCliente;
@@ -15,8 +31,6 @@ public class Transacao {
 		this.detalhe = detalhe;
 	}
 	
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -25,8 +39,9 @@ public class Transacao {
 		return result;
 	}
 
-
-
+	/**
+	 * Duas transacoes sao iguais se possuirem o mesmo email
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Transacao){

@@ -43,8 +43,9 @@ public class Estadia {
 	 * 		O valor do desconto
 	 * @return
 	 * 		O valor total da estadia dada a quantidade de dias definida na criação do objeto
+	 * @throws SistemaException
 	 */
-	public double calculaValorEstadia(double desconto)throws Exception{
+	public double calculaValorEstadia(double desconto)throws SistemaException{
 		return this.quarto.getDiaria(desconto) * this.dias;
 	}
 	
@@ -53,6 +54,7 @@ public class Estadia {
 	 * Sobrecarga do metodo calculaValorEstadia(double).
 	 * @return
 	 * 		O valor da estadia. 
+	 * @throws SistemaException
 	 */
 	public double calculaValorEstadia()throws SistemaException{
 		return this.quarto.getDiaria() * this.dias;
@@ -78,9 +80,6 @@ public class Estadia {
 		this.dias = dias;
 	}
 
-
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,8 +88,6 @@ public class Estadia {
 		result = prime * result + ((quarto == null) ? 0 : quarto.hashCode());
 		return result;
 	}
-
-
 
 	/**
 	 * Duas estadias são iguais se possuirem o mesmo quarto e a mesma quantidade de dias. 
@@ -108,8 +105,4 @@ public class Estadia {
 			return false;
 		}
 	}
-	
-	
-	
-
 }

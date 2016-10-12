@@ -16,25 +16,38 @@ public class ClienteFactory {
 	public ClienteFactory(){}
 	
 	/**
-	 * Cria um objeto cliente
-	 * 
+	 * Cria um cliente
 	 * @param nome
-	 *            O nome do cliente
-	 * @param dataNasc
-	 *            A data de nascimento do cliente
+	 * 		Nome do cliente
 	 * @param email
-	 *            O Email do cliente
+	 * 		Email do cliente
+	 * @param dataNasc
+	 * 		Data de nascimento do cliente
 	 * @param hosp
-	 *            Representa se esta hospedado ou nao
-	 * @throws Exception
-	 *             Quando alguma das strings é invalida.
+	 * 		Boolean indicando se esta hospedado ou nao
+	 * @return
+	 * 		O cliente criado
+	 * @throws SistemaException
+	 * @throws AtributoClienteException
+	 * @throws FormatoInvalidoException
 	 */
 	public Cliente criaCliente(String nome, String email, String dataNasc, boolean hosp) throws SistemaException, AtributoClienteException, FormatoInvalidoException {
 		return new Cliente( nome, email, dataNasc,hosp);
 	}
-	
+
 	/**
-	 * Cria um cliente quando o cliente nao estiver hospedado
+	 * Cria um cliente sem indicar se ele esta hospedado ou nao
+	 * @param nome
+	 * 		Nome do cliente
+	 * @param email
+	 * 		Email do cliente
+	 * @param dataNasc
+	 * 		Data de nascimento do cliente
+	 * @return
+	 * 		O cliente criado
+	 * @throws SistemaException
+	 * @throws AtributoClienteException
+	 * @throws FormatoInvalidoException
 	 */
 	public Cliente criaCliente(String nome, String email, String dataNasc) throws SistemaException, AtributoClienteException, FormatoInvalidoException{
 		return new Cliente(nome,email,dataNasc);

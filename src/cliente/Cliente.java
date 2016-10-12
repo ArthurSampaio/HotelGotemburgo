@@ -20,6 +20,7 @@ import estadia.Estadia;
  * Classe que representa um cliente cadastrado no BD do Hotel Gutemburgo
  * 
  * @author Arthur Sampaio
+ * @author Tiago Pereira
  *
  */
 public class Cliente {
@@ -44,11 +45,10 @@ public class Cliente {
 	 *            O Email do cliente
 	 * @param hosp
 	 *            Representa se esta hospedado ou nao
-	 * @throws CadastroVazioException 
-	 * @throws CadastroInvalidoException 
-	 * @throws IdadeInvalidaException 
-	 * @throws Exception
-	 *             Quando alguma das strings é invalida.
+	 * @throws ValorInvalidoException 
+	 * @throws AtributoClienteException 
+	 * @throws SistemaException
+	 *         
 	 */
 	public Cliente(String nome, String email, String dataNasc, boolean hosp) throws ValorInvalidoException, AtributoClienteException, SistemaException {
 		
@@ -78,10 +78,16 @@ public class Cliente {
 	}
 
 	/**
-	 * Construtor para quando o cliente nao estiver hospedado
-	 * @throws CadastroVazioException 
-	 * @throws CadastroInvalidoException 
-	 * @throws IdadeInvalidaException 
+	 *  Construtor para quando o cliente nao estiver hospedado
+	 * @param nome
+	 * 		Nome do cliente
+	 * @param email
+	 * 		Email do cliente
+	 * @param dataNasc
+	 * 		Data de nascimento do Cliente
+	 * @throws StringInvalidaException
+	 * @throws ValorInvalidoException
+	 * @throws SistemaException
 	 */
 	public Cliente(String nome, String email, String dataNasc) throws StringInvalidaException, ValorInvalidoException, SistemaException {
 		this(nome, email, dataNasc, false);
@@ -103,12 +109,12 @@ public class Cliente {
 	 *            A informacao a ser atualizada
 	 * @param valor
 	 *            O novo valor da informacao
-	 * @throws Exception
+	 * @throws SistemaException
 	 *             Quando a informacao requerida nao existe no usuario
 	 * @throws StringInvalidaException
 	 *             Quando ha alguma string invalida (null ou vazia)
 	 */
-	public void atualizaCadastro(String tipoInformacao, String valor)throws SistemaException, StringInvalidaException, Exception {
+	public void atualizaCadastro(String tipoInformacao, String valor)throws SistemaException, StringInvalidaException {
 	
 		if (stringInvalida(tipoInformacao)) {
 			throw new StringInvalidaException();
@@ -136,8 +142,6 @@ public class Cliente {
 			checaEmail(valor);
 			this.setEmail(valor);
 		}
-		
-		
 	}
 	
 	
@@ -172,12 +176,11 @@ public class Cliente {
 	 * @param tipoInformacao
 	 *            define qual informacao deve ser retornada
 	 * @return um string contendo a informacao requerida
-	 * @throws Exception
+	 * @throws SistemaException
 	 *             quando um tipoInformacao nao existe no cliente
-	 * @throws StringInvalidaException
 	 *             quando ha uma string invalida
 	 */
-	public String getInfoHospede(String tipoInformacao) {
+	public String getInfoHospede(String tipoInformacao) throws SistemaException {
 		if (stringInvalida(tipoInformacao)) {
 			throw new AtributoClienteException(tipoInformacao);
 		}
@@ -201,8 +204,7 @@ public class Cliente {
 	 * 		Define a informacao
 	 * @return
 	 * 		a informacao requerida
-	 * @throws Exception
-	 * @throws StringInvalidaException
+	 * @throws SistemaException
 	 * 		Quando a string for invalida ou nula
 	 */
 	public String getInfoHospedagem(String info) throws SistemaException{
@@ -253,7 +255,7 @@ public class Cliente {
 	 * Calcula o valor total das estadias
 	 * @return
 	 * 		O valor das estadias
-	 * @throws Exception
+	 * @throws SistemaException
 	 */
 	public double totalEstadias() throws SistemaException {
 		double total = 0.0;
@@ -264,7 +266,7 @@ public class Cliente {
 	}
 
 	/**
-	 * Adiciona uma estadia no HashMap de Estadias do Cliente
+	 * Adiciona uma estadia no mapa de Estadias do Cliente
 	 * 
 	 * @param novaEstadia
 	 */
@@ -277,7 +279,7 @@ public class Cliente {
 	 * Retira uma estadia do cliente
 	 * @param estadia
 	 * 		Especifica a estadia
-	 * @throws Exception
+	 * @throws SistemaException
 	 */
 	public void removeEstadia(Estadia estadia) throws SistemaException {
 		String id = estadia.getIDQuarto();
@@ -291,7 +293,7 @@ public class Cliente {
 	}
 
 	/**
-	 * Esta hospedado?
+	 * Indica se um cliente esta hospedado ou nao
 	 * @return
 	 * 		True se verdade, false cc. 
 	 */
@@ -368,8 +370,7 @@ public class Cliente {
 	/**
 	 * Checa se o email passado pelo usuario eh valido
 	 * @param email
-	 * @param erro
-	 * @throws Exception 
+	 * @throws FormatoInvalidoException 
 	 */
 	public void checaEmail(String email) throws FormatoInvalidoException {
 		if (!email.matches("[ a-zA-Z]+@[ a-zA-Z]+\\.[ a-zA-Z]+")
