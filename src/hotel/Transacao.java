@@ -1,12 +1,18 @@
 package hotel;
 
+import java.io.Serializable;
+
 /**
  * Classe Transacao
  * @author Tiago Pereira
  *
  */
-public class Transacao {
+public class Transacao implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4232120918575458099L;
 	private String nomeCliente;
 	private String emailCliente;
 	private double valorTransacao;

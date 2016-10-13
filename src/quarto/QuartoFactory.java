@@ -1,5 +1,6 @@
 package quarto;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import excecoes.SistemaException;
@@ -10,8 +11,12 @@ import excecoes.StringInvalidaException;
  * @author Arthur Sampaio
  *
  */
-public class QuartoFactory {
+public class QuartoFactory implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6843085609182582855L;
 	private HashMap<String, TipoDeQuarto> mapQuarto;
 	
 	public QuartoFactory(){

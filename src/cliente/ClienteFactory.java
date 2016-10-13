@@ -1,5 +1,7 @@
 package cliente;
 
+import java.io.Serializable;
+
 import excecoes.AtributoClienteException;
 import excecoes.FormatoInvalidoException;
 import excecoes.SistemaException;
@@ -10,9 +12,14 @@ import excecoes.SistemaException;
  * @author Arthur Sampaio
  *
  */
-public class ClienteFactory {
+public class ClienteFactory implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5785471959687431972L;
+
 	public ClienteFactory(){}
 	
 	/**

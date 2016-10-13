@@ -13,6 +13,10 @@ import excecoes.SistemaException;
  */
 
 public class Refeicao extends ItemCardapio {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3891465390648044966L;
 	private List<Prato> menu;
 	private static final double DESCONTO = 0.9;
 

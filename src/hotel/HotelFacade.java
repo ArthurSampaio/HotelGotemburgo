@@ -15,13 +15,12 @@ public class HotelFacade {
 	private BancoDeDados bd;
 
 	public HotelFacade() {
-		this.gerencia = new HotelController();
-		this.bd = bd.getInstance();
+		this.bd = BancoDeDados.getInstance();
 	}
 
 	public void iniciaSistema() throws IOException {
-		//bd.iniciaSistema();
-	//	gerencia = bd.getHotelController();
+		bd.iniciaSistema();
+		gerencia = bd.getHotelController();
 		
 		
 	}
@@ -132,7 +131,7 @@ public class HotelFacade {
 	
 
 	public void fechaSistema() throws IOException, SistemaException {
-	//	bd.fechaSistema();
+		bd.fechaSistema();
 		gerencia.geraRelatorios();
 	}
 

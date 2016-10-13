@@ -1,5 +1,6 @@
 package cliente;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,8 +24,12 @@ import estadia.Estadia;
  * @author Tiago Pereira
  *
  */
-public class Cliente {
+public class Cliente implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2756368413811605685L;
 	private boolean hospedado;
 	private String nome;
 	private String dataNasc;

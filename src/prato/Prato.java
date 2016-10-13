@@ -15,6 +15,10 @@ import excecoes.SistemaException;
  */
 public class Prato extends ItemCardapio {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8657385087012454372L;
 	private double preco;
 
 	/**

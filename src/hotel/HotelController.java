@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,11 @@ import restaurante.RestauranteController;
  * @author Tiago Pereira
  *
  */
-public class HotelController {
+public class HotelController implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5713763590536159507L;
 	private List<Cliente> clientes;
 	private RestauranteController restaurante;
 	private List<Transacao> transacoes;

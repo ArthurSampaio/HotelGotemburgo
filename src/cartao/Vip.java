@@ -1,6 +1,13 @@
 package cartao;
 
-public class Vip implements CartaoInterface {
+import java.io.Serializable;
+
+public class Vip implements CartaoInterface, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4677519802543825379L;
 
 	private final double BONUS_VIP = 0.50;
 

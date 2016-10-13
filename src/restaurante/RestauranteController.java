@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,8 +29,12 @@ import prato.Refeicao;
  * @author Tiago Pereira
  *
  */
-public class RestauranteController {
+public class RestauranteController implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3495581216342300534L;
 	private List<ItemCardapio> cardapio;
 	private FactoryItemCardapio fabrica;
 	private FactoryComparador factoryComparador;

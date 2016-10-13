@@ -1,5 +1,6 @@
 package prato;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -7,7 +8,12 @@ import java.util.Comparator;
  * @author Tiago Pereira
  *
  */
-public class ComparadorNome implements Comparator<ItemCardapio> {
+public class ComparadorNome implements Comparator<ItemCardapio>, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2902259729935690212L;
 
 	public ComparadorNome(){
 	}

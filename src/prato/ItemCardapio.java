@@ -1,5 +1,7 @@
 package prato;
 
+import java.io.Serializable;
+
 import excecoes.DescricaoItemCardapioException;
 import excecoes.NomeItemCardapioException;
 
@@ -12,8 +14,12 @@ import excecoes.NomeItemCardapioException;
  *
  */
 
-public abstract class ItemCardapio implements Comparable<ItemCardapio>{
+public abstract class ItemCardapio implements Comparable<ItemCardapio>, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2787317864336979797L;
 	private String nome;
 	private String descricao;
 	

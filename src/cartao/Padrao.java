@@ -1,7 +1,13 @@
 package cartao;
 
-public class Padrao implements CartaoInterface {
+import java.io.Serializable;
 
+public class Padrao implements CartaoInterface, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7745116818590629417L;
 	private final double BONUS_PADRAO = 0.10;
 
 	/**

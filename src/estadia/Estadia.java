@@ -1,4 +1,6 @@
 package estadia;
+import java.io.Serializable;
+
 import excecoes.QuartoInvalidoException;
 import excecoes.SistemaException;
 import excecoes.ValorInvalidoException;
@@ -10,7 +12,11 @@ import quarto.Quarto;
  * @author Arthur Sampaio
  *
  */
-public class Estadia {
+public class Estadia implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3059738729836154341L;
 	private Quarto quarto;
 	private int dias;
 	

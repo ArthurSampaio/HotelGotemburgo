@@ -1,5 +1,7 @@
 package cartao;
 
+import java.io.Serializable;
+
 import excecoes.ConvertePontosException;
 import excecoes.ValorInvalidoException;
 
@@ -18,8 +20,12 @@ import excecoes.ValorInvalidoException;
  * Padrao, Premium ou Vip.
  *
  */
-public class Cartao {
+public class Cartao implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5259686131076570787L;
 	private int pontos;
 	private CartaoInterface cartao;
 

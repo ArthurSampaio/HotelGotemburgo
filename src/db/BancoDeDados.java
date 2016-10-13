@@ -37,8 +37,8 @@ public class BancoDeDados {
 	
 			
 			
-	private OutputStream hotelControllerOutput; 
-	private InputStream hoteControllerInput;
+	private ObjectOutputStream hotelControllerOutput; 
+	private ObjectInputStream hotelControllerInput;
 
 	/**
 	 * Contrutor de BancoDeDados
@@ -55,8 +55,6 @@ public class BancoDeDados {
 		
 		if(instance == null){
 			instance = new BancoDeDados();
-		}else{
-			return instance;
 		}
 		return instance;
 		
@@ -68,11 +66,11 @@ public class BancoDeDados {
 	 */
 	public void iniciaSistema() throws IOException {
 		try{
-			this.hoteControllerInput = new ObjectInputStream(
+			this.hotelControllerInput = new ObjectInputStream(
 					new FileInputStream(path + "/" +
 			file));
 			try{
-				hotelController =(HotelController) hotelController;
+				hotelController =(HotelController) hotelControllerInput.readObject();
 			}catch(Exception e){
 				hotelController = new HotelController();
 			}
@@ -92,15 +90,16 @@ public class BancoDeDados {
 		}catch(IOException e){
 			System.err.println("IOException: "+ e.getMessage());
 		}finally {
-			this.hoteControllerInput.close();
+			this.hotelControllerInput.close();
 		}
 		
 	}
 	
 	/**
 	 * Salva o estado atual do sistema em hug.dat
+	 * @throws IOException 
 	 */
-	public void fechaSistema(){
+	public void fechaSistema() throws IOException{
 				
 		try{
 			this.hotelControllerOutput = new ObjectOutputStream(

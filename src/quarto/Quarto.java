@@ -1,5 +1,7 @@
 package quarto;
 
+import java.io.Serializable;
+
 import excecoes.AtributoClienteException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
@@ -11,7 +13,11 @@ import excecoes.ValorInvalidoException;
  * @author Arthur Sampaio
  * @author Tiago Pereira
  */
-public class Quarto{
+public class Quarto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9108304519862557816L;
 	private String ID;
 	private TipoDeQuarto diaria;
 	private static final String ID_VAZIO_NULO = "O ID nao pode ser vazio ou nulo.";

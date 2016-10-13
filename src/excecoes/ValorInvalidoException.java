@@ -9,8 +9,11 @@ package excecoes;
  */
 public class ValorInvalidoException extends SistemaException{
 	
-	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1770725689547946917L;
 	private static final String MENSAGEM = "Valor invalido";
 	
 	public ValorInvalidoException(){

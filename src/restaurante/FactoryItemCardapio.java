@@ -1,5 +1,6 @@
 package restaurante;
  
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import excecoes.DescricaoItemCardapioException;
@@ -10,7 +11,12 @@ import excecoes.ValorInvalidoException;
 import prato.Prato;
 import prato.Refeicao;
  
-public class FactoryItemCardapio {
+public class FactoryItemCardapio implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5362149428900354101L;
+
 	public Prato criaPrato(String nome, double preco, String descricao) throws SistemaException {
 		if (nome.trim().isEmpty() || nome == null) {
 			throw new NomeItemCardapioException("Nome do prato esta vazio.");

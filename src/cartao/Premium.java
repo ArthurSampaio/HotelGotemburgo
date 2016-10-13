@@ -1,7 +1,13 @@
 package cartao;
 
-public class Premium implements CartaoInterface {
+import java.io.Serializable;
 
+public class Premium implements CartaoInterface, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6186682839817913739L;
 	private final double BONUS_PREMIUM = 0.30;
 
 	/**

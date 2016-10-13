@@ -9,8 +9,11 @@ package excecoes;
 public class StringInvalidaException extends SistemaException {
 	
 
-	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6584890679526582576L;
 	private static final String MENSAGEM = "String nula ou vazia";
 	
 	public StringInvalidaException(){
