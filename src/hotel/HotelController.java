@@ -535,6 +535,10 @@ public class HotelController implements Serializable {
 		return valor;
 	}
 	
+	/**
+	 * Gera relatorio dos clientes
+	 * @throws SistemaException
+	 */
 	private void geraRelatorioCliente() throws SistemaException {
 		PrintWriter out = null;
 		try {
@@ -568,10 +572,18 @@ public class HotelController implements Serializable {
 		}	
 	}
 	
+	/**
+	 * Gera relatorio do cardapio
+	 * @throws IOException
+	 * @throws SistemaException
+	 */
 	private void geraRelatorioMenu() throws IOException, SistemaException{
 		restaurante.geraRelatorioMenu();
 	}
 	
+	/**
+	 * Gera relatorio de transacoes
+	 */
 	private void geraRelatorioTransacoes(){
 		PrintWriter out = null;
 		String path; 
@@ -606,6 +618,9 @@ public class HotelController implements Serializable {
 		}	
 	}
 	
+	/**
+	 * Gera relatorio completo do hotel
+	 */
 	private void geraRelatorioHotel(){
 		try {
 			String path = new File("./arquivos_sistema/relatorios/cad_hospedes.txt").getCanonicalPath();
@@ -652,6 +667,11 @@ public class HotelController implements Serializable {
 		
 	}
 	
+	/**
+	 * Gera todos os 4 relatorios
+	 * @throws IOException
+	 * @throws SistemaException
+	 */
 	public void geraRelatorios() throws IOException, SistemaException{
 		geraRelatorioMenu();
 		geraRelatorioTransacoes();
