@@ -4,9 +4,6 @@ import java.io.IOException;
 
 import db.BancoDeDados;
 import easyaccept.EasyAccept;
-import excecoes.AtualizaCadastroException;
-import excecoes.CadastroInvalidoException;
-import excecoes.CadastroItemCardapioException;
 import excecoes.EmailInexistenteException;
 import excecoes.RemocaoException;
 import excecoes.SistemaException;

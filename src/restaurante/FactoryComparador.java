@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 import excecoes.AtributoClienteException;
-import excecoes.StringInvalidaException;
 import prato.ComparadorNome;
 import prato.ComparadorPreco;
 import prato.ItemCardapio;

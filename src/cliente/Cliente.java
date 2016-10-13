@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 
 import cartao.Cartao;
 import excecoes.AtributoClienteException;
-import excecoes.CadastroInvalidoException;
 import excecoes.ConvertePontosException;
 import excecoes.FormatoInvalidoException;
 import excecoes.QuartoInvalidoException;

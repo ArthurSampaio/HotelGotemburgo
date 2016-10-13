@@ -22,7 +22,6 @@ import excecoes.CadastroItemCardapioException;
 import excecoes.EmailInexistenteException;
 import excecoes.RemocaoException;
 import excecoes.SistemaException;
-import excecoes.StringInvalidaException;
 import quarto.Quarto;
 import quarto.QuartoFactory;
 import restaurante.RestauranteController;

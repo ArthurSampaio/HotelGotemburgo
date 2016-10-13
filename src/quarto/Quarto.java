@@ -2,7 +2,6 @@ package quarto;
 
 import java.io.Serializable;
 
-import excecoes.AtributoClienteException;
 import excecoes.SistemaException;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
