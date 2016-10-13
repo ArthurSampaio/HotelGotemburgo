@@ -70,6 +70,9 @@ public abstract class ItemCardapio implements Comparable<ItemCardapio>, Serializ
 		}return false;
 	}
 	
+	/**
+	 * Compara dois ItensCardapio pelo preco.
+	 */
 	public int compareTo(ItemCardapio outro){
 		if(this.getPreco() > outro.getPreco()){
 			return 1;
