@@ -63,16 +63,10 @@ public class CartaoTeste {
 	public void addPontos() {
 		try {
 			cartao.addPontos(-200);
-
 		} catch (Exception e) {
 			assertEquals("Valor invalido", e.getMessage());
 
 		}
 	}
-
-	// @Test
-	// public void convertePontos(){
-	//
-	// }
 
 }
