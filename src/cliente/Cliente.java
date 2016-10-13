@@ -26,9 +26,7 @@ import estadia.Estadia;
  */
 public class Cliente implements Serializable{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -2756368413811605685L;
 	private boolean hospedado;
 	private String nome;
@@ -386,11 +384,23 @@ public class Cliente implements Serializable{
 	}
 
 	
+	/**
+	 * Checa se a data eh valida
+	 * @param data
+	 * 		data a ser checada
+	 * @throws SistemaException
+	 */
 	private void checaData(String data) throws SistemaException {
 		if (!data.matches("(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[0-2])/\\d{4}")) {
 			throw new SistemaException(" Formato de data invalido.");		}
 	}
 
+	/**
+	 * Checa se hospede eh maior de idade
+	 * @param data
+	 * 			Data de nascimento cadastrada no hospede
+	 * @throws SistemaException
+	 */
 	private void checaIdade(String data) throws SistemaException {
 		String ano = data.split("/")[2];
 		if (Integer.parseInt(ano) > 1998) {
