@@ -19,8 +19,13 @@ public class HotelFacade {
 	}
 
 	public void iniciaSistema() throws IOException {
-		bd.iniciaSistema();
-		gerencia = bd.getHotelController();
+		try{
+			bd.iniciaSistema();
+			gerencia = bd.getHotelController();
+		}catch(NullPointerException e){
+			gerencia = new HotelController();
+		}
+		
 		
 		
 	}
