@@ -551,7 +551,8 @@ public class HotelController implements Serializable {
 				Cliente atual = getCliente(clientes.get(i).getEmail());
 				out.println("Email: " + atual.getEmail());
 				out.println("Nome: " + atual.getNome());
-				out.println("Data de nascimento: " + atual.getDataNasc());
+				String[] data = atual.getDataNasc().split("/");
+				out.println("Data de nascimento: " + data[2] + "-" + data[1] + "-" + data[0]);
 				out.println(" ");
 			}
 		} 
