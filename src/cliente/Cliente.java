@@ -39,6 +39,7 @@ public class Cliente implements Serializable{
 
 
 	private static final String CLIENTE_SEM_INFORMACAO = "O cliente nao possue a informacao especificada.";
+
 	/**
 	 * Construtor da Classe Cliente
 	 * 
