@@ -12,7 +12,7 @@ O Hotel Gotemburgo é o projeto de finalização do curso de Laboratório de Pro
 
 Arthur Sampaio [@ArthurSampaio](https://github.com/ArthurSampaio)
 
-Joao Maurício [@joaomcarvalho](https://github.com/ArthurSampaio)
+Joao Maurício [@joaomcarvalho](https://github.com/joaomcarvalho)
 
 Mariana Mendes [@m4reana](https://github.com/m4reana)
 
