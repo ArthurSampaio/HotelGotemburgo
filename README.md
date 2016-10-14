@@ -7,15 +7,19 @@ Claro, por estar em um país de alta tecnologia, o sistema desse hotel é comple
 
 #TIME DE DESENVOLVIMENTO
 
+
 O Hotel Gotemburgo é o projeto de finalização do curso de Laboratório de Programação II da Universidade Federal de Campina Grande. O Time de desenvolvimento é composto por: 
 
-Arthur Sampaio @ArthurSampaio
+Arthur Sampaio [@ArthurSampaio](https://github.com/ArthurSampaio)
 
-Joao Maurício @joaomcarvalho
+Joao Maurício [@joaomcarvalho](https://github.com/ArthurSampaio)
 
-Mariana Mendes @m4reana
+Mariana Mendes [@m4reana](https://github.com/m4reana)
 
-Tiago Lima @TiagoLimaPereira
+Tiago Lima [@TiagoLimaPereira](https://github.com/TiagoLimaPereira)
+
+#Relatório de Projeto
+
 
 #Relatório de Projeto
 
